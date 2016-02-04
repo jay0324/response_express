@@ -4,9 +4,11 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/01/22 修改:
-- JSlideImg加入transitStyle及slideBtn的trigger設定值
-- 樣式調整,並區分demo1及demo2在響應式UI上的風格做調整
+Date: 2016/02/04 修改:
+- 修正tabJumper在無UI的狀況下仍然會有padding
+- 修正JSlideImg前後項目切換問題, 加入touch event
+- 加入css3動畫特效
+- 在頁面滑動至相對高度的resTabJumper按鈕會加入jumperActive class, 在客製化修改其樣式即可
 
 =======================================================================================================================
 套用方式及相關文件說明
@@ -158,70 +160,72 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 			
 			//文字跑馬燈效果函式=================================================================
 			$(obj).JResMarquee({
-					   objWidth: 內容長度 (預設值"auto",會以文字大小的設定來算長度)
-					   fontSize: "文字大小",
-					   position: "方向 (-1:由左向右 1:由右向左)",
-					   speed: "速度 (數字越小越快)"
-					   })
+				objWidth: 內容長度 (預設值"auto",會以文字大小的設定來算長度)
+				fontSize: "文字大小",
+				position: "方向 (-1:由左向右 1:由右向左)",
+				speed: "速度 (數字越小越快)"
+			})
 			//===================================================================================
 			
 			//橫向卷軸效果函式===================================================================
 			$(obj).JResOverflow({
-								   flow: 橫向卷軸開關 (true:啟用 false:關閉),
-								   paddingAmt: 相對圖文間距(px),
-								   setUILoadWidth: 載入介面尺寸,預設值為800 (注意: 此設定一旦修改,相對應css也要調整才會正常載入設定)
-								 });
+				flow: 橫向卷軸開關 (true:啟用 false:關閉),
+				paddingAmt: 相對圖文間距(px),
+				setUILoadWidth: 載入介面尺寸,預設值為800 (注意: 此設定一旦修改,相對應css也要調整才會正常載入設定)
+			});
 			
 			$(obj).addClass("resUnwrap"); //取消橫向卷軸
 			//===================================================================================
 			
 			//圖片放大功能=======================================================================
 			$(obj).JResEnlarge({
-									enlargeSize: 圖片放大類型 ("100%":符合螢幕 "auto":原尺寸)
-									scalePx: 手動縮放調整尺寸(px),
-									paddingAmt: 相對圖文間距(px),
-									extraSource: "放大後圖片路徑(預設為原圖)",
-									setUILoadWidth: 載入介面尺寸,預設值為800 (注意: 此設定一旦修改,相對應css也要調整才會正常載入設定),
-									popupMode: 是否使用影視窗(布林) (預設false),
-									enablePluginMode: 是否與其他shadowbox共存(布林) (預設false)
-								 });
+				enlargeSize: 圖片放大類型 ("100%":符合螢幕 "auto":原尺寸)
+				scalePx: 手動縮放調整尺寸(px),
+				paddingAmt: 相對圖文間距(px),
+				extraSource: "放大後圖片路徑(預設為原圖)",
+				setUILoadWidth: 載入介面尺寸,預設值為800 (注意: 此設定一旦修改,相對應css也要調整才會正常載入設定),
+				popupMode: 是否使用影視窗(布林) (預設false),
+				enablePluginMode: 是否與其他shadowbox共存(布林) (預設false)
+			});
 			
 			$(obj).addClass("resUnlarger"); //取消圖片放大
 			//===================================================================================
 			
 			//簡易淡出淡入畫面切換效果函式=======================================================
 			$(obj).JSlideImg({
-								autoPlay: true, //自動撥放 預設: ture
-								childTag: "畫面切換物件的tag, 如: img,div,a,...",
-								transitTime: 畫面切換秒數,
-								transitStyle: "animate(動畫效果,只針對當前圖片做淡入),預設值為空值(雙向淡入淡出)",
-								holdTime: 畫面停留秒數,
-								paddingAmt: 相對縮圖尺寸(px),
-								layout: 排版 如: left: 靠齊左 / right:靠其右 / 預設:清除,
-								thumb: {						//小圖切換按鈕
-					                state: true,				//是否使用(預設false)
-					                amount: 4,					//一次顯示數量
-					                width:50,					//小圖寬度
-					                height:50,					//小圖高度
-					                type: 'horizontal',			//顯示方式(直式:vertical 橫式: horizontal)
-					                position: 'left:10px;bottom:10px;'	//位置(以style的方式來定位，結尾一定要有分號，不然會顯示不出來)
-					            },
-					            slideBtn:{
-					                state: true,				//是否使用上下項目切換按鈕組
-					                trigger: 'click',			//觸發動作 預設:click 其他: mouseenter ...
-					                width: 100,					//按鈕寬
-					                height: 100,				//按鈕高
-					                type: 'horizontal'			//按鈕呈現方式(直式:vertical 橫式: horizontal) 
-					            },
-					            setupResposive: {				//小圖在不同尺寸下的設定
-					            	600:{						//尺寸
-					            								//設定參照thumb的設定項目
-					            		slideBtn:{}				//上下項目切換按鈕組設定值請參照上面設定方式
-					            	}
-					            },
-								onTrans: function(){}, //客製倫播效果 預設:false
-								onHold: function(){} //客製內容物件動態效果 預設:false
-							});
+				autoPlay: true, //自動撥放 預設: ture
+				childTag: "畫面切換物件的tag, 如: img,div,a,...",
+				transitTime: 畫面切換秒數,
+				transitStyle: "animate(動畫效果,只針對當前圖片做淡入),預設值為空值(雙向淡入淡出)",
+				holdTime: 畫面停留秒數,
+				paddingAmt: 相對縮圖尺寸(px),
+				layout: 排版 如: left: 靠齊左 / right:靠其右 / 預設:清除,
+				touchSwipAmt: 觸控捲動觸發移動量(數字) (預設:100),
+				thumb: {						//小圖切換按鈕
+					state: true,				//是否使用(預設false)
+					amount: 4,					//一次顯示數量
+					width:50,					//小圖寬度
+					height:50,					//小圖高度
+					type: 'horizontal',			//顯示方式(直式:vertical 橫式: horizontal)
+					position: 'left:10px;bottom:10px;'	//位置(以style的方式來定位，結尾一定要有分號，不然會顯示不出來)
+				},
+				slideBtn:{
+					state: true,				//是否使用上下項目切換按鈕組
+					trigger: 'click',			//觸發動作 預設:click 其他: mouseenter ...
+					width: 100,					//按鈕寬
+					height: 100,				//按鈕高
+					type: 'horizontal'			//按鈕呈現方式(直式:vertical 橫式: horizontal) 
+				},
+				setupResposive: {				//小圖在不同尺寸下的設定
+					600:{						//尺寸
+					    //設定參照thumb的設定項目
+						slideBtn:{}				//上下項目切換按鈕組設定值請參照上面設定方式
+					}
+				},
+				onTrans: function(){}, //客製倫播效果 預設:false
+				onHold: function(){} //客製內容物件動態效果 預設:false
+			});
+
 			//html結構
 			<div id="mySlideshow">
 				<img src="img_path" toggle-thumb-source="thumb_img_path" toggle-thumb-title="thumb_title" />
@@ -255,6 +259,7 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 			//===================================================================================
 
 			//Tab標籤頁面定位按鈕設定值==========================================================
+			//在頁面滑動至相對高度的jumper按鈕會加入jumperActive class, 在客製化修改其樣式即可
 			$(obj).addClass("resTabJumper");
 			<a class="resTabJumper" href="#目標ID">連結</a>
 			//===================================================================================
@@ -262,7 +267,7 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 			//Tab group建立=====================================================================
 			$(obj).JResContentTab({
 				init: 預設的顯示標籤 (預設:0),
-	            fx: 切換效果 (預設:fade / fade,slide,show),
+	            fx: 切換效果 (預設:slide / fade,slide,show),
 	            transitTime: 切換效果時間 (預設:300),
 	            createTabs: {			//js寫入Tab
 	            	tab1:{				//新標籤編號
@@ -351,23 +356,23 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 		        position: 定位方式(字串)(預設'fixed',其他'absolute'),
 		        container: 若定位方式為'absolute'必須提供父層的容器物件ID,
 		        path: {			//路徑設定
-		                0:{		//路徑名稱或編號
-		                    speed: 1,			//卷軸速度
-		                    start:{				//點位設定(起點)
-		                        ladder: 0,		//點位開始的卷軸位置
-		                        x: 400,			//點位x位置
-		                        y: 1000,		//點位y位置
-		                        z: 2, 			//點位z位置
-		                        opacity: 0		//透明度 (浮點 0~1)
-		                    },
-		                    end: {				//點位設定(終點)
-		                        ladder: 600,	//點位終點的卷軸位置
-		                        x: 800,			//點位x位置
-		                        y: 100,			//點位y位置
-		                        z: 2, 			//點位z位置
-		                        opacity: 1		//透明度 (浮點 0~1)
-		                    } 
-		                }
+		        	0:{		//路徑名稱或編號
+		        		speed: 1,			//卷軸速度
+		        		start:{				//點位設定(起點)
+		            		ladder: 0,		//點位開始的卷軸位置
+		                	x: 400,			//點位x位置
+		                	y: 1000,		//點位y位置
+		                	z: 2, 			//點位z位置
+		                	opacity: 0		//透明度 (浮點 0~1)
+		            	},
+		            	end: {				//點位設定(終點)
+		                	ladder: 600,	//點位終點的卷軸位置
+		                	x: 800,			//點位x位置
+		                	y: 100,			//點位y位置
+		                	z: 2, 			//點位z位置
+		                	opacity: 1		//透明度 (浮點 0~1)
+		            	} 
+		        	}
 		        }
 		    });
 		    //定位連結
@@ -418,6 +423,12 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 		    		...
 		    	</ul>
 		    </div>
+		    //====================================================================================
+
+		    //JResScrollSticker功能===============================================================
+		    $("#ID")JResScrollSticker({
+		    	position:{} //設定位置樣式,預設值為top:0 (obj)
+		    });
 		    //====================================================================================
 
 			
