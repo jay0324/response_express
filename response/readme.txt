@@ -4,10 +4,9 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/02/18 修改:
-- 修正JResDelayLoader客制效果載入時IE opacity無法轉為1的問題
-- 修正所有opacity的設定值
-- 修正resDocLayout及resJSlideImg樣式,加入overflow hidden
+Date: 2016/02/26 修改:
+- 修正resLayout image尺寸處理動作
+- 修正resEnlarge偵測圖片外框尺寸問題
 
 =======================================================================================================================
 套用方式及相關文件說明

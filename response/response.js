@@ -1,7 +1,7 @@
 /*  
     $ Responsive plugin
     Program: Jay HSU
-    Date: 2016/02/18
+    Date: 2016/02/26
 */
 
 /*! Respond.js v1.4.2: min/max-width media query polyfill
@@ -743,18 +743,20 @@ var ladderObjAmt = 0;
             });
         //});
         //若url有#則使用定位移動函式 (restabJumperState:true使用/false停用, restabJumperSpeed:移動速度)
-        if (restabJumperState && window.location.hash) {
-            var targetPosID = $(window.location.hash);
-            var speed = restabJumperSpeed;
-            var paddingAmt = 0;
-            //檢查此頁面是否有此區塊物件ID
-            if ($(targetPosID).length > 0) {
-                if (resMenuState === true && resMenuType === "fixed" && $(window).width() <= setUILoadWidth) {
-                    paddingAmt = resMobileNavSetupHeight;
+        $(function(){
+            if (restabJumperState && window.location.hash) {
+                var targetPosID = $(window.location.hash);
+                var speed = restabJumperSpeed;
+                var paddingAmt = 0;
+                //檢查此頁面是否有此區塊物件ID
+                if ($(targetPosID).length > 0) {
+                    if (resMenuState === true && resMenuType === "fixed" && $(window).width() <= setUILoadWidth) {
+                        paddingAmt = resMobileNavSetupHeight;
+                    }
+                    fnTabJumper(targetPosID, speed, paddingAmt);
                 }
-                fnTabJumper(targetPosID, speed, paddingAmt);
             }
-        }
+        })
         //resTabJumper
         if (restabJumperState) {
             //$(".resTabJumper").each(function() {
@@ -819,7 +821,7 @@ var ladderObjAmt = 0;
         });
         //swap version
         function fnTabJumper(targetPosID, speed, paddingAmt) {
-            var paddingAmt = paddingAmt + 10; //多10px
+            var paddingAmt = paddingAmt; //多10px
             $("html, body").animate({
                 scrollTop: $(targetPosID).offset().top - paddingAmt
             }, speed);
@@ -1909,14 +1911,13 @@ var ladderObjAmt = 0;
                 var enlargeSize = options.enlargeSize;
                 var scalePx = options.scalePx;
                 var paddingAmt = options.paddingAmt;
-                //var documentW = $(window).width() - paddingAmt;
-                //螢幕寬與上層容器取得其最小值來作為最大寬度
-                var documentW = Math.min(($(window).width() - paddingAmt), ($(this).parent().width() - paddingAmt));
-                if (documentW <= 100) documentW = $(window).width() - paddingAmt;
-
                 var touchOrangal, updateOrangal = 0;
 
-                $(this).each(function() {
+                $(this).each(function() {  
+                    //var documentW = $(window).width() - paddingAmt;
+                    //螢幕寬與上層容器取得其最小值來作為最大寬度
+                    var documentW = Math.min(($(window).width() - paddingAmt), ($(this).parent().width() - paddingAmt));
+                    if (documentW <= 100) documentW = $(window).width() - paddingAmt;
                     var enablePluginModeSource = "";
                     $(this).addClass("resEnlargeImg");
                         //先檢查class
@@ -1949,9 +1950,9 @@ var ladderObjAmt = 0;
                             }
                 
                             if (doUsed) {
-                                var objW,objH = 0;
-                                var wrapH = 'height:auto';
                                 $(this).one('load', function() {
+                                    var objW,objH = 0;
+                                    var wrapH = 'height:auto';
                                     var d = new Date();
                                     var thisID = "resEnlarge_" + Math.floor(d.getTime()); //因為亂數會重複所以改成毫秒
                                     
@@ -1962,6 +1963,7 @@ var ladderObjAmt = 0;
                                     
 
                                     //如果在寫入時該物件為隱藏物件，會導致物件無法偵測到尺寸，此時把該物件的寬度設定為預設外框的寬度，高度auto,設定在物件的樣式中
+                                    
                                     if (objW == 0) {
                                         objW = documentW;
                                         $(this).css({
@@ -2154,6 +2156,7 @@ var ladderObjAmt = 0;
     };
 
     //mobile enlarge control
+    $(function(){$('body').append('<div id="resEnlargePopupWrap">');})
     JResEnlargeControl = function(options) {
         var defaults = {
             id: "",
@@ -2161,62 +2164,69 @@ var ladderObjAmt = 0;
             scalePx: 20
         };
         options = $.extend(defaults, options);
+
+        var container = "#resEnlargePopupWrap";
         var id = options.id;
         var action = options.action;
         var scalePx = options.scalePx;
+        //console.log($("#"+id+">.resEnlargeContent").get(0).outerHTML);
+        if (action == 'open') {
+            $(container).html($("#"+id+">.resEnlargeContent").get(0).outerHTML);
+        }
+
         switch (action) {
           //打開視窗
             case "open":
-            $("#" + id + ">.resEnlargeContent").fadeIn(200);
-            if ($("#mobile_nav_bottom").attr("resState") != "notUsed") {
-                $("#mobile_nav_bottom").fadeOut(100);
-            }
-            if ($("#mobile_nav").attr("resState") != "notUsed") {
-                $("#mobile_nav").fadeOut(100);
+                $(container).fadeIn(200);
+                if ($("#mobile_nav_bottom").attr("resState") != "notUsed") {
+                    $("#mobile_nav_bottom").fadeOut(100);
+                }
+                if ($("#mobile_nav").attr("resState") != "notUsed") {
+                    $("#mobile_nav").fadeOut(100);
+                    $("body").css({'overflow':'hidden'});
+                }
                 $("body").css({'overflow':'hidden'});
-            }
-            $("body").css({'overflow':'hidden'});
             
             break;
 
           //關閉視窗
             case "close":
-            $("#" + id + ">.resEnlargeContent").fadeOut(200);
-            if ($("#mobile_nav_bottom").attr("resState") != "notUsed") {
-                $("#mobile_nav_bottom").fadeIn(100);
-            }
-            if ($("#mobile_nav").attr("resState") != "notUsed") {
-                $("#mobile_nav").fadeIn(100);
-            }
-            $("body").css({'overflow':'auto'});
+                $(container).fadeOut(200);
+                if ($("#mobile_nav_bottom").attr("resState") != "notUsed") {
+                    $("#mobile_nav_bottom").fadeIn(100);
+                }
+                if ($("#mobile_nav").attr("resState") != "notUsed") {
+                    $("#mobile_nav").fadeIn(100);
+                }
+                $("body").css({'overflow':'auto'});
             break;
 
           //符合尺寸
             case "fit":
-            if ($("#" + id + " .resEnlargeOraginalIcon").css("display") == "none") {
-                $("#" + id + " .resEnlargeFitIcon").hide();
-                $("#" + id + " .resEnlargeOraginalIcon").show();
-                $("#" + id + ">.resEnlargeContent>img").attr("style", "width:auto !important");
-            }
+                if ($(container + " .resEnlargeOraginalIcon").css("display") == "none") {
+                    $(container + " .resEnlargeFitIcon").hide();
+                    $(container + " .resEnlargeOraginalIcon").show();
+                    $(container + ">.resEnlargeContent>img").attr("style", "width:auto !important");
+                }
             break;
 
           //原始大小
             case "oraginal":
-            if ($("#" + id + " .resEnlargeFitIcon").css("display") == "none") {
-                $("#" + id + " .resEnlargeFitIcon").show();
-                $("#" + id + " .resEnlargeOraginalIcon").hide();
-                $("#" + id + ">.resEnlargeContent>img").attr("style", "width:100% !important");
-            }
+                if ($(container + " .resEnlargeFitIcon").css("display") == "none") {
+                    $(container + " .resEnlargeFitIcon").show();
+                    $(container + " .resEnlargeOraginalIcon").hide();
+                    $(container + ">.resEnlargeContent>img").attr("style", "width:100% !important");
+                }
             break;
 
           //放大
             case "plus":
-            $("#" + id + ">.resEnlargeContent>img").attr("style", "width:" + ($("#" + id + ">.resEnlargeContent>img").width() + scalePx) + "px !important");
+                $(container + ">.resEnlargeContent>img").attr("style", "width:" + ($(container + ">.resEnlargeContent>img").width() + scalePx) + "px !important");
             break;
 
           //縮小
             case "dis":
-            $("#" + id + ">.resEnlargeContent>img").attr("style", "width:" + ($("#" + id + ">.resEnlargeContent>img").width() - scalePx) + "px !important");
+                $(container + ">.resEnlargeContent>img").attr("style", "width:" + ($(container + ">.resEnlargeContent>img").width() - scalePx) + "px !important");
             break;
         }
     };
@@ -3739,7 +3749,7 @@ var ladderObjAmt = 0;
         })
 
         //處理res排版圖片尺寸
-        $('.resRow [class*="resCol"]').each(function() {
+        /*$('.resRow [class*="resCol"]').each(function() {
             $resColW = $(this).width();
             //console.log("width:"+$resColW);
             $("img", this).each(function() {
@@ -3765,7 +3775,7 @@ var ladderObjAmt = 0;
                     }
                 }
             });
-        });
+        });*/
 
     });
 
