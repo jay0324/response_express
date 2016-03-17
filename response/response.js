@@ -1,7 +1,7 @@
 /*  
     $ Responsive plugin
     Program: Jay HSU
-    Date: 2016/02/26
+    Date: 2016/03/10
 */
 
 /*! Respond.js v1.4.2: min/max-width media query polyfill
@@ -58,6 +58,12 @@ var ladderObjAmt = 0;
             res_langArrayAdd1: "",
             res_langVarAdd2: "",
             res_langArrayAdd2: "",
+            res_langVarAdd3: "",
+            res_langArrayAdd3: "",
+            res_langVarAdd4: "",
+            res_langArrayAdd4: "",
+            res_langVarAdd5: "",
+            res_langArrayAdd5: "",
             defaultLangMenuObj: "",
             customLangMenu: "<ul>" + '<li><a href="#">中文版</a></li>' + '<li><a href="#">ENGLISH</a></li>' + "</ul>",
             defaultMenuObj: "",
@@ -428,10 +434,16 @@ var ladderObjAmt = 0;
         //res_langVarCn: 簡中版判斷值
         //res_langVarAdd1: 外加語言1判斷值
         //res_langVarAdd2: 外加語言2判斷值
+        //res_langVarAdd3: 外加語言3判斷值
+        //res_langVarAdd4: 外加語言4判斷值
+        //res_langVarAdd5: 外加語言5判斷值
         //res_langArrayTw: 繁中翻譯字串
         //res_langArrayCn: 簡中翻譯字串
         //res_langArrayAdd1: 外加語言1翻譯字串
         //res_langArrayAdd2: 外加語言2翻譯字串
+        //res_langArrayAdd3: 外加語言3翻譯字串
+        //res_langArrayAdd4: 外加語言4翻譯字串
+        //res_langArrayAdd5: 外加語言5翻譯字串
         //defaultLangMenuObj: 原網頁內容的語言選單id或class
         //customLangMenu: 客製化的語言選單內容
         var res_langSwitch = options.res_langSwitch ? "" : "style='display:none'";
@@ -472,6 +484,33 @@ var ladderObjAmt = 0;
         if (res_langArrayAdd2_extend.length > 0) {
             for (var i = 0; i < res_langArrayAdd2_extend.length; i++) {
                 res_langArrayAdd2.push(res_langArrayAdd2_extend[i]);
+            }
+        }
+        //外加語言3
+        var res_langVarAdd3 = options.res_langVarAdd3.toLowerCase();
+        var res_langArrayAdd3 = [ "language:language", "menu:menu", "mobile:mobile", "desktop:desktop" ];
+        var res_langArrayAdd3_extend = options.res_langArrayAdd3;
+        if (res_langArrayAdd3_extend.length > 0) {
+            for (var i = 0; i < res_langArrayAdd3_extend.length; i++) {
+                res_langArrayAdd3.push(res_langArrayAdd3_extend[i]);
+            }
+        }
+        //外加語言4
+        var res_langVarAdd4 = options.res_langVarAdd4.toLowerCase();
+        var res_langArrayAdd4 = [ "language:language", "menu:menu", "mobile:mobile", "desktop:desktop" ];
+        var res_langArrayAdd4_extend = options.res_langArrayAdd4;
+        if (res_langArrayAdd4_extend.length > 0) {
+            for (var i = 0; i < res_langArrayAdd4_extend.length; i++) {
+                res_langArrayAdd4.push(res_langArrayAdd4_extend[i]);
+            }
+        }
+        //外加語言5
+        var res_langVarAdd5 = options.res_langVarAdd5.toLowerCase();
+        var res_langArrayAdd5 = [ "language:language", "menu:menu", "mobile:mobile", "desktop:desktop" ];
+        var res_langArrayAdd5_extend = options.res_langArrayAdd5;
+        if (res_langArrayAdd5_extend.length > 0) {
+            for (var i = 0; i < res_langArrayAdd5_extend.length; i++) {
+                res_langArrayAdd5.push(res_langArrayAdd5_extend[i]);
             }
         }
         var defaultLangMenuObj = options.defaultLangMenuObj;
@@ -906,6 +945,12 @@ var ladderObjAmt = 0;
                 transStr = fnReturnTranslate(res_langArrayAdd1, str);
             } else if (res_langVarAdd2 != "" && checkString.indexOf(res_langVarAdd2) != -1) {
                 transStr = fnReturnTranslate(res_langArrayAdd2, str);
+            } else if (res_langVarAdd3 != "" && checkString.indexOf(res_langVarAdd3) != -1) {
+                transStr = fnReturnTranslate(res_langArrayAdd3, str);
+            } else if (res_langVarAdd4 != "" && checkString.indexOf(res_langVarAdd4) != -1) {
+                transStr = fnReturnTranslate(res_langArrayAdd4, str);
+            } else if (res_langVarAdd5 != "" && checkString.indexOf(res_langVarAdd5) != -1) {
+                transStr = fnReturnTranslate(res_langArrayAdd5, str);
             } else if (res_langVarEn != "" && checkString.indexOf(res_langVarEn) != -1) {
                 transStr = str;
             } else {
@@ -929,6 +974,21 @@ var ladderObjAmt = 0;
                   //外加語系2
                     case "add2":
                     transStr = fnReturnTranslate(res_langArrayAdd2, str);
+                    break;
+
+                  //外加語系3
+                    case "add3":
+                    transStr = fnReturnTranslate(res_langArrayAdd3, str);
+                    break;
+
+                  //外加語系4
+                    case "add4":
+                    transStr = fnReturnTranslate(res_langArrayAdd4, str);
+                    break;
+
+                  //外加語系5
+                    case "add5":
+                    transStr = fnReturnTranslate(res_langArrayAdd5, str);
                     break;
 
                   //預設值
