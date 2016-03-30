@@ -1,0 +1,209 @@
+/* resMenu style */
+
+.resMenu {
+    ul {
+        margin: 5px;
+        padding: 0;
+        li {
+            list-style: none;
+            margin: 7px 5px;
+            a {
+                display:block;
+                color: #333;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: bold;
+                margin-bottom:1px;
+                &.hasChild{
+                    padding:5px 5px 5px 30px;
+                    background:#ccc url("../_img/EnlargePlus_btn.png") left top no-repeat;
+                    background-size:auto 100%;
+                    color:#000;
+                }
+            }
+            ul {
+                display: none;
+                li {
+                    a {
+                        font-weight: normal;
+                    }
+                    ul {
+                        li {
+                            margin: 10px 5px;
+                            a {
+                                font-size: 13px;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            &.active {
+                >ul {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.resMenu2 {
+    position: relative;
+    display: inline-block;
+    margin-bottom:-3px;
+    ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+        li {
+            position: relative;
+            display: inline-block;
+            margin: 1px;
+            padding: 0;
+            list-style: none;
+            float: left;
+            a {
+                display: block;
+                padding: 10px 35px;
+                margin: 0;
+                width: auto;
+                height: auto;
+                float: left;
+                text-decoration: none;
+                color: #000;
+                text-align: center;
+                font-size: 15px;
+                background: #eee;
+                @include transition("background 0.5s");
+                &.hasChild{
+                    padding: 10px 40px 10px 30px;
+                    background:#ccc url("../_img/EnlargePlus_btn.png") right center no-repeat;
+                    background-size:auto 100%;
+                }
+                &:hover {
+                    color: #fff;
+                    background: #666564;
+                    &.hasChild{
+                        background:#666564 url("../_img/EnlargePlus_btn.png") right center no-repeat;
+                        background-size:auto 100%;
+                    }
+                }
+            }
+            &.active {
+                >a {
+                    color: #fff;
+                    background: #666564;
+                }
+            }
+            ul {
+                position: absolute;
+                display: none;
+                top: 100%;
+                li {
+                    margin: 0 0 1px 0;
+                    a {
+                        width: 150px;
+                        background: #eee;
+                        &:hover {
+                            background: #666564;
+                        }
+                    }
+                    &.active {
+                        a {
+                            background: #666564;
+                        }
+                    }
+                    ul {
+                        top: 0;
+                        left: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 
+    - google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+
+}
+
+/* 
+    - ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+    - google nexus 7 landscape (966px)
+    - google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+    - google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+
+}
+
+/*
+    - ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+    - iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+    - iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+    - google nexus 7 portrait (604px)
+    - google nexus 7 2 portrait (600px)
+    - galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+
+}
+
+/* 
+    - iphone 5 landscape (568px)
+    - iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+    - iphone 6 plus portrait (414px) 
+    - galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+
+}
+
+/* 
+    - iphone 6 portrait (375px)
+    - galaxy S portrait (360px)
+    - iphone 5 portrait (320px)
+    - iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}

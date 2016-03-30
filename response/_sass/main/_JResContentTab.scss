@@ -1,0 +1,161 @@
+/* responsive tab class style */
+
+.tabs {
+    display: block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    /* z-index: 1; */
+    li {
+        display: block;
+        margin: 1px 5px 0 0;
+        padding: 0;
+        float: left;
+        list-style: none;
+        .tabsBtn {
+            display: block;
+            width: auto;
+            padding: 5px 30px;
+            background: #E8E8E8;
+            color: #333;
+            font-size: 16px;
+            text-decoration: none;
+            border: 1px solid #CCCCCC;
+            @include transition(background 0.5s,
+            color 0.5s);
+            @include border-radius(2px 15px 0 0);
+            &:hover,
+            &.active {
+                color: #333;
+                background: #fff;
+                border-bottom: 1px solid #fff;
+            }
+        }
+    }
+}
+
+.tabs_content {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    clear: both;
+    border: 1px solid #CCCCCC;
+    min-height: 200px;
+    top: -1px;
+    position: relative;
+    /* z-index: 0; */
+    .tabsContent {
+        display: none;
+        top: 0;
+        clear: both;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* 
+    - google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+
+}
+
+/* 
+    - ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+    - google nexus 7 landscape (966px)
+    - google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+    - google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+
+}
+
+/*
+    - ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+    - iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+    - iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+    - google nexus 7 portrait (604px)
+    - google nexus 7 2 portrait (600px)
+    - galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+
+}
+
+/* 
+    - iphone 5 landscape (568px)
+    - iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+    - iphone 6 plus portrait (414px) 
+    - galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+    .tabs {
+        li {
+            clear: both;
+            float: none;
+            margin: 1px 0 0 0;
+            .tabsBtn {
+                padding: 5px 10px;
+                clear: both;
+                @include border-radius(2px 2px 0 0);
+                &:hover,
+                &.active {
+                    border: 1px solid #AAAAAA;
+                    background: #cccccc;
+                }
+            }
+        }
+    }
+    .tabs_content {
+        margin: 0 0 10px 0;
+        top: 0;
+        border-top: 0;
+    }
+}
+
+/* 
+    - iphone 6 portrait (375px)
+    - galaxy S portrait (360px)
+    - iphone 5 portrait (320px)
+    - iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}

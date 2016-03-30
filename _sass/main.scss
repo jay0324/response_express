@@ -2,7 +2,7 @@
 /* 
 跨瀏覽器css3 mixins
 */
-@import "_css3-mixins.scss";
+@import "css3-mixin/_css3-mixins.scss";
 
 /*
 CSS3動畫, 請至helpers查詢模組參數, 然後把想要使用的動畫效果改成true即可
@@ -13,38 +13,7 @@ $use-bounceIn: true;
 $use-slideIn: true;
 @import "animate-sass-master/_animate.scss";
 
-body{
-	padding:0;
-	margin:0;
-	font-family: 'Lato', Verdana, Meiryo, "微軟正黑體", "Microsoft JhengHei";
-	font-size:14px;
-}
-
-/* main_page style */
-.main_page{
-	.resContainer{
-		.resDocLayout{
-			width:1280px;
-		}	
-		
-		&#dHeader{
-			
-		}
-
-		&#dSubHeader{
-			
-		}
-
-		&#dTorso{
-			
-		}
-
-		&#dFooter{
-			
-		}
-
-		&#dSubFooter{
-			
-		}
-	}
-}
+/* 
+CSS FOR WEBSITE PAGES
+*/
+@import "pages/_main.scss";

@@ -290,3 +290,44 @@
 @mixin animation($str) {
   @include css3-prefix('animation', $str);
 }
+
+/* 列印出背景顏色 */
+@mixin print-color-adjust($value) {
+    -webkit-print-color-adjust: $value;
+    -moz-print-color-adjust: $value;
+    -ms-print-color-adjust: $value;
+    -o-print-color-adjust: $value;
+    print-color-adjust: $value;
+}
+
+@mixin page-break-inside($value) {
+    -webkit-page-break-inside: $value;
+    -moz-page-break-inside: $value;
+    -ms-page-break-inside: $value;
+    -o-page-break-inside: $value;
+    page-break-inside: $value;
+}
+
+@mixin page-break-after($value) {
+    -webkit-page-break-after: $value;
+    -moz-page-break-after: $value;
+    -ms-page-break-after: $value;
+    -o-page-break-after: $value;
+    page-break-after: $value;
+}
+
+@mixin text-size-adjust($value) {
+    -webkit-text-size-adjust: $value;
+    -moz-text-size-adjust: $value;
+    -ms-text-size-adjust: $value;
+    -o-text-size-adjust: $value;
+    text-size-adjust: $value;
+}
+
+@mixin overflow-scrolling($value) {
+    -webkit-overflow-scrolling: $value;
+    -moz-overflow-scrolling: $value;
+    -ms-overflow-scrolling: $value;
+    -o-overflow-scrolling: $value;
+    overflow-scrolling: $value;
+}
