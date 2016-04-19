@@ -24,16 +24,16 @@ jquery.min.js看情形加入，如果該頁面已經有用jQuery則不用加入
 NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯產生css
 如果沒有的人請直接編輯_css下的css檔案
 
+<!--JQUERY-->
+<script type="text/javascript" src="response/jquery.min.js"></script> <!--jQuery Local v1.11.1 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script> <!--jQuery CDN v1.11.1 -->
+
 <!--響應式設定-->
 <link rel="stylesheet" type="text/css" href="response/_css/default.css" media="all"> <!--響應式預設樣式-->
 <link rel="stylesheet" type="text/css" href="response/_css/custom.css" media="all"> <!--客制設定樣式-->
-<script type="text/javascript" src="response/jquery.min.js"></script> <!--jQuery-->
 <script type="text/javascript" src="response/response.min.js"></script> <!--response主程式-->
 <script type="text/javascript" src="response/custom.js"></script> <!--response客制設定-->
 <!--響應式設定-->
-
-如果需要做css transition特效可以加入下列外掛
-<script type="text/javascript" src="response/jquery.transform.min.js"></script> <!--jQuery Cross Browser Transform 外掛-->
 
 =======================================================================================================================
 響應式設定相關參數說明
