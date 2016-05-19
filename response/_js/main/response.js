@@ -45,6 +45,8 @@ var ladderObjAmt = 0;
             additionalPage: "",
             pannelPosition: "left",
             pannelStyle: '',
+            pannelAnimateTime: 500,
+            pannelAnimateEasing: "swing",
             menuCollapse:'',
             resPageLoader: false,
             resPageLoaderTigger: 800,
@@ -76,6 +78,12 @@ var ladderObjAmt = 0;
 
         //設定響應式介面載入尺寸
         var setUILoadWidth = options.setUILoadWidth;
+
+        //設定響應式介面收拉視窗的開啟動畫時間
+        var pannelAnimateTime = options.pannelAnimateTime;
+
+        //設定響應式介面收拉視窗開啟動畫效果
+        var pannelAnimateEasing = options.pannelAnimateEasing;
 
         //設定響應式主導覽按鈕 (上方)
         var resMobileNavSetup = options.res_mobileTopNavBtnSetup;
@@ -165,9 +173,9 @@ var ladderObjAmt = 0;
         var resPageTitleHeight = resMobileNavSetupHeight - (resPageTitleMargin * 2); //resPageTitle高度
         var additionalPageContent = '<div id="resPageLoader" class="resFlipPage resFlipPageR"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + 
                                     '<div style="height:' + resMobileNavSetupHeight + 'px;" class="resPageController">' + 
-                                    '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#resPageLoader\',action:\'back\'});return false;"></div>' + 
+                                    '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#resPageLoader\',action:\'back\',animateTime:' + pannelAnimateTime + ',animateEasing:\''+pannelAnimateEasing+'\'});return false;"></div>' + 
                                     '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">Res Loader</div></div>'+
-                                    '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\'});return false;"></div></div>' +
+                                    '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\',animateTime:' + pannelAnimateTime + ',animateEasing:\''+pannelAnimateEasing+'\'});return false;"></div></div>' +
                                     '<div class="resAddPageContent"><div class="resAddPageContentMain">' + 
                                     '<div id="resPageLoad_loading_icon"></div>' + 
                                     '<div id="resPageLoad_area"></div>' + 
@@ -188,15 +196,15 @@ var ladderObjAmt = 0;
                 var relateBtn = "";
                 if ($.trim(additionalPageArray[i][4]) != "") {
                     var relateID = additionalPageArray[i][4].indexOf("_pageContent") == -1 ? additionalPageArray[i][4] + "_pageContent" : additionalPageArray[i][4];
-                    relateBtn = '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageNextIcon" onclick="JResPageControl({id:\'#' + relateID + '\',action:\'open\'});return false;"></div>';
+                    relateBtn = '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageNextIcon" onclick="JResPageControl({id:\'#' + relateID + '\',action:\'open\',animateTime:' + pannelAnimateTime + ',animateEasing:\''+pannelAnimateEasing+'\'});return false;"></div>';
                 }
                 additionalPageContent += '<div id="' + addPageID + '" class="resFlipPage ' + addPagePosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' +
                                          '<div style="height:' + resMobileNavSetupHeight + 'px;" class="resPageController">' + 
-                                            '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#' + addPageID + '\',action:\'back\'});return false;"></div>' + 
+                                            '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#' + addPageID + '\',action:\'back\',animateTime:' + pannelAnimateTime + ',animateEasing:\''+pannelAnimateEasing+'\'});return false;"></div>' + 
                                             '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">' + additionalPageArray[i][2] + "</div>" + 
                                             relateBtn + 
                                          '</div>'+
-                                         '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\'});return false;"></div></div>' +
+                                         '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\',animateTime:' + pannelAnimateTime + ',animateEasing:\''+pannelAnimateEasing+'\'});return false;"></div></div>' +
                                          '<div class="resAddPageContent"><div class="resAddPageContentMain">' + 
                                             addPageContent + 
                                          "<div class='clear'></div></div></div></div></div>";
@@ -243,7 +251,7 @@ var ladderObjAmt = 0;
 
                     var addPanelContent = additionalBtnArray[i][4][1] != undefined ? additionalBtnArray[i][4][1] : "";
                     additionalPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
-                    btnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false});return false;\"";
+                    btnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'"+pannelAnimateEasing+"'});return false;\"";
                     //trim whitespace from pannel content, then check if it is empty return value false to showBtn
                     if ($.trim(addPanelContent) == "") {
                         showBtn = false;
@@ -338,7 +346,7 @@ var ladderObjAmt = 0;
 
                     var addPanelContent = additionalBottomBtnArray[i][4][1] != undefined ? additionalBottomBtnArray[i][4][1] : "";
                     additionalBottomPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
-                    BottombtnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false});return false;\"";
+                    BottombtnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'"+pannelAnimateEasing+"'});return false;\"";
                     //trim whitespace from pannel content, then check if it is empty return value false to showBtn
                     if ($.trim(addPanelContent) == "") {
                         showBtn = false;
@@ -620,13 +628,15 @@ var ladderObjAmt = 0;
                         btnId: "#menu_btn,#menu_btn_bottom",
                         contentId: "#mobile_nav_content",
                         position: flipDirection,
-                        resetEvt: false
+                        resetEvt: false,
+                        animateTime: pannelAnimateTime,
+                        animateEasing: pannelAnimateEasing
                     });
                     return false;
                 });
                 //-- content close mask --
                 $("body").append('<div id="resContentMask"></div>');
-                //-- give content container a mini-height
+                //-- give content container a height
                 $("#resMainWrap").css("min-height", resMainWrap_miniHight + "px");
 
                 //使用伸縮選單的物件ID
@@ -654,12 +664,16 @@ var ladderObjAmt = 0;
                         var pos = addBtn[i][4][0];
                     }
                 }
+
                 JResMobileTopNav({
                     btnId: "#" + toggle,
                     contentId: "#" + toggle + "_pannelContent",
                     position: pos,
-                    resetEvt: false
+                    resetEvt: false,
+                    animateTime: pannelAnimateTime,
+                    animateEasing: pannelAnimateEasing
                 });
+
                 return false;
             });
         //});
@@ -669,7 +683,9 @@ var ladderObjAmt = 0;
             $('body').on('click','.resPageBtn',function(){
                 var toggle = $(this).attr("toggle");
                 JResPageControl({
-                    id: "#" + toggle + "_pageContent"
+                    id: "#" + toggle + "_pageContent",
+                    animateTime: pannelAnimateTime,
+                    animateEasing: pannelAnimateEasing
                 });
                 return false;
             });
@@ -691,7 +707,9 @@ var ladderObjAmt = 0;
                     //預設值在800以內寬度再使用響應視窗
                     if ($(window).width() <= setUILoadWidth) {
                         JResPageControl({
-                            id: "#resPageLoader"
+                            id: "#resPageLoader",
+                            animateTime: pannelAnimateTime,
+                            animateEasing: pannelAnimateEasing
                         });
                         var pageTitle = $(this).attr("title") == "" || $(this).attr("title") == undefined ? "" : $(this).attr("title");
                         var toggleParam = ($(this).attr("toggleParam") == undefined || $(this).attr("toggleParam") == "") ? "" : $(this).attr("toggleParam");
@@ -723,7 +741,9 @@ var ladderObjAmt = 0;
                     }
                 } else if ($(this).attr("tigger") == "always") {
                     JResPageControl({
-                        id: "#resPageLoader"
+                        id: "#resPageLoader",
+                        animateTime: pannelAnimateTime,
+                        animateEasing: pannelAnimateEasing
                     });
                     var pageTitle = $(this).attr("title") == "" || $(this).attr("title") == undefined ? "" : $(this).attr("title");
                     var toggleParam = ($(this).attr("toggleParam") == undefined || $(this).attr("toggleParam") == "") ? "" : $(this).attr("toggleParam");
@@ -822,14 +842,12 @@ var ladderObjAmt = 0;
         //close all pannel if click resContentMask area
         $("#resContentMask").click(function() {
             JResMobileTopNav({
-                resetEvt: true
+                resetEvt: true,
+                animateTime: pannelAnimateTime,
+                animateEasing: pannelAnimateEasing
             });
         });
-        $(window).scroll(function() {
-            JResMobileTopNav({
-                resetEvt: true
-            });
-        });
+
         //swap version
         function fnTabJumper(targetPosID, speed, paddingAmt) {
             var paddingAmt = paddingAmt; //多10px
@@ -2215,9 +2233,10 @@ var ladderObjAmt = 0;
                 }
                 if ($("#mobile_nav").attr("resState") != "notUsed") {
                     $("#mobile_nav").fadeOut(100);
-                    $("body").css({'overflow':'hidden'});
                 }
-                $("body").css({'overflow':'hidden'});
+                if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                    $("html").addClass("resHtmlOverflow");
+                }
             
             break;
 
@@ -2230,7 +2249,9 @@ var ladderObjAmt = 0;
                 if ($("#mobile_nav").attr("resState") != "notUsed") {
                     $("#mobile_nav").fadeIn(100);
                 }
-                $("body").css({'overflow':'auto'});
+                if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                    $("html").removeClass("resHtmlOverflow");
+                }
             break;
 
           //符合尺寸
@@ -2335,11 +2356,15 @@ var ladderObjAmt = 0;
             }
 
             $(".resPopupBoxWrap").fadeIn(500); 
-            $("body").css({'overflow':'hidden'});
+            if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                $("html").addClass("resHtmlOverflow");
+            }
             
         }else{
             $(".resPopupBoxWrap").fadeOut(500);
-            $("body").css({'overflow':'auto'});
+            if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                $("html").removeClass("resHtmlOverflow");
+            }
         }
     }
 
@@ -2348,76 +2373,86 @@ var ladderObjAmt = 0;
     JResPageControl = function(options) {
         var defaults = {
             id: "",
-            action: "open"
+            action: "open",
+            animateTime: 300,
+            animateEasing: 'swing'
         };
         options = $.extend(defaults, options);
         var id = options.id;
         var action = options.action;
+        var animateTime = options.animateTime;
+        var animateEasing = options.animateEasing;
         switch (action) {
           //關閉頁面
             case "back":
-                $("html").removeClass("resHtmlOverflow");
+                if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                    $("html").removeClass("resHtmlOverflow");
+                }
+
                 if ($(id).hasClass("resFlipPageR")) {
                     $(id).animate({
                         right: "-120%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                 } else if ($(id).hasClass("resFlipPageT")) {
                     $(id).animate({
                         top: "-120%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                 } else {
                     $(id).animate({
                         left: "-120%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                 }
                 //關閉時清除url_loader內容
                 $("#resPageLoad_area").html("");
-                $("body").css({"overflow":"auto"});
-                $(this).animate({"z-index":-1},300);
+                $(this).animate({"z-index":-1},animateTime,animateEasing);
             break;
 
             //關閉全部頁面
             case "closeAll":
-                $("html").removeClass("resHtmlOverflow");
+                if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                    $("html").removeClass("resHtmlOverflow");
+                }
+
                 $(".resFlipPage").each(function(){
                     if ($(this).hasClass("resFlipPageR") && ($(this).css("right") == "0px" || $(this).css("right") == "0%")){
                         $(this).animate({
                             right: "-120%"
-                        }, 300);
+                        },animateTime,animateEasing);
                     }else if ($(this).hasClass("resFlipPageT") && ($(this).css("top") == "0px" || $(this).css("top") == "0%")){
                         $(this).animate({
                             right: "-120%"
-                        }, 300);
+                        },animateTime,animateEasing);
                     }else{
                         $(this).animate({
                             right: "-120%"
-                        }, 300);
+                        },animateTime,animateEasing);
                     }
                 })
                 //關閉時清除url_loader內容
                 $("#resPageLoad_area").html("");
-                $("body").css({"overflow":"auto"});
-                $(this).animate({"z-index":-1},300);
+                $(this).animate({"z-index":-1},animateTime,animateEasing);
             break;
 
           //打開頁面
             case "open":
             default:
-                $("html").addClass("resHtmlOverflow");
+                if(!$("#resMainWrap").hasClass('resPannelOpen')){
+                    $("html").addClass("resHtmlOverflow");
+                }
+                
                 if ($(id).hasClass("resFlipPageR")) {
                     $(id).animate({
                         right: "0px"
-                    }, 300);
+                    },animateTime,animateEasing);
                 } else if ($(id).hasClass("resFlipPageT")) {
                     $(id).animate({
                         top: "0px"
-                    }, 300);
+                    },animateTime,animateEasing);
                 } else {
                     $(id).animate({
                         left: "0px"
-                    }, 300);
+                    },animateTime,animateEasing);
                 }
-                $("body").css({"overflow":"hidden"});
                 $(id).css({"z-index":1001});
             break;
         }
@@ -2428,19 +2463,24 @@ var ladderObjAmt = 0;
             btnId: "",
             contentId: "",
             position: "",
-            resetEvt: true
+            resetEvt: true,
+            animateTime: 500,
+            animateEasing: "swing"
         };
         options = $.extend(defaults, options);
         var btnId = options.btnId;
         var contentId = options.contentId;
         var position = options.position;
         var resetEvt = options.resetEvt;
+        var ignoreUEvent = options.ignoreUEvent;
+        var animateTime = options.animateTime;
+        var animateEasing = options.animateEasing;
         //開啟前先檢查其他pannel如果已經開啟則關閉
         $(".flipContentL").each(function() {
             if ($(this).css("left") == "0px" || $(this).css("left") == "0%") {
                 $(this).animate({
                     left: "-90%"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#mobile_nav ul li a div").remove();
                 $("#mobile_nav_bottom ul li a div").remove();
                 $.JResContentScroll({
@@ -2452,7 +2492,7 @@ var ladderObjAmt = 0;
             if ($(this).css("right") == "0px" || $(this).css("left") == "0%") {
                 $(this).animate({
                     right: "-90%"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#mobile_nav ul li a div").remove();
                 $("#mobile_nav_bottom ul li a div").remove();
                 $.JResContentScroll({
@@ -2464,7 +2504,7 @@ var ladderObjAmt = 0;
             if ($(this).css("top") == "0px" || $(this).css("left") == "0%") {
                 $(this).animate({
                     top: "-90%"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#mobile_nav ul li a div").remove();
                 $("#mobile_nav_bottom ul li a div").remove();
                 $.JResContentScroll({
@@ -2476,7 +2516,7 @@ var ladderObjAmt = 0;
             if ($(this).css("top") == "0px" || $(this).css("left") == "0%") {
                 $(this).animate({
                     top: "-110px"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#mobile_nav ul li a div").remove();
                 $("#mobile_nav_bottom ul li a div").remove();
                 $.JResContentScroll({
@@ -2484,15 +2524,16 @@ var ladderObjAmt = 0;
                 });
             }
         });
+
         $(".flipContentLU").each(function() {
             if ($(this).css("left") == "0px" || $(this).css("left") == "0%") {
                 $("#resContentMask").removeAttr("style").css("left", "0");
                 $(this).animate({
                     left: "-90%"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#resMainWrap").animate({
                     left: "0"
-                }, 300, function() {
+                }, animateTime,animateEasing, function() {
                     //$(this).removeAttr("style");
                     $(this).css("left","");
                 });
@@ -2508,10 +2549,10 @@ var ladderObjAmt = 0;
                 $("#resContentMask").removeAttr("style").css("right", "0");
                 $(this).animate({
                     right: "-90%"
-                }, 300);
+                }, animateTime,animateEasing);
                 $("#resMainWrap").animate({
                     right: "0"
-                }, 300, function() {
+                }, animateTime,animateEasing, function() {
                     //$(this).removeAttr("style");
                     $(this).css("right","");
                 });
@@ -2522,14 +2563,16 @@ var ladderObjAmt = 0;
                 });
             }
         });
+
         if (resetEvt == false) {
+            $("#resMainWrap").addClass('resPannelOpen');
             //開啟視窗
             switch (position) {
               case "right":
                 if ($(contentId).css("right") == "0px" || $(contentId).css("right") == "0%") {
                     $(contentId).animate({
                         right: "-90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: true
                     });
@@ -2537,7 +2580,7 @@ var ladderObjAmt = 0;
                 } else {
                     $(contentId).animate({
                         right: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2549,7 +2592,7 @@ var ladderObjAmt = 0;
                 if ($(contentId).css("top") == "0px" || $(contentId).css("top") == "0%") {
                     $(contentId).animate({
                         top: "-90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: true
                     });
@@ -2557,7 +2600,7 @@ var ladderObjAmt = 0;
                 } else {
                     $(contentId).animate({
                         top: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2569,7 +2612,7 @@ var ladderObjAmt = 0;
                 if ($(contentId).css("top") == "0px" || $(contentId).css("top") == "0%") {
                     $(contentId).animate({
                         top: "-100px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: true
                     });
@@ -2577,7 +2620,7 @@ var ladderObjAmt = 0;
                 } else {
                     $(contentId).animate({
                         top: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2590,10 +2633,10 @@ var ladderObjAmt = 0;
                     $("#resContentMask").removeAttr("style").css("left", "0");
                     $(contentId).animate({
                         left: "-90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $("#resMainWrap").animate({
                         left: "0"
-                    }, 300, function() {
+                    }, animateTime,animateEasing, function() {
                         //$(this).removeAttr("style");
                         $(this).css("left","");
                     });
@@ -2605,10 +2648,10 @@ var ladderObjAmt = 0;
                     $("#resContentMask").removeAttr("style").css("left", "90%");
                     $(contentId).animate({
                         left: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $("#resMainWrap").animate({
                         left: "90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2621,10 +2664,10 @@ var ladderObjAmt = 0;
                     $("#resContentMask").removeAttr("style").css("right", "0");
                     $(contentId).animate({
                         right: "-90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $("#resMainWrap").animate({
                         right: "0"
-                    }, 300, function() {
+                    }, animateTime,animateEasing, function() {
                         //$(this).removeAttr("style");
                         $(this).css("right","");
                     });
@@ -2636,10 +2679,10 @@ var ladderObjAmt = 0;
                     $("#resContentMask").removeAttr("style").css("right", "90%");
                     $(contentId).animate({
                         right: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $("#resMainWrap").animate({
                         right: "90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2651,7 +2694,7 @@ var ladderObjAmt = 0;
                 if ($(contentId).css("left") == "0px" || $(contentId).css("left") == "0%") {
                     $(contentId).animate({
                         left: "-90%"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: true
                     });
@@ -2659,7 +2702,7 @@ var ladderObjAmt = 0;
                 } else {
                     $(contentId).animate({
                         left: "0px"
-                    }, 300);
+                    }, animateTime,animateEasing);
                     $.JResContentScroll({
                         action: false
                     });
@@ -2681,6 +2724,7 @@ var ladderObjAmt = 0;
             //$("#resMainWrap").css({"position":"relative"});
             $("html").removeClass("resHtmlOverflow");
             $("#resContentMask").hide();
+            $("#resMainWrap").removeClass('resPannelOpen');
         } else {
             //$("#resMainWrap").css({"position":"fixed"});
             $("html").addClass("resHtmlOverflow");
@@ -2754,20 +2798,23 @@ var ladderObjAmt = 0;
                 if ($(loadObj,obj).attr("load") != "complete") {
                     var maxAmt = $(loadObj,obj).length;
                     var delayAmt = 0;
+                    var targetObj;
                     for (var i = 0; i<maxAmt; i++ ){
                         delayAmt+=delay;
+                        targetObj = $(loadObj+":eq("+i+")",obj); //執行動作物件
 
                         if (options.onLoad != false) {
-                            $(loadObj+":eq("+i+")",obj).css({visibility:'visible'}); //將物件設為visible再進行效果
-                            options.onLoad.call( $(loadObj+":eq("+i+")",obj) ); //執行其他客製的動作
+                            $(targetObj).css({visibility:'visible'}); //將物件設為visible再進行效果
+                            options.onLoad.call($(targetObj)); //執行其他客製的動作
+
                         }else{
-                            $(loadObj+":eq("+i+")",obj).delay(delayAmt).animate({
+                            $(targetObj).delay(delayAmt).animate({
                                 opacity: '1'
                             },transition);
                         }
 
                         //加入載入完成標記
-                        $(loadObj+":eq("+i+")",obj).attr("load","complete");
+                        $(targetObj).attr("load","complete");
 
                     }
                 }
@@ -3179,13 +3226,15 @@ var ladderObjAmt = 0;
     $.fn.JResMenu = function(options) {
         var defaults = {
             view: 'vertical',
-            action: 'click'
+            action: 'click',
+            fx: true
         };
         options = $.extend(defaults, options);
         $(this).each(function(){
             var obj = $(this);
             var view = options.view;
             var action = options.action;
+            var fx = options.fx;
 
             //如針對目前在操作中的menu，將其z-index設為上層
             $(obj).on('mouseenter',function(){
@@ -3211,44 +3260,51 @@ var ladderObjAmt = 0;
                     //add style
                     $(obj).addClass("resMenu2");
 
-                    //add event
-                    if (action == 'hover') {
-                        //hover event
-                        $(obj).on('mouseenter','li',function(e){
-                            $(">ul",this).slideDown(10);
-                        }).on('mouseleave','li',function(e){
-                            $(this).parent().children().each(function(){
-                                $(this).children('ul').slideUp(10);
-                            })
-                        })
-                    }else{
-                        //click event
-                        $(obj).on('click','li',function(e){
-                            if ($(e.target).hasClass("hasChild")) {
-                                //偵測同層目錄下的物件就收起來
+                    //如果要使用收合動作效果
+                    if (fx) {
+                        //add event
+                        if (action == 'hover') {
+                            //hover event
+                            $(obj).on('mouseenter','li',function(e){
+                                $(">ul",this).slideDown(10);
+                            }).on('mouseleave','li',function(e){
                                 $(this).parent().children().each(function(){
-                                    $(this).children('ul').slideUp(200);
+                                    $(this).children('ul').slideUp(10);
                                 })
+                            })
+                        }else{
+                            //click event
+                            $(obj).on('click','li',function(e){
+                                //取得點選物件
+                                var targetClick = e.target;
+                                if (!$(targetClick).is('a')) targetClick = $(e.target).parent('a.hasChild');
+                                
+                                if ($(targetClick).hasClass("hasChild")) {
+                                    //偵測同層目錄下的物件就收起來
+                                    $(this).parent().children().each(function(){
+                                        $(this).children('ul').slideUp(200);
+                                    })
 
-                                //偵測目前點擊的物件是否有子目錄，有的話就開啟
-                                if($(">ul",this).length > 0){
-                                    if ($(">ul",this).css('display') == 'none') {
-                                        $(">ul",this).slideDown(200);
-                                    }else{
-                                        $(">ul",this).slideUp(200);
+                                    //偵測目前點擊的物件是否有子目錄，有的話就開啟
+                                    if($(">ul",this).length > 0){
+                                        if ($(">ul",this).css('display') == 'none') {
+                                            $(">ul",this).slideDown(200);
+                                        }else{
+                                            $(">ul",this).slideUp(200);
+                                        }
+                                        return false;
                                     }
-                                    return false;
+
+                                    //只偵測到目前的物件
+                                    e.stopPropagation(); 
+
                                 }
 
-                                //只偵測到目前的物件
-                                e.stopPropagation(); 
-
-                            }
-
-                            
-                        }).on('mouseleave',function(){
-                            $('li>ul',this).slideUp(200);
-                        });
+                                
+                            }).on('mouseleave',function(){
+                                $('li>ul',this).slideUp(200);
+                            });
+                        }
                     }
 
                 break;
@@ -3256,47 +3312,54 @@ var ladderObjAmt = 0;
                     //add style
                     $(obj).addClass("resMenu");
 
-                    //add event
-                    if (action == 'hover') {
-                        //hover event
-                        $(obj).on('mouseenter','li',function(e){
-                            $(">ul",this).slideDown(500);
-                        }).on('mouseleave','li',function(e){
-                            //偵測同層目錄下的物件是否有active,沒有的話就收起來
-                            $(this).parent().children().each(function(){
-                                if(!$(this).hasClass('active')){
-                                    $(this).children('ul').slideUp(500);
-                                }
-                            })
-                        })
-
-                    }else{
-                        //click event
-                        $(obj).on('click','li',function(e){
-                            //偵測同層目錄下的物件是否有active,沒有的話就收起來
-                            if ($(e.target).hasClass("hasChild")) {
+                    //如果要使用收合動作效果
+                    if (fx) {
+                        //add event
+                        if (action == 'hover') {
+                            //hover event
+                            $(obj).on('mouseenter','li',function(e){
+                                $(">ul",this).slideDown(500);
+                            }).on('mouseleave','li',function(e){
+                                //偵測同層目錄下的物件是否有active,沒有的話就收起來
                                 $(this).parent().children().each(function(){
                                     if(!$(this).hasClass('active')){
-                                        $(this).children('ul').slideUp(200);
+                                        $(this).children('ul').slideUp(500);
                                     }
                                 })
+                            })
+                        }else{
+                            //click event
+                            $(obj).on('click','li',function(e){
+                                //取得點選物件
+                                var targetClick = e.target;
+                                if (!$(targetClick).is('a')) targetClick = $(e.target).parent('a.hasChild');
 
-                                //偵測目前點擊的物件是否有子目錄，有的話就開啟
-                                if($(">ul",this).length > 0){
-                                    if ($(">ul",this).css('display') == 'none') {
-                                        $(">ul",this).slideDown(200);
-                                    }else{
-                                        $(">ul",this).slideUp(200);
+                                //偵測同層目錄下的物件是否有active,沒有的話就收起來
+                                if ($(targetClick).hasClass("hasChild")) {
+                                    $(this).parent().children().each(function(){
+                                        if(!$(this).hasClass('active')){
+                                            $(this).children('ul').slideUp(200);
+                                        }
+                                    })
+
+                                    //偵測目前點擊的物件是否有子目錄，有的話就開啟
+                                    if($(">ul",this).length > 0){
+                                        if ($(">ul",this).css('display') == 'none') {
+                                            $(">ul",this).slideDown(200);
+                                        }else{
+                                            $(">ul",this).slideUp(200);
+                                        }
+                                        return false;
                                     }
-                                    return false;
-                                }
 
-                                //只偵測到目前的物件
-                                //console.log($(e.target).hasClass("hasChild"));
-                                e.stopPropagation();
-                            }
-                        })
+                                    //只偵測到目前的物件
+                                    //console.log($(e.target).hasClass("hasChild"));
+                                    e.stopPropagation();
+                                }
+                            })
+                        }
                     }
+                    
                 break;
             }
 

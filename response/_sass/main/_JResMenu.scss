@@ -41,6 +41,14 @@
             &.active {
                 >ul {
                     display: block;
+                    >li.active{
+                        >a{
+                           color:#B7151C; 
+                        }
+                    }
+                }
+                >a{
+                    color:#B7151C;
                 }
             }
         }
@@ -89,12 +97,30 @@
                     }
                 }
             }
+
             &.active {
+                >ul {
+                    >li.active{
+                        >a{
+                           color: #fff;
+                           background: #666564;
+                            &.hasChild{
+                                background:#666564 url("../_img/EnlargePlus_btn.png") right center no-repeat;
+                                background-size:auto 100%;
+                            }
+                        }
+                    }
+                }
                 >a {
                     color: #fff;
                     background: #666564;
+                    &.hasChild{
+                        background:#666564 url("../_img/EnlargePlus_btn.png") right center no-repeat;
+                        background-size:auto 100%;
+                    }
                 }
             }
+
             ul {
                 position: absolute;
                 display: none;

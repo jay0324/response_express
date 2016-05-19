@@ -3,6 +3,7 @@ body{
 	margin:0;
 	font-family: 'Lato', Verdana, Meiryo, "微軟正黑體", "Microsoft JhengHei";
 	font-size:14px;
+	background:#fff;
 }
 
 /* main_page style */
@@ -13,7 +14,12 @@ body{
 		}	
 		
 		&#dHeader{
-			
+			z-index:2;
+			#lang{
+				&.resMenu2 ul li ul li a{
+					width:auto;
+				}
+			}
 		}
 
 		&#dSubHeader{
@@ -25,11 +31,110 @@ body{
 		}
 
 		&#dFooter{
-			
+			background:#eee;
 		}
 
 		&#dSubFooter{
 			
+		}
+	}
+}
+
+.btn{
+	border:1px solid #D0D0D0;
+	background:#fff;
+	padding:10px 15px;
+	text-decoration:none;
+	color:#929090;
+	@include transition('all 0.5s');
+
+	&:hover{
+		background:#eee;
+	}
+}
+
+/* social community */
+.community {
+	display: inline-block;
+    a {
+        display: inline-block;
+        width: auto;
+        height: auto;
+        margin: 0 5px;
+        padding: 2px;
+        border:0;
+        background: #2E2E2E;
+        @include border-radius("50px");
+        i {
+            display: block;
+            width: 30px;
+            height: 30px;
+            @include transition("transform 1s");
+            &:hover {
+                @include transform("rotateZ(360deg);");
+            }
+            &.facebook {
+                background: url("../_img/layout/icon/facebook_icon.png") no-repeat;
+            }
+            &.twitter {
+                background: url("../_img/layout/icon/twiter_icon.png") no-repeat;
+            }
+            &.plurk {
+                background: url("../_img/layout/icon/plurk_icon.png") no-repeat;
+            }
+            &.delicious {
+                background: url("../_img/layout/icon/delic_icon.png") no-repeat;
+            }
+            &.linkin {
+                background: url("../_img/layout/icon/linkin_icon.png") no-repeat;
+            }
+            &.google {
+                background: url("../_img/layout/icon/gplus_icon.png") no-repeat;
+            }
+            &.baidu {
+                background: url("../_img/layout/icon/biadu_icon.png") no-repeat;
+            }
+            &.chrome {
+                background: url("../_img/layout/icon/chrome_icon.png") no-repeat;
+            }
+            &.qq {
+                background: url("../_img/layout/icon/qq_icon.png") no-repeat;
+            }
+        }
+    }
+}
+
+/* table style */
+table{
+	border:1px solid #DEDEDE;
+
+	tr{
+		th{
+			color:#B00000;
+			padding:10px 10px 10px 35px;
+			border:1px solid #DEDEDE;
+			text-align: left;
+		}
+		td{
+			padding:10px;
+			border:1px solid #DEDEDE;
+		}
+
+		&:nth-child(odd),&.nth-child-odd{
+			th{
+				background:#F1F1F1;
+			}
+			td{
+				background:#F1F1F1;
+			}
+		}
+
+		&:first-child,&.first-child{
+			th{
+				color:#000;
+				@include background-gradient(#FEFEFE,#EAEAEC);
+				background-position:center;
+			}
 		}
 	}
 }
