@@ -59,7 +59,11 @@
 	- galaxy tab portrait (600px)
 */
 @media (max-width:604px){
-
+	.mobile_overflow {
+		table{
+			width:600px !important;
+		}
+	}
 }
 
 /* 

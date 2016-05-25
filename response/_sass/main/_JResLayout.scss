@@ -155,44 +155,49 @@ select.resSelect{
 */
 @media (max-width:736px){
     /*response table*/
-    .resTable>tbody {
-        width: 100%;
-        >tr {
-            >td,
-            >th {
-                display: block;
-                width: auto;
-                height: auto;
-                clear: both;
-                text-align: left;
-                &.resEmptyCol {
-                    display: none;
-                }
-                input,
-                select {
-                    width: 98%;
-                }
-                input {
-                    &[type="radio"],
-                    &[type="checkbox"] {
-                        width: auto;
+    .resTable{
+        display:block;
+        >tbody,>thead {
+            display:block;
+            width: 100%;
+            >tr {
+                display:block;
+                >td,
+                >th {
+                    display: block;
+                    width: auto;
+                    height: auto;
+                    clear: both;
+                    text-align: left;
+                    &.resEmptyCol {
+                        display: none;
                     }
-                    &[type="submit"],
-                    &[type="reset"],
-                    &[type="button"] {
+                    input,
+                    select {
+                        width: 98%;
+                    }
+                    input {
+                        &[type="radio"],
+                        &[type="checkbox"] {
+                            width: auto;
+                        }
+                        &[type="submit"],
+                        &[type="reset"],
+                        &[type="button"] {
+                            width: 48%;
+                            padding: 5px 0;
+                            height: auto;
+                        }
+                    }
+                    button {
                         width: 48%;
                         padding: 5px 0;
                         height: auto;
                     }
-                }
-                button {
-                    width: 48%;
-                    padding: 5px 0;
-                    height: auto;
-                }
-                textarea {
-                    width: 98%;
-                    height: 200px;
+                    textarea {
+                        width: 98%;
+                        height: 200px;
+                    }
                 }
             }
         }

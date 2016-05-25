@@ -4,10 +4,10 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/05/19 修改:
-- 修正響應式視窗在left_under和right_under開啟的問題
-- 響應式模組加入pannelAnimateTime及pannelAnimateEasing兩個參數
-- 加入jquery easing外掛用來提供參數值給pannelAnimateEasing
+Date: 2016/05/25 修改:
+- 修正jresEnlarge樣式及程式中針對指定尺寸以下的外框固定尺寸設定值
+- 修正jresOverflow樣式
+- 修正樣式
 
 =======================================================================================================================
 其他外掛
@@ -126,6 +126,8 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 				additionalPage: [["頁面ID名稱","視窗開啟方式(left,top,right)","頁面標題","頁面內容","相關頁面ID(會產生下一頁按鈕)"],...]
 				pannelPosition: '預設響應式視窗開啟方式(top,left,right,left_under,right_under)',
 				pannelStyle: '預設響應式視窗風格 預設為空值,style1)",
+				pannelAnimateTime: 響應是視窗動畫播放時間,預設500(毫秒),
+            	pannelAnimateEasing: 響應式視窗動畫效果，預設"swing"(參考文件:http://gsgd.co.uk/sandbox/jquery/easing/),
 				menuCollapse: '要套用收闔式的物件ID,如多個ID可用逗號隔開',
 				resPageLoader: true/false (是否使用頁面載入動畫,預設false),
 				resPageLoaderTigger: 'always'/800/600/... (是否在特定螢幕寬以下才使用loader,預設值為800),

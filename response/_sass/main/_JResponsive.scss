@@ -534,6 +534,11 @@ img {
         width: 90%;
         height: 100%;
         z-index: 98;
+
+        @include box-shadow(0,
+        0,
+        0,
+        #000);
     }
     .flipContentRU {
         top: 0;
@@ -542,6 +547,11 @@ img {
         width: 90%;
         height: 100%;
         z-index: 98;
+
+        @include box-shadow(0,
+        0,
+        0,
+        #000);
     }
     /*響應式頁面*/
     .resFlipPage {

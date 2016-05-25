@@ -1,4 +1,8 @@
 /*enlarge 還原*/
+.resEnlargeWraper{
+    overflow: hidden;
+}
+
 .resEnlarge {
     position: static;
     >.resEnlargeOpenIcon,
