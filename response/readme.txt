@@ -4,10 +4,27 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/05/25 修改:
-- 修正jresEnlarge樣式及程式中針對指定尺寸以下的外框固定尺寸設定值
-- 修正jresOverflow樣式
-- 修正樣式
+Date: 2016/06/01 修改:
+- 加入排版樣式
+
+.resRow的設定值:
+.resEven: 用在將resRow下的resCol設為同高度
+ATTR -> res-slice-h="定義要將resRow下的resCol橫向平均分為幾等分"
+ATTR -> res-slice-v="定義要將resRow下的resCol縱向平均分為幾等分"
+
+.resCol*的設定值:
+.resCol: 無任何定義的resCol Dom
+.overflow: 定義此resCol Dom加入卷軸
+.top: 定義此resCol Dom的內容縱向向上對齊
+.middle: 定義此resCol Dom的內容縱向向中對齊
+.bottom: 定義此resCol Dom的內容縱向向下對齊
+
+ATTR -> res-slice-ratio-h="定義此resCol橫向相對比例"
+ATTR -> res-slice-ratio-v="定義此resCol縱向相對比例"
+
+$(menuObjID).JResMenu()
+修改fx模式參數:
+"mixed": 混合模式(當混和模式的時候，有子選單的A連結如果將它的HREF設為#則就會以收合方式效果帶入，反之如果給HREF連結則會跳頁)
 
 =======================================================================================================================
 其他外掛
@@ -423,7 +440,7 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 			$(menuObjID).JResMenu({
 		        view: 顯示方式(字串)(horizontal: 橫向, vertical:縱向(預設)),
 		        action: 觸發方式(字串)(hover: 滑過觸發, click: 點擊觸發(預設)),
-		        fx: 使用展開收闔效果 (預設: true)
+		        fx: 使用展開收闔效果 (預設: true, "mixed": 混合模式(當混和模式的時候，有子選單的A連結如果將它的HREF設為#則就會以收合方式效果帶入，反之如果給HREF連結則會跳頁))
 		    })
 
 		    //HTML結構
@@ -442,6 +459,9 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 		    		...
 		    	</ul>
 		    </div>
+
+		    //備註: 因為程式執行後樣式才會寫入物件，建議可以先將樣式先寫入物件，在頁面載入時樣式才會預先出現
+		    //如: <div id="menuObjID" class="程式載入樣式名稱">
 		    //====================================================================================
 
 		    //JResScrollSticker功能===============================================================

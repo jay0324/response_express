@@ -4,9 +4,15 @@
     ul {
         margin: 5px;
         padding: 0;
+            list-style: none;
+            list-style-image: none;
+            list-style-type: none;
         li {
             list-style: none;
             margin: 7px 5px;
+            list-style: none;
+            list-style-image: none;
+            list-style-type: none;
             a {
                 display:block;
                 color: #333;
@@ -57,24 +63,30 @@
 
 .resMenu2 {
     position: relative;
-    display: inline-block;
-    margin-bottom:-3px;
+    display: block;
+    width:100%;
     ul {
-        display: block;
+        display: flex;
         margin: 0;
         padding: 0;
+        list-style: none;
+        list-style-image: none;
+        list-style-type: none;
         li {
             position: relative;
             display: inline-block;
+            flex: 1;
             margin: 1px;
             padding: 0;
             list-style: none;
+            list-style-image: none;
+            list-style-type: none;
             float: left;
             a {
                 display: block;
-                padding: 10px 35px;
+                padding: 10px 5%;
                 margin: 0;
-                width: auto;
+                width: 90%;
                 height: auto;
                 float: left;
                 text-decoration: none;
@@ -84,7 +96,6 @@
                 background: #eee;
                 @include transition("background 0.5s");
                 &.hasChild{
-                    padding: 10px 40px 10px 30px;
                     background:#ccc url("../_img/EnlargePlus_btn.png") right center no-repeat;
                     background-size:auto 100%;
                 }
@@ -125,10 +136,13 @@
                 position: absolute;
                 display: none;
                 top: 100%;
+                width:100%;
                 li {
-                    margin: 0 0 1px 0;
+                    width:100%;
+                    margin: 0;
+                    border-bottom:1px solid #fff;
                     a {
-                        width: 150px;
+                        width: 90%;
                         background: #eee;
                         &:hover {
                             background: #666564;

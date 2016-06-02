@@ -1,7 +1,7 @@
 /*
 *$.Responsive plugin
 *Program: Jay HSU
-*Date: 2016/03/21
+*Date: 2016/06/01
 */
 var currScrollPos = 0;
 var ladderObjAmt = 0;
@@ -3261,7 +3261,7 @@ var ladderObjAmt = 0;
                     $(obj).addClass("resMenu2");
 
                     //如果要使用收合動作效果
-                    if (fx) {
+                    if (fx || fx == 'mixed') {
                         //add event
                         if (action == 'hover') {
                             //hover event
@@ -3279,7 +3279,7 @@ var ladderObjAmt = 0;
                                 var targetClick = e.target;
                                 if (!$(targetClick).is('a')) targetClick = $(e.target).parent('a.hasChild');
                                 
-                                if ($(targetClick).hasClass("hasChild")) {
+                                if ($(targetClick).hasClass("hasChild") && !(fx == 'mixed' && $(targetClick).attr("href") != "#") ) {
                                     //偵測同層目錄下的物件就收起來
                                     $(this).parent().children().each(function(){
                                         $(this).children('ul').slideUp(200);
@@ -3313,7 +3313,7 @@ var ladderObjAmt = 0;
                     $(obj).addClass("resMenu");
 
                     //如果要使用收合動作效果
-                    if (fx) {
+                    if (fx || fx == 'mixed') {
                         //add event
                         if (action == 'hover') {
                             //hover event
@@ -3335,7 +3335,7 @@ var ladderObjAmt = 0;
                                 if (!$(targetClick).is('a')) targetClick = $(e.target).parent('a.hasChild');
 
                                 //偵測同層目錄下的物件是否有active,沒有的話就收起來
-                                if ($(targetClick).hasClass("hasChild")) {
+                                if ($(targetClick).hasClass("hasChild") && !(fx == 'mixed' && $(targetClick).attr("href") != "#") ) {
                                     $(this).parent().children().each(function(){
                                         if(!$(this).hasClass('active')){
                                             $(this).children('ul').slideUp(200);
@@ -3840,6 +3840,75 @@ var ladderObjAmt = 0;
         $(".resTable td").each(function(){
             if ($(this).html() == "&nbsp;" || $(this).html() == "" || $(this).html() == " "){
                 $(this).addClass("resEmptyCol");
+            }
+        })
+
+        /*resSplit*/
+        $('.resRow').each(function() {
+            //切割寬度並在W:736以上使用)
+            if($(window).width() >= 736 ) {
+                if ($(this).attr("res-slice-h") != undefined) {
+                    var getSliceVar = $(this).attr("res-slice-h");
+                    var getTotalSlice = 0;
+
+                    $(">[class*='resCol']",this).each(function(){
+                        if($(this).attr('res-slice-ratio-h') != undefined) {
+                            getTotalSlice += parseInt($(this).attr('res-slice-ratio-h'));
+                        }else{
+                            getTotalSlice += 1; //預設加一
+                        }
+                    })
+
+                    var setSliceVar = Math.max(getTotalSlice,getSliceVar);
+                    var setSliceRatio = 100/parseInt(setSliceVar);
+
+                    $(">[class*='resCol']",this).each(function(){
+                        if($(this).attr('res-slice-ratio-h') != undefined) {
+                            var getCurrentRatio = parseInt($(this).attr('res-slice-ratio-h'));
+                            $(this).width((getCurrentRatio*setSliceRatio) + '%');
+                        }else{
+                            $(this).width(setSliceRatio + '%');
+                        }
+                    })
+
+                }
+            }
+
+            /* 切割高度並在W:570以上進行高度同步 */
+            if($(window).width() >= 570 ) {
+                if ($(this).attr("res-slice-v") != undefined){
+                    var getSliceVar = $(this).attr("res-slice-v");
+                    var getTotalSlice = 0;
+                    $(this).height($(this).height());
+
+                    $(">[class*='resCol']",this).each(function(){
+                        if($(this).attr('res-slice-ratio-v') != undefined) {
+                            getTotalSlice += parseInt($(this).attr('res-slice-ratio-v'));
+                        }else{
+                            getTotalSlice += 1; //預設加一
+                        }
+                    })
+
+                    var setSliceVar = Math.max(getTotalSlice,getSliceVar);
+                    var setSliceRatio = 100/parseInt(setSliceVar);
+
+                    $(">[class*='resCol']",this).each(function(){
+                        if($(this).attr('res-slice-ratio-v') != undefined) {
+                            var getCurrentRatio = parseInt($(this).attr('res-slice-ratio-v'));
+                            $(this).height((getCurrentRatio*setSliceRatio) + '%');
+                        }else{
+                            $(this).height(setSliceRatio + '%');
+                        }
+                    })
+
+                }
+
+                
+                if ($(this).hasClass("resEven")){
+                    var rowHeight = $(this).height();
+                    var maxHeight = Math.max.apply(null, $(">[class*='resCol']",this).map(function(){return $(this).height();}).get());
+                    $(">[class*='resCol']",this).height(Math.max(maxHeight,rowHeight));
+                }
             }
         })
 

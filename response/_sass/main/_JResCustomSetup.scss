@@ -3,7 +3,9 @@
 	- google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
 */
 @media (max-width:1280px){
-
+	.main_page .resContainer .resDocLayout{
+		width:100%;
+	}
 }
 
 /* 
@@ -25,7 +27,12 @@
 	- google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
 */
 @media (max-width:800px){
-
+	#left_container{
+		display:none;
+	}
+	#right_container{
+		width:100%;
+	}
 }
 
 /*
