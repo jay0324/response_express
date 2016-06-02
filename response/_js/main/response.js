@@ -3847,24 +3847,22 @@ var ladderObjAmt = 0;
         $('.resRow').each(function() {
             //切割寬度並在W:736以上使用)
             if($(window).width() >= 736 ) {
-                if ($(this).attr("res-slice-h") != undefined) {
-                    var getSliceVar = $(this).attr("res-slice-h");
+                if ($(this).hasClass("res-slice-h")) {
                     var getTotalSlice = 0;
 
                     $(">[class*='resCol']",this).each(function(){
-                        if($(this).attr('res-slice-ratio-h') != undefined) {
-                            getTotalSlice += parseInt($(this).attr('res-slice-ratio-h'));
+                        if($(this).attr('res-slice-h') != undefined) {
+                            getTotalSlice += parseInt($(this).attr('res-slice-h'));
                         }else{
                             getTotalSlice += 1; //預設加一
                         }
                     })
 
-                    var setSliceVar = Math.max(getTotalSlice,getSliceVar);
-                    var setSliceRatio = 100/parseInt(setSliceVar);
+                    var setSliceRatio = 100/parseInt(getTotalSlice);
 
                     $(">[class*='resCol']",this).each(function(){
-                        if($(this).attr('res-slice-ratio-h') != undefined) {
-                            var getCurrentRatio = parseInt($(this).attr('res-slice-ratio-h'));
+                        if($(this).attr('res-slice-h') != undefined) {
+                            var getCurrentRatio = parseInt($(this).attr('res-slice-h'));
                             $(this).width((getCurrentRatio*setSliceRatio) + '%');
                         }else{
                             $(this).width(setSliceRatio + '%');
@@ -3876,25 +3874,23 @@ var ladderObjAmt = 0;
 
             /* 切割高度並在W:570以上進行高度同步 */
             if($(window).width() >= 570 ) {
-                if ($(this).attr("res-slice-v") != undefined){
-                    var getSliceVar = $(this).attr("res-slice-v");
+                if ($(this).hasClass("res-slice-v")){
                     var getTotalSlice = 0;
                     $(this).height($(this).height());
 
                     $(">[class*='resCol']",this).each(function(){
-                        if($(this).attr('res-slice-ratio-v') != undefined) {
-                            getTotalSlice += parseInt($(this).attr('res-slice-ratio-v'));
+                        if($(this).attr('res-slice-v') != undefined) {
+                            getTotalSlice += parseInt($(this).attr('res-slice-v'));
                         }else{
                             getTotalSlice += 1; //預設加一
                         }
                     })
 
-                    var setSliceVar = Math.max(getTotalSlice,getSliceVar);
-                    var setSliceRatio = 100/parseInt(setSliceVar);
+                    var setSliceRatio = 100/parseInt(getTotalSlice);
 
                     $(">[class*='resCol']",this).each(function(){
-                        if($(this).attr('res-slice-ratio-v') != undefined) {
-                            var getCurrentRatio = parseInt($(this).attr('res-slice-ratio-v'));
+                        if($(this).attr('res-slice-v') != undefined) {
+                            var getCurrentRatio = parseInt($(this).attr('res-slice-v'));
                             $(this).height((getCurrentRatio*setSliceRatio) + '%');
                         }else{
                             $(this).height(setSliceRatio + '%');

@@ -9,8 +9,8 @@ Date: 2016/06/01 修改:
 
 .resRow的設定值:
 .resEven: 用在將resRow下的resCol設為同高度
-ATTR -> res-slice-h="定義要將resRow下的resCol橫向平均分為幾等分"
-ATTR -> res-slice-v="定義要將resRow下的resCol縱向平均分為幾等分"
+.res-slice-h: 用在將resRow下的resCol橫向自動均分
+.res-slice-v: 用在將resRow下的resCol縱向自動均分
 
 .resCol*的設定值:
 .resCol: 無任何定義的resCol Dom
@@ -19,8 +19,8 @@ ATTR -> res-slice-v="定義要將resRow下的resCol縱向平均分為幾等分"
 .middle: 定義此resCol Dom的內容縱向向中對齊
 .bottom: 定義此resCol Dom的內容縱向向下對齊
 
-ATTR -> res-slice-ratio-h="定義此resCol橫向相對比例"
-ATTR -> res-slice-ratio-v="定義此resCol縱向相對比例"
+ATTR -> res-slice-h="定義此resCol橫向相對比例"
+ATTR -> res-slice-v="定義此resCol縱向相對比例"
 
 $(menuObjID).JResMenu()
 修改fx模式參數:
