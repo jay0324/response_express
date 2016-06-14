@@ -4,27 +4,11 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/06/01 修改:
-- 加入排版樣式
+Date: 2016/06/14 修改:
+-加入透過gulp進行客製化建置外掛，可以選擇加入的模組
+-新增: JResAccordion, JResWrapper (未完成)
+-建構中取消JResAccordion.js, JResWrapper.js, JResLadderObj.js, JResFollowObj.js, 如果之後要用在自行建構
 
-.resRow的設定值:
-.resEven: 用在將resRow下的resCol設為同高度
-.res-slice-h: 用在將resRow下的resCol橫向自動均分
-.res-slice-v: 用在將resRow下的resCol縱向自動均分
-
-.resCol*的設定值:
-.resCol: 無任何定義的resCol Dom
-.overflow: 定義此resCol Dom加入卷軸
-.top: 定義此resCol Dom的內容縱向向上對齊
-.middle: 定義此resCol Dom的內容縱向向中對齊
-.bottom: 定義此resCol Dom的內容縱向向下對齊
-
-ATTR -> res-slice-h="定義此resCol橫向相對比例"
-ATTR -> res-slice-v="定義此resCol縱向相對比例"
-
-$(menuObjID).JResMenu()
-修改fx模式參數:
-"mixed": 混合模式(當混和模式的時候，有子選單的A連結如果將它的HREF設為#則就會以收合方式效果帶入，反之如果給HREF連結則會跳頁)
 
 =======================================================================================================================
 其他外掛
@@ -342,6 +326,7 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 				listAmt: 顯示數量(數字) (預設5),
 				listPaddingAmt: 每個項目的間距(數字) (預設2),
 				from: 第一個顯示的項目(數字) (預設0),
+				type: 呈現方式(字串: horizontal/vertical) (預設horizontal),
 				btnSetup:{				//按鈕設定(物件)
 	                nextBtn:{			//往後按鈕(物件)
 	                    state: 是否顯示(布林)(預設true),
@@ -468,6 +453,65 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 		    $("#ID").JResScrollSticker({
 		    	position:{} //設定位置樣式,預設值為top:0 (obj)
 		    });
+		    //====================================================================================
+
+		    //JResAccordion功能===================================================================
+		    $("#ID").JResAccordion({
+	            height: 300, 		//高度
+	            amount: 4,			//數量
+	            openW: 52,			//開啟寬/高度(%)
+	            headingW: 40,		//標題區寬/高度(%)
+	            contentW: 60,		//內容區寬/高度(%)
+	            delay: 1000,		//動畫長度 (毫秒)
+	            fx:'linear',		//動畫效果 (參照Jquery earsing)
+	            type: 'horizontal'	//排列方式 (horizontal:橫向 / vertical:縱向)
+	        });
+
+	        //HTML結構
+	        <ul id="demoAccordion" class="resAccordion">
+                <li>
+                    <div class="heading"> Heading </div>
+                    <div class="content"> Content </div>
+                </li>
+                <li>
+                    <div class="heading"> Heading </div>
+                    <div class="content"> Content </div>
+                </li>
+                <li>
+                    <div class="heading"> Heading </div>
+                    <div class="content"> Content </div>
+                </li>
+                <li>
+                    <div class="heading"> Heading </div>
+                    <div class="content"> Content </div>
+                </li>
+            </ul>
+
+		    //====================================================================================
+
+		    //res排版樣式=========================================================================
+		    .resRow的設定值:
+			.resEven: 用在將resRow下的resCol設為同高度
+			.res-slice-h: 用在將resRow下的resCol橫向自動均分
+			.res-slice-v: 用在將resRow下的resCol縱向自動均分
+
+			.resCol*的設定值 (引入12格線排版樣式.resCol1~.resCol12):
+			.resCol: 無任何定義的resCol Dom
+			.overflow: 定義此resCol Dom加入卷軸
+			.top: 定義此resCol Dom的內容縱向向上對齊
+			.middle: 定義此resCol Dom的內容縱向向中對齊
+			.bottom: 定義此resCol Dom的內容縱向向下對齊
+
+			ATTR -> res-slice-h="定義此resCol橫向相對比例"
+			ATTR -> res-slice-v="定義此resCol縱向相對比例"
+
+			其他:
+			.resSelect: 客製化下拉式
+			.clear: 清除流動
+			.resContainer: 外框
+			.resDocLayout: 內框
+			.resTable: 流動式表格
+
 		    //====================================================================================
 
 			
