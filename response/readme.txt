@@ -4,10 +4,11 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/06/14 修改:
--加入透過gulp進行客製化建置外掛，可以選擇加入的模組
--新增: JResAccordion, JResWrapper (未完成)
--建構中取消JResAccordion.js, JResWrapper.js, JResLadderObj.js, JResFollowObj.js, 如果之後要用在自行建構
+Date: 2016/06/17 修改:
+-新增: .resTableRow: 將結構同.resRow，只是他是以table的方式來排列，不過這個就沒有響應式了，其他尺寸的呈現，再依照需求修改樣式即可
+-修正: $(obj).JResOverflow() table在偵測不到尺寸的包覆方式
+-修正: $(obj).JSlideImg() 圖片置中，加入判斷如果目前為隱藏狀態就不執行，修正thumb list重複點擊會進行重複執行的問題，加入loader
+-修正: loader的event調整於ready時建立,windows onload之後移除
 
 
 =======================================================================================================================
@@ -490,6 +491,9 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 		    //====================================================================================
 
 		    //res排版樣式=========================================================================
+		    .resTableRow: 將結構同.resRow，只是他是以table的方式來排列，不過這個就沒有響應式了，
+		    其他尺寸的呈現，再依照需求修改樣式即可
+
 		    .resRow的設定值:
 			.resEven: 用在將resRow下的resCol設為同高度
 			.res-slice-h: 用在將resRow下的resCol橫向自動均分

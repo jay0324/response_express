@@ -12,13 +12,20 @@
     >a {
         display: block;
         position: absolute;
+        margin:auto;
         top: 0;
         left: 0;
+        right: 0;
+        bottom: 0;
         width: auto;
         height: auto;
         opacity: 0;
         filter: alpha(opacity=0);
+        >img{
+            margin:0 auto;
+        }
     }
+
     .resJSlideImgThumb {
         position: absolute;
         overflow: hidden;
@@ -63,8 +70,9 @@
                 }
                 img {
                     display: block;
-                    width: 100%;
-                    height: auto;
+                    width:auto;
+                    height:50%;
+                    margin:0 auto;
                     clear: both;
                 }
                 span {
@@ -72,6 +80,17 @@
                     height: 20px;
                     clear: both;
                     text-align: center;
+                }
+
+                &.resThumbFit{
+                    img{
+                        width:auto;
+                        height:100%;
+                        margin:0 auto;
+                    }
+                    span{
+                        display:none;
+                    }
                 }
             }
         }

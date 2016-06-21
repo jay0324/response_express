@@ -35,7 +35,7 @@ select.resSelect{
     }
 }
 
-.resRow {
+.resRow,.resTableRow {
     display: block;
     width: 100%;
     height: auto;
@@ -85,6 +85,13 @@ select.resSelect{
     .resCol0 {
         display:none;
     }
+}
+
+.resRow {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
 
     [class*="resCol"] {
         display: block;
@@ -141,7 +148,30 @@ select.resSelect{
             display:block;
         }
     }
+}
 
+.resTableRow{
+    display:table;
+    [class*="resCol"] {
+        display:table-cell;
+        float:none;
+
+        &.center {
+            text-align: center;
+        }
+        &.right {
+            text-align: right;
+        }
+        &.middle {
+            vertical-align: middle;
+        }
+        &.top {
+            vertical-align: top;
+        }
+        &.bottom {
+            vertical-align: bottom;
+        }
+    }
 }
 
 /* 

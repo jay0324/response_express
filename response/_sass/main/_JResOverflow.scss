@@ -29,6 +29,10 @@
         width: auto;
         overflow: auto;
         background: url("../_img/scroller_btn.png") top left no-repeat;
+
+        >img{
+        	max-width: initial !important;
+        }
     }
 }
 
