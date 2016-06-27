@@ -1,0 +1,37 @@
+/* 預設響應式設定 */
+/* 
+跨瀏覽器css3 mixins
+*/
+@import "css3-mixin/_css3-mixins.scss";
+
+/* fonts */
+@import "fonts/_global.scss";
+
+/*
+CSS3動畫, 請至helpers查詢模組參數, 然後把想要使用的動畫效果改成true即可
+$use-動畫效果class: true;
+使用方式: 在要使用效果的物件上設定animated 動畫效果class就可以了
+*/
+@import "animate-sass-master/_animate.scss";
+
+/* 
+RES SETUP MODULES
+*/
+@import "main/_JResponsive.scss";
+@import "main/_JResLayout.scss";
+@import "main/_JSlideImg.scss";
+@import "main/_JResEnlarge.scss";
+@import "main/_JResOverflow.scss";
+@import "main/_JResMenu.scss";
+@import "main/_JResContentTab.scss";
+@import "main/_JResContentSlider.scss";
+@import "main/_JResMarquee.scss";
+@import "main/_JResLadderObj.scss";
+//@import "main/_JResAccordion.scss";
+//@import "main/_JResWrapper.scss";
+
+/* 
+custom scss
+*/
+@import "custom/_page.scss";
+@import "custom/_JResCustomSetup.scss";
