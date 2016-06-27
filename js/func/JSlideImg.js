@@ -10,23 +10,8 @@
             paddingAmt: 0,
             layout: "clear",
             touchSwipAmt: 100,
-            thumb: {
-                state: false,
-                amount: 4,
-                width:100,
-                height:100,
-                type: 'horizontal',
-                position: 'bottom:0;left:0;',
-                overlap: true,
-                overlapPos: 'auto'
-            },
-            slideBtn:{
-                state: false,
-                trigger: 'click',
-                width: 100,
-                height: 100,
-                type: 'horizontal'
-            },
+            thumb: {},
+            slideBtn:{},
             autoPlay: true,
             setupResposive: {},
             onTrans: false,
@@ -91,6 +76,7 @@
             var swipToPrevPOS = 0;
             var trackSwipEvent = false;
             var touchSwipAmt = options.touchSwipAmt;
+            var displayTitle = options.displayTitle;
 
             //螢幕寬與上層容器取得其最小值來作為最大寬度
             var maxJSlideWidth = Math.min(($(window).width() - paddingAmt), ($(resContainer).parent().width() - paddingAmt));
@@ -169,13 +155,46 @@
             fnCheckResponsiveSetup();
 
             //取得物件小圖設定值
+
+            /*initial value*/
+            var thumbInitial = {
+                state: false,
+                amount: 4,
+                width:'auto',
+                height:'auto',
+                type: 'horizontal',
+                position: 'auto',
+                overlap: true,
+                overlapPos: 'auto',
+                displayTitle: 'auto',
+                thumbRatio: 1
+            }
+
             if(!$.isEmptyObject(thumb)){
+
+                /*initial data*/
+                thumb['state'] = (thumb['state'] == undefined) ? thumbInitial['state'] : thumb['state'];
+                thumb['amount'] = (thumb['amount'] == undefined) ? thumbInitial['amount'] : thumb['amount'];
+                thumb['width'] = (thumb['width'] == undefined) ? thumbInitial['width'] : thumb['width'];
+                thumb['height'] = (thumb['height'] == undefined) ? thumbInitial['height'] : thumb['height'];
+                thumb['type'] = (thumb['type'] == undefined) ? thumbInitial['type'] : thumb['type'];
+                thumb['position'] = (thumb['position'] == undefined) ? thumbInitial['position'] : thumb['position'];
+                thumb['overlap'] = (thumb['overlap'] == undefined) ? thumbInitial['overlap'] : thumb['overlap'];
+                thumb['overlapPos'] = (thumb['overlapPos'] == undefined) ? thumbInitial['overlapPos'] : thumb['overlapPos'];
+                thumb['displayTitle'] = (thumb['displayTitle'] == undefined) ? thumbInitial['displayTitle'] : thumb['displayTitle'];
+                thumb['thumbRatio'] = (thumb['thumbRatio'] == undefined) ? thumbInitial['thumbRatio'] : thumb['thumbRatio'];
+
+                /*analyse data*/
                 if(thumb['state']) {
                     var thumbAmt = (thumb['amount'] == 'auto')?maxAmtThumb:thumb['amount'];
                     var ThumbScroller = (maxAmtThumb <= thumbAmt) ? false : true;
+
                     if (thumb['type'] == 'vertical') {
-                        var btnW = (thumb['width']+12);
                         var btnH = (ThumbScroller) ? 20 : 0;
+                        /*如果width和height設定為auto*/
+                        thumb['height'] = (thumb['height'] == 'auto') ? (((resJSlideHeight-(btnH*2))/thumbAmt) -12) : thumb['height'];
+                        thumb['width'] = (thumb['width'] == 'auto') ? (thumb['height']*thumb['thumbRatio']) : thumb['width']; 
+                        var btnW = (thumb['width']+12);
                         var positionPrev = "top:0;";
                         var positionNext = "bottom:0;";
                         var positionTrack = "top:"+btnH+"px;";
@@ -184,6 +203,17 @@
                         var maxThumbTrack = (((maxAmtThumb/thumbAmt)-1)*thumbH)-((btnH*2)+(10*thumbAmt));
                         var thumbWUL = (thumb['width']+12) + 'px';
                         var thumbHUL = "auto";
+                        var thumbTitleOranitation = 'vetical';
+                        switch(thumb['displayTitle']){
+                            case 'left':
+                                var setthumbTitlePosition = 'bottom:0;left:0;right:initial;';
+                            break;
+                            case 'right':
+                            default:
+                                var setthumbTitlePosition = 'bottom:0;right:0;left:initial;';
+                            break;
+                        }
+                        var thumbTitlePosition = 'width:'+(resJSlideWidth-thumb['width']-25)+'px;'+setthumbTitlePosition;
 
                         //apply overlapping
                         if (!thumb['overlap']) {
@@ -192,6 +222,10 @@
                                     $(options.disObj).css({
                                         'width': ($(options.disObj).width() - (thumb['width']+20)) + 'px',
                                         'padding-right':(thumb['width']+20)+'px'
+                                    });
+                                    $(options.childTag.toLowerCase(),options.disObj).css({
+                                        'width': $(options.disObj).width() + 'px',
+                                        'height':'auto'
                                     });
                                     $(">"+options.childTag.toLowerCase(),options.disObj).css({
                                         'margin-right':'0',
@@ -202,6 +236,10 @@
                                     $(options.disObj).css({
                                         'width': ($(options.disObj).width() - (thumb['width']+20)) + 'px',
                                         'padding-left':(thumb['width']+20)+'px'
+                                    });
+                                    $(options.childTag.toLowerCase(),options.disObj).css({
+                                        'width': $(options.disObj).width() + 'px',
+                                        'height':'auto'
                                     });
                                     $(">"+options.childTag.toLowerCase(),options.disObj).css({
                                         'margin-left':'0',
@@ -221,8 +259,13 @@
                         }else{
                             var thumbPos = thumb['position'];
                         }
-                     }else{
+
+
+                    }else{
                         var btnW = (ThumbScroller) ? 20 : 0;
+                        /*如果width和height設定為auto*/
+                        thumb['width'] = (thumb['width'] == 'auto') ? (((resJSlideWidth-(btnW*2))/thumbAmt) -12) : thumb['width'];
+                        thumb['height'] = (thumb['height'] == 'auto') ? (thumb['width']*thumb['thumbRatio']) : thumb['height'];
                         var btnH = (thumb['height']+12);
                         var positionPrev = "left:0;";
                         var positionNext = "right:0;";
@@ -232,6 +275,8 @@
                         var maxThumbTrack = (((maxAmtThumb/thumbAmt)-1)*thumbW)-((btnW*2)+(10*thumbAmt));
                         var thumbWUL = 'auto';
                         var thumbHUL = (thumb['height']+12) + 'px';
+                        var thumbTitleOranitation = 'horizontal';
+                        var thumbTitlePosition = 'bottom:'+(thumbH+10)+'px';
                         
                         //apply overlapping
                         if (!thumb['overlap']) {
@@ -263,28 +308,63 @@
                         }else{
                             var thumbPos = thumb['position'];
                         }
-                     } 
+                    } 
 
-                    var thumbDom = '<div class="resJSlideImgThumb resJSlideImgController" style="'+thumbPos+'width:'+thumbW+'px;height:'+thumbH+'px">'+
-                    '<a class="resJSlideImgThumbPrev end" href="#" style="'+positionPrev+'width:'+btnW+'px;height:'+btnH+'px"></a>'+
-                    '<ul class="resJSlideImgThumbTrack" style="'+positionTrack+'width:'+thumbWUL+';height:'+thumbHUL+'">';
+                    var thumbDomObj = "";
+                    var thumbTitleObj = "";
                     $("#" + options.disObj.attr("id") + ">" + options.childTag.toLowerCase()).each(function(){
                         var getDefaultTitle = (options.childTag.toLowerCase() == "img")?($(this).attr('alt') == undefined || $(this).attr('alt') == "")?"":$(this).attr('alt'):($(this).attr('title') == undefined || $(this).attr('title') == "")?"":$(this).attr('title');
                         var source = ($(this).attr('toggle-thumb-source') == undefined || $(this).attr('toggle-thumb-source') == "") ? $(this).attr('src') : $(this).attr('toggle-thumb-source');
                         var title = ($(this).attr('toggle-thumb-title') == undefined || $(this).attr('toggle-thumb-title') == "") ? getDefaultTitle : $(this).attr('toggle-thumb-title');
-                        var setStyleForThumbImg = (title == undefined || title == "") ? ' resThumbFit ' : '';
-                        thumbDom += '<li class="resJSlideImgThumbItem'+setStyleForThumbImg+'" style="width:'+thumb['width']+'px;height:'+thumb['height']+'px;">'+
-                            '<img src="'+source+'" />'+
-                            '<span>'+title+'</span>'+
-                        '</li>';
+
+                        //設定thumb圖片的顯示區域
+                        if (thumb['displayTitle'] == 'auto') {
+                            var setStyleForThumbImg = (title == undefined || title == "") ? ' resThumbFit ' : '';
+                            thumbDomObj += '<li class="resJSlideImgThumbItem'+setStyleForThumbImg+'" style="width:'+thumb['width']+'px;height:'+thumb['height']+'px;">'+
+                                '<img src="'+source+'" />'+
+                                '<span>'+title+'</span>'+
+                            '</li>';
+                        }else{
+                            var setStyleForThumbImg = ' resThumbFit ';
+                            thumbDomObj += '<li class="resJSlideImgThumbItem'+setStyleForThumbImg+'" style="width:'+thumb['width']+'px;height:'+thumb['height']+'px;">'+
+                                '<img src="'+source+'" />'+
+                            '</li>';
+
+                            if (!(title == undefined || title == "")) {
+                                thumbTitleObj += '<div class="thumbTitleWrapObj">'+title+'</div>';
+                            }
+                        }
+
                     })
-                    thumbDom += '</ul><a class="resJSlideImgThumbNext" href="#" style="'+positionNext+'width:'+btnW+'px;height:'+btnH+'px"></a></div>';
-                    $(options.disObj).append(thumbDom);
+
+                    var thumbTitileDom = (thumb['displayTitle'] != 'auto')?'<div class="thumbTitleWrap '+thumbTitleOranitation+'" style="'+thumbTitlePosition+'">'+thumbTitleObj+'</div>':'';
+                    var thumbDom = '<div class="resJSlideImgThumb resJSlideImgController" style="'+thumbPos+'width:'+thumbW+'px;height:'+thumbH+'px">'+
+                    '<a class="resJSlideImgThumbPrev end" href="#" style="'+positionPrev+'width:'+btnW+'px;height:'+btnH+'px"></a>'+
+                    '<ul class="resJSlideImgThumbTrack" style="'+positionTrack+'width:'+thumbWUL+';height:'+thumbHUL+'">'+thumbDomObj+
+                    '</ul><a class="resJSlideImgThumbNext" href="#" style="'+positionNext+'width:'+btnW+'px;height:'+btnH+'px"></a></div>';
+                    $(options.disObj).append(thumbTitileDom+thumbDom);
                 }
             }
 
             //取得前後項目切換按鈕
+            /*initial value*/
+            var sideBtnInitial = {
+                state: false,
+                trigger: 'click',
+                width: 100,
+                height: 100,
+                type: 'horizontal'
+            }
+
             if(!$.isEmptyObject(slideBtn)){
+                /*initial data*/
+                thumb['state'] = (thumb['state'] == undefined) ? sideBtnInitial['state'] : thumb['state'];
+                thumb['trigger'] = (thumb['trigger'] == undefined) ? sideBtnInitial['trigger'] : thumb['trigger'];
+                thumb['width'] = (thumb['width'] == undefined) ? sideBtnInitial['width'] : thumb['width'];
+                thumb['height'] = (thumb['height'] == undefined) ? sideBtnInitial['height'] : thumb['height'];
+                thumb['type'] = (thumb['type'] == undefined) ? sideBtnInitial['type'] : thumb['type'];
+
+                /*analyse data*/
                 if(slideBtn['state']) {
                     if (slideBtn['type'] == 'vertical') {
                         var setSlideBtnContainerPos = 'left:' + ((resJSlideWidth - slideBtn['width'])/2) + 'px;';
@@ -635,7 +715,9 @@
                         thumb['position'] = (setupResposive[checkWinWArray[i]]['position'] != undefined)?setupResposive[checkWinWArray[i]]['position']:thumb['position'];
                         thumb['overlap'] = (setupResposive[checkWinWArray[i]]['overlap'] != undefined)?setupResposive[checkWinWArray[i]]['overlap']:thumb['overlap'];
                         thumb['overlapPos'] = (setupResposive[checkWinWArray[i]]['overlapPos'] != undefined)?setupResposive[checkWinWArray[i]]['overlapPos']:thumb['overlapPos'];
-                        
+                        thumb['dsiplayTitle'] = (setupResposive[checkWinWArray[i]]['dsiplayTitle'] != undefined)?setupResposive[checkWinWArray[i]]['dsiplayTitle']:thumb['dsiplayTitle'];
+                        thumb['thumbRatio'] = (setupResposive[checkWinWArray[i]]['thumbRatio'] != undefined)?setupResposive[checkWinWArray[i]]['thumbRatio']:thumb['thumbRatio'];
+
                         if(!$.isEmptyObject(setupResposive[checkWinWArray[i]]['slideBtn'])){
                             //上下項目響應式設定
                             slideBtn['state'] = (setupResposive[checkWinWArray[i]]['slideBtn']['state'] != undefined)?setupResposive[checkWinWArray[i]]['slideBtn']['state']:slideBtn['state'];
@@ -682,6 +764,10 @@
 
         $("#" + disObj + " .resJSlideImgThumbItem").removeClass('active');
         $("#" + disObj + " .resJSlideImgThumbItem:eq("+curr+")").addClass('active');
+
+        //thumbTitle
+        $("#" + disObj + " .thumbTitleWrapObj").fadeOut(600);
+        $("#" + disObj + " .thumbTitleWrapObj:eq("+curr+")").fadeIn(600);
 
         //客製變換效果
         if (options.onTrans != false) {

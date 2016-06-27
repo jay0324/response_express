@@ -1,6 +1,6 @@
 {
   "name": "response_express",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "response setup",
   "main": "response.js",
   "scripts": {

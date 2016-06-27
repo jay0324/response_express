@@ -19,8 +19,7 @@
         bottom: 0;
         width: auto;
         height: auto;
-        opacity: 0;
-        filter: alpha(opacity=0);
+        @include opacity(0);
         >img{
             margin:0 auto;
         }
@@ -49,8 +48,7 @@
             position: absolute;
             z-index: 1;
             &.end {
-                opacity: 0;
-                filter: alpha(opacity=0);
+                @include opacity(0);
             }
         }
         ul {
@@ -102,8 +100,7 @@
     }
     .resJSlideImgslideBtn {
         position: static;
-        opacity: 1;
-        filter: alpha(opacity=100);
+        @include opacity(1);
         .resJSlideImgslideBtnPrev {
             position: absolute;
             background: #666;
@@ -113,6 +110,25 @@
             position: absolute;
             background: #666;
             z-index:2;
+        }
+    }
+    .thumbTitleWrap{
+        position: absolute;
+        opacity: 1;
+        z-index: 2;
+        top: initial;
+        left: 0;
+        height: auto;
+        width: 100%;
+        margin: 0;
+        .thumbTitleWrapObj{
+            display:none;
+            position:absolute;
+            bottom:0;
+            left:0;
+            padding:1%;
+            width:98%;
+            @include background-opacity(#eee, 0.5);
         }
     }
 }
