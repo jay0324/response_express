@@ -4,9 +4,7 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
-Date: 2016/07/01 修改:
--新增: JSlideImg 增加參數 displayTitle 顯示title的方式, 預設'auto': 直接顯示在thumb選項裡 'top':統一顯示於thumb選項上方 'left': 若thumb為縱向排列則會排在左下 'right': 若thumb為縱向排列則會排在右下
-
+-新增: 建立dist版本，並提供rawgit cdn連結
 
 =======================================================================================================================
 其他外掛
@@ -37,11 +35,20 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!--cloudflare CDN v1.11.1 -->
 
 <!--響應式設定-->
-<link rel="stylesheet" type="text/css" href="response/css/default.css" media="all"> <!--響應式樣式-->
-<link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--一般樣式-->
-<script type="text/javascript" src="response/js/response.min.js"></script> <!--主程式-->
+<link rel="stylesheet" type="text/css" href="response/response.default.min.css" media="all"> <!--預設響應式樣式-->
+<link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
+<link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--客製樣式NO SASS-->
+<script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
 <script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
 <!--響應式設定-->
+
+<!-- rawgit cdn 樣式選一個來用就可以了 -->
+https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.default.min.css <!--預設響應式樣式-->
+https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.js
+
+<!--Style1 樣式-->
+<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--響應式樣式-->
+https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.default.min.css <!--Style1響應式樣式-->
 
 =======================================================================================================================
 響應式設定相關參數說明

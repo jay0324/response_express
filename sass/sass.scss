@@ -15,22 +15,6 @@ $use-動畫效果class: true;
 @import "animate-sass-master/_animate.scss";
 
 /* 
-RES SETUP MODULES
-*/
-@import "main/_JResponsive.scss";
-@import "main/_JResLayout.scss";
-@import "main/_JSlideImg.scss";
-@import "main/_JResEnlarge.scss";
-@import "main/_JResOverflow.scss";
-@import "main/_JResMenu.scss";
-@import "main/_JResContentTab.scss";
-@import "main/_JResContentSlider.scss";
-@import "main/_JResMarquee.scss";
-@import "main/_JResLadderObj.scss";
-//@import "main/_JResAccordion.scss";
-//@import "main/_JResWrapper.scss";
-
-/* 
 custom scss
 */
 @import "custom/_page.scss";
