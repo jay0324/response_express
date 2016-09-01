@@ -1,0 +1,275 @@
+body{
+	padding:0;
+	margin:0;
+	font-family: 'Lato', Verdana, Meiryo, "微軟正黑體", "Microsoft JhengHei";
+	font-size:14px;
+	background:#fff;
+	line-height:20px;
+}
+
+/* page1_style style */
+.page1_style{
+	.resContainer{
+		.resDocLayout{
+			width:1280px;
+		}	
+		
+		&#dHeader{
+			z-index:2;
+			#lang{
+				width: 150px;
+			    float: right;
+			    position: absolute;
+			    bottom: 0;
+			    right: 0;
+			}
+
+			#logo{
+				display:inline-block;
+				width:400px;
+			}
+		}
+
+		&#dSubHeader{
+			.resDocLayout{
+				width:100%;
+			}
+
+			.top-nav-wrap{
+				position:absolute;
+				top:0;
+				left:0;
+				z-index:1;
+				padding:10px 0;
+				@include background-opacity(#000,0.5);
+
+				#nav{
+					width:1280px;
+					margin:0 auto;
+
+					&.resMenu2 ul li {
+						a{
+							background:initial;
+							padding: 10px 5px;
+							&:hover{
+								background:#ccc;
+								color:#7B7B7B;
+							}
+						}
+
+						ul li a{
+							background:#7B7B7B;
+						}
+					}
+				}
+			}
+		}
+
+		&#dRow2{
+			.resDocLayout{
+				width:100%;
+			}
+		}
+
+		&#dRow3{
+			a{
+				display:block;
+				overflow:hidden;
+
+				img{
+					@include transition("all 0.5s");
+				}
+
+				&:hover{
+					img{
+						@include transform("scale(2)");
+					}
+				}
+			}
+		}
+
+		&#dFooter{
+			background:#000;
+		}
+
+		&#dSubFooter{
+			background:#000;
+			color:#fff;
+			.copyright{
+				font-size:12px;
+			}
+		}
+	}
+
+	.btn{
+		border:1px solid #D0D0D0;
+		background:#fff;
+		padding:10px 15px;
+		text-decoration:none;
+		color:#929090;
+		@include transition('all 0.5s');
+
+		&:hover{
+			background:#eee;
+		}
+	}
+
+	/* social community */
+	.community {
+		display: inline-block;
+	    a {
+	        display: inline-block;
+	        width: auto;
+	        height: auto;
+	        margin: 0;
+	        padding: 2px;
+	        border:0;
+	        background: none;
+	        @include border-radius("50px");
+	        i {
+	            display: block;
+	            width: 30px;
+	            height: 30px;
+	            @include opacity(0.6);
+	            @include transition("all 1s");
+	            &:hover {
+	                @include opacity(1);
+	                @include transform("scale(1.2);");
+	            }
+	            &.facebook {
+	                background: url("../img/layout/icon/facebook_icon.png") no-repeat;
+	            }
+	            &.twitter {
+	                background: url("../img/layout/icon/twiter_icon.png") no-repeat;
+	            }
+	            &.plurk {
+	                background: url("../img/layout/icon/plurk_icon.png") no-repeat;
+	            }
+	            &.delicious {
+	                background: url("../img/layout/icon/delic_icon.png") no-repeat;
+	            }
+	            &.linkin {
+	                background: url("../img/layout/icon/linkin_icon.png") no-repeat;
+	            }
+	            &.google {
+	                background: url("../img/layout/icon/gplus_icon.png") no-repeat;
+	            }
+	            &.baidu {
+	                background: url("../img/layout/icon/biadu_icon.png") no-repeat;
+	            }
+	            &.chrome {
+	                background: url("../img/layout/icon/chrome_icon.png") no-repeat;
+	            }
+	            &.qq {
+	                background: url("../img/layout/icon/qq_icon.png") no-repeat;
+	            }
+	        }
+	    }
+	}
+
+	/* table style */
+
+
+	/* response setup */
+
+	/* 
+		- google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+	*/
+	@media (max-width:1280px){
+		.resContainer .resDocLayout{
+			width:100%;
+		}
+	}
+
+	/* 
+		- ipad landscape / general screen landscape / galaxy tab (1024px)
+	*/
+	@media (max-width:1024px){
+
+	}
+
+	/* 
+		- google nexus 7 landscape (966px)
+		- google nexus 7 2 landscape (960px)
+	*/
+	@media (max-width:966px){
+
+	}
+
+	/* 
+		- google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+	*/
+	@media (max-width:800px){
+		#nav,#lang,#footer_nav,.top-nav-wrap{
+			display:none;
+		}
+	}
+
+	/*
+		- ipad portrait / general screen portrait (768px)
+	*/
+	@media (max-width:768px){
+
+	}
+
+	/*
+		- iphone 6 plus landscape (736px) 
+	*/
+	@media (max-width:736px){
+
+	}
+
+	/*
+		- iphone 6 landscape (667px)
+	*/
+	@media (max-width:667px){
+
+	}
+
+	/* 
+		- google nexus 7 portrait (604px)
+		- google nexus 7 2 portrait (600px)
+		- galaxy tab portrait (600px)
+	*/
+	@media (max-width:604px){
+
+	}
+
+	/* 
+		- iphone 5 landscape (568px)
+		- iphone 4 landscape (480px)
+	*/
+	@media (max-width:570px){
+		.resContainer#dHeader #logo{
+			width:100%;
+		}
+	}
+
+	/* 
+		- iphone 6 plus portrait (414px) 
+		- galaxy note portrait (400px)
+	*/
+	@media (max-width:420px){
+		.resContainer#dSubFooter {
+			.left,.right{
+				text-align: center;
+			}
+		}
+	}
+
+	/* 
+		- iphone 6 portrait (375px)
+		- galaxy S portrait (360px)
+		- iphone 5 portrait (320px)
+		- iphone 4 portrait (320px)
+	*/
+	@media (max-width:380px){
+
+	}
+
+	/* print style */
+	@media print{
+		/* custom setup */
+
+	}
+}

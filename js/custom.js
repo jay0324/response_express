@@ -1,38 +1,13 @@
 $(function() {
+	//response setup
 	$.JResponsive({
-		defaultMenuObj: "#nav",
-		defaultLangMenuObj: "#languageSelect",
-		menuCollapse: "#resPrimery, #sidebar_btn_pannelContent .menuList",
-		additionalBtn: [
-	            	[
-	            		"sidebar_btn",
-	            		"#",
-	            		"sidebar",
-	            		"pannel",
-		            	[
-		            		"left_under",
-		            		$("#sidebar").html()
-		            	]
-	        		]
-	    ]
+	    defaultMenuObj: "#nav",
+	    res_langSwitch: false
 	});
 
-	$("#nav,#footer_nav,#lang").JResMenu({
-		view: 'horizontal',
-	});
+	$.JRes_autoRefresh({ state: false })
 
-	$("#sidebar").JResMenu();
-
-	$("#myTabs").JResContentTab();
-
-	$(".resEnlargeObj").JResEnlarge({
-		enlargeSize: 'auto',
-		paddingAmt: 0
-	});
-
-	$("table").JResOverflow({
-		paddingAmt: 40
-	});
+	$(".ui-dialog-titlebar-close").append('<i class="fa fa-times" aria-hidden="true"></i>');
 	
 
  })

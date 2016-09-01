@@ -1,0 +1,294 @@
+/* index page */
+
+.index_page{
+	.item{
+
+		>.resMargin{
+			background:#fff;
+			border:1px solid #888;
+			@include border-radius(10px);
+		}
+
+		.thumb_img{
+			cursor:default;
+			height: 200px;
+		    display: block;
+		    border: 1px solid #ddd;
+		    @include border-radius(10px);
+		    overflow:auto;
+		    background:url("../img/index/demo.jpg") center no-repeat;
+		    background-size: 100% 100%;
+		}
+
+		.tags{
+			padding:5px 0;
+			font-size:12px;
+			color:#666;
+			&:before{
+				content:"Tags: ";
+			}
+		}
+
+		.level{
+			color:#E35A31;
+			text-align: center;
+			margin:5px 0;
+		}
+
+		.controller{
+			margin:2px;
+			@include transition("all 0.5s");
+
+			.btn{
+				padding:2px 5px;
+				margin:1px;
+				float:right;
+
+				&.move{
+					float:left;
+					cursor:move;
+				}
+			}
+			&:after{
+				content:'';
+				display:block;
+				clear:both;
+			}
+
+			&.on{
+				display:block;
+			}
+
+			&.off{
+				display:none;
+			}
+		}
+	}
+
+	.filter{
+
+		.search{
+			color:#000;
+		}
+
+		input{
+			padding:5px;
+			@include border-radius(5px);
+			border:1px solid #888;
+			margin:0 10px;
+		
+			&[type="button"]{
+				margin:0 2px;
+				cursor:pointer;
+				display:inline-block;
+			}
+		}
+
+		button{
+			padding:5px;
+			@include border-radius(5px);
+			border:1px solid #888;
+			margin:0 10px;
+			margin:0 2px;
+			cursor:pointer;
+			display:inline-block;
+		}
+
+		.controller{
+			float:right;
+			a{
+				padding:5px;
+			}
+			.btn{
+				display:inline-block;
+
+				@include transition("all 0.5s");
+
+				&.off{
+					@include opacity(0.2);
+					cursor:default;
+				}
+				&.on{
+					@include opacity(1);
+					background:#F9263E;
+					color:#fff;
+
+					&:hover{
+						background:#B92722;
+					}
+				}
+
+				&.manageSwitch{
+					cursor:pointer !important;
+				}
+			}
+
+			&.on{
+				.btn{
+					@include opacity(1);
+
+					&.off{
+						@include opacity(0.2);
+						cursor:default;
+					}
+				}
+			}
+
+			&.off{
+				.btn{
+					@include opacity(0.2);
+					cursor:default;
+				}
+			}
+		}
+	}
+
+	#top-nav{
+		top:0;
+		background:#000;
+		color:#fff;
+		position:fixed;
+		z-index:1;
+	}
+
+	#main{
+		position:relative;
+		padding: 4% 0;
+	}
+
+	#bottom-block{
+		bottom:0;
+		background:#000;
+		color:#fff;
+		position:fixed;
+		z-index:1;
+	}
+}
+
+.btn{
+	display:block;
+	color:#fff;
+	text-align: center;
+	text-decoration: none;
+	padding:10px;
+	background:#000;
+	border:1px solid #888;
+	@include border-radius(5px);
+	@include transition("background 0.5s");
+
+	&:hover{
+		background:#555;
+		color:#fff;
+	}
+}
+
+.transition{
+	@include transition("all 0.5s");
+}
+
+/* response breakpoint */
+
+/* 
+	- google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+	.index_page .resContainer .resDocLayout{
+		width:100%;
+	}
+}
+
+/* 
+	- ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+	- google nexus 7 landscape (966px)
+	- google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+	- google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+	.index_page{
+		#resPrimery{
+			strong{
+				display:block;
+				color:#fff;
+				padding:10px;
+			}
+			input{
+				padding:5px;
+				margin:10px;
+			}
+		}
+	}
+}
+
+/*
+	- ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+	- iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+	- iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+	- google nexus 7 portrait (604px)
+	- google nexus 7 2 portrait (600px)
+	- galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+
+}
+
+/* 
+	- iphone 5 landscape (568px)
+	- iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+	- iphone 6 plus portrait (414px) 
+	- galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+
+}
+
+/* 
+	- iphone 6 portrait (375px)
+	- galaxy S portrait (360px)
+	- iphone 5 portrait (320px)
+	- iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}
+
+/* print style */
+@media print{
+	/* custom setup */
+
+}

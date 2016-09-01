@@ -4,7 +4,9 @@
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--新增: 建立dist版本，並提供rawgit cdn連結
+-新增: 2016/08/17 後版本請在網頁中加入viewport標籤
+-加入: 將可變參數獨立出來放在_JResVar.scss用來設定客製樣式
+-修改: 修正JSlideImg.js
 
 =======================================================================================================================
 其他外掛
@@ -16,15 +18,22 @@ screenfull.js: https://sindresorhus.com/screenfull.js/
 套用方式及相關文件說明
 =======================================================================================================================
 
+*Date: 2016/08/17 後版本請在網頁中加入viewport標籤
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0" />
+
 在head所有加入下面幾行幾可啟用
 注意: jquery請看情形加入，如果該頁面已經有用jQuery則不用加入
 如果jquery用的是v1.7.1請取代為v1.11.1版 (因為1.7.x版會有重複執行的狀況)
+
+* 自行建置主程式
+sass建構樣式參數: sass/main/style1/_JResVar.scss
 
 * 調整響應式內容
 檔案: custom.js
 
 * 調整響應式樣式
-檔案: custom.css
+無SASS樣式檔案: nosass.css
+SASS樣式檔案: sass/custom/_JResCustomSetup.scss
 
 NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯產生css
 如果沒有的人請直接編輯_css下的css檔案

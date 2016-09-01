@@ -1,0 +1,16 @@
+<div class="resRow dataList" ng-model="demoList" ui-sortable="sortableOptions">
+    <div class="{{myLayout}} item" ng-repeat="data in demoList | filter: dataTags | orderBy: myOrderBy:reverse">
+        <div class="resMargin resPadding">
+            <div class="controller {{manage_btn_state}}">
+                <a class="btn" href="#" title="remove" ng-click="removeItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a class="btn" href="#" title="edit" ng-click="editItemDia($index)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                <a class="btn move" href="#" title="move"><i class="fa fa-arrows" aria-hidden="true"></i></a>
+            </div>
+            <a class="thumb_img" href="#" ng-bind-html="thumbimg | unsafe">{{myThumb(data.thumb)}}</a>
+            <h3><i class="fa fa-bookmark" aria-hidden="true"></i> {{data.title}}</h3>
+            <div class="level" ng-bind-html="level | unsafe">{{mylevel(data.level)}}</div>
+            <a href="{{data.path}}" title="{{data.title}} - Preview" class="resPageLoaderBtn btn" tigger="always" toggleParam="allowfullscreen"><i class="fa fa-link" aria-hidden="true"></i> Preview</a>
+            <div class="tags">{{data.tags}}</div>
+        </div>
+    </div>
+</div>
