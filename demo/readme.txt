@@ -1,12 +1,13 @@
+# response
+this is a response setup for general webpage which is not designed by table and flash layout
+
 =======================================================================================================================
 版本說明
 =======================================================================================================================
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--新增: 2016/08/17 後版本請在網頁中加入viewport標籤
--加入: 將可變參數獨立出來放在_JResVar.scss用來設定客製樣式
--修改: 修正JSlideImg.js
+-修改: 修改說明文件
 
 =======================================================================================================================
 其他外掛
@@ -183,7 +184,8 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.d
 				],
             	res_mobileBottomNavBtnSetup: 請參照res_mobileTopNavBtnSetup的設定值,
             	additionalBottomBtn: 請參照additionalBtn的設定值,
-            	scrollTop: 使用ScrollToTop外掛功能 (預設:true)
+            	scrollTop: 使用ScrollToTop外掛功能 (預設:true),
+            	app_icon: APP icon的圖檔路徑 (預設: "img/response/app_ico.png")
 			});
 			//===================================================================================
 			
