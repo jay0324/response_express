@@ -7,7 +7,7 @@ this is a response setup for general webpage which is not designed by table and 
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--修改: 修改說明文件
+-修改: .resTapjumper 多加一個 toggle-offset 屬性, 用來微調定位按鈕鎖定置入class
 
 =======================================================================================================================
 其他外掛
@@ -300,7 +300,7 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.d
 			//Tab標籤頁面定位按鈕設定值==========================================================
 			//在頁面滑動至相對高度的jumper按鈕會加入jumperActive class, 在客製化修改其樣式即可
 			$(obj).addClass("resTabJumper");
-			<a class="resTabJumper" href="#目標ID">連結</a>
+			<a class="resTabJumper" href="#目標ID" toggle-offset="微調卷軸定位">連結</a>
 			//===================================================================================
 
 			//Tab group建立=====================================================================
