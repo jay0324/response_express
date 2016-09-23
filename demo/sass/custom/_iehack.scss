@@ -1,0 +1,25 @@
+/*
+ie hack scss
+
+ie6: selector{ _style: value;}
+ie7: selector{ +style: value;} or selector{ *+style: value;}
+ie9: selector{ +style: value \9\0;}
+ie6/7: selector{ *style: value;}
+ie8/9: selector{ style: value \0;}
+ie6/7/8/9: selector{ style: value \9;}
+
+IE10 put a class=”ie10″ to the <html> tag, which is very convenient for us to write any hack towards IE10.
+ie10: .ie10 selector{ style: value;}
+
+*/
+
+.main_style .resContainer#dSubHeader .top-nav-wrap .resMenu2#nav ul li{
+	width: 9% \9;
+	a{
+		font-size:15px \9;
+	}
+}
+
+.text-wrap{
+	padding-top:40% \9;
+}
