@@ -51,6 +51,10 @@ gulp.task('update-package-for-demo', function() {
     gulp.src('plugin/response/*.txt')
         .pipe(gulp.dest('demo/'));
 
+    gulp.src('plugin/response/fonts/*')
+        .pipe(gulp.dest('css/fonts/'))
+        .pipe(gulp.dest('demo/css/fonts/'));
+
     /*font-awesome package*/
     gulp.src('node_modules/font-awesome/css/*')
         .pipe(gulp.dest('demo/plugin/font-awesome/css/'));

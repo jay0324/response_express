@@ -7,7 +7,8 @@ this is a response setup for general webpage which is not designed by table and 
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--修改: .resTapjumper 多加一個 toggle-offset 屬性, 用來微調定位按鈕鎖定置入class
+-修改: 將圖片icon改為字型icon，並移除樣式，只保留預設樣式，把所有全域樣式參數移入sass/main/_JResVar.scss中，字型的部分則
+統一放在sass/fonts裡面，字型檔統一放在根目錄下的fonts資料夾
 
 =======================================================================================================================
 其他外掛
@@ -41,24 +42,20 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 
 <!--JQUERY-->
 <script type="text/javascript" src="response/jquery.min.js"></script> <!--jQuery Local v1.11.1 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script> <!--jQuery CDN v1.11.1 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!--cloudflare CDN v1.11.1 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script> <!--jQuery CDN v1.11.1 -->
 
 <!--響應式設定-->
-<link rel="stylesheet" type="text/css" href="response/response.default.min.css" media="all"> <!--預設響應式樣式-->
+<link rel="stylesheet" type="text/css" href="response/response.min.css" media="all"> <!--預設響應式樣式-->
 <link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
 <link rel="stylesheet" type="text/css" href="response/css/nosass.css" media="all"> <!--客製樣式NO SASS-->
 <script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
 <script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
 <!--響應式設定-->
 
-<!-- rawgit cdn 樣式選一個來用就可以了 -->
-https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.default.min.css <!--預設響應式樣式-->
+<!-- rawgit cdn -->
+https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.css <!--預設響應式樣式-->
 https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.js
-
-<!--Style1 樣式-->
-<link rel="stylesheet" type="text/css" href="response/response.style1.min.css" media="all"> <!--響應式樣式-->
-https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.default.min.css <!--Style1響應式樣式-->
 
 =======================================================================================================================
 響應式設定相關參數說明
