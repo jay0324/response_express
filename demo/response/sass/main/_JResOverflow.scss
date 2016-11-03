@@ -1,0 +1,110 @@
+/* 
+	- google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+
+}
+
+/* 
+	- ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+	- google nexus 7 landscape (966px)
+	- google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+	- google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+	.mobile_overflow {
+        padding: 35px 0 0 0;
+        width: auto;
+        overflow: auto;
+        position:relative;
+        background-color: $overflow-bg-color;
+        background-image: $overflow-bg-image;
+        background-position: top left;
+        background-repeat:no-repeat;
+
+        >img{
+        	max-width: initial !important;
+        }
+    }
+}
+
+/*
+	- ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+	- iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+	- iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+	- google nexus 7 portrait (604px)
+	- google nexus 7 2 portrait (600px)
+	- galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+	.mobile_overflow {
+		table{
+			width:600px !important;
+		}
+	}
+}
+
+/* 
+	- iphone 5 landscape (568px)
+	- iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+	- iphone 6 plus portrait (414px) 
+	- galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+
+}
+
+/* 
+	- iphone 6 portrait (375px)
+	- galaxy S portrait (360px)
+	- iphone 5 portrait (320px)
+	- iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}
+
+/* print style */
+
+@media print {
+    .mobile_overflow {
+        background: none;
+        padding: 0;
+    }
+}

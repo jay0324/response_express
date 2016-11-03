@@ -1,0 +1,952 @@
+/* ELEMENTS */
+img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+}
+
+#mobile_nav,
+.flipContent,
+#mobile_nav_bottom {
+    display: none;
+}
+
+
+/* 預設響應式頁面設定 */
+
+.resFlipPage {
+    display: block;
+    position: fixed;
+    margin: 0;
+    padding: 0 0 0 0;
+    background: #fff;
+    text-align: left;
+    @include box-shadow(0, 0, 10px, #000);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    -moz-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+}
+
+.resFlipPageL {
+    top: 0;
+    left: -120%;
+    right: auto;
+}
+
+.resFlipPageR {
+    top: 0;
+    left: auto;
+    right: -120%;
+}
+
+.resFlipPageT {
+    left: 0;
+    right: auto;
+    top: -120%;
+}
+
+.resFlipPage .menuList {
+    margin: 60px 10px 60px 10px;
+}
+
+.resPageController,
+.resPageControllerBottom {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    background: $mobile-nav-bg-color;
+    background-size: 100% 100%;
+    z-index: 1;
+}
+
+.resPageController {
+    top: 0;
+    >.resAddPageTitle {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        top: 0;
+        z-index: 0;
+    }
+    >.resAddPageBackIcon {
+        position: absolute;
+        //background: url("../img/response/default/closeLeft_btn.png") top left repeat-x;
+        //background-size: 100% 100%;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        cursor: pointer;
+        .icon {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            text-align: center;
+            &::before{
+                font-family: 'icomoon' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                display: inline-block;
+                line-height: 50px;
+                content:$close_left_btn_content;
+                color:$mobile-nav-text-color;
+                font-size:$close_btn_size;
+            }
+        }
+    }
+    >.resAddPageNextIcon {
+        position: absolute;
+        //background: url("../img/response/default/closeRight_btn.png") top left repeat-x;
+        //background-size: 100% 100%;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        cursor: pointer;
+        .icon {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            text-align: center;
+            &::before{
+                font-family: 'icomoon' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                display: inline-block;
+                line-height: 50px;
+                content:$close_right_btn_content;
+                color:$mobile-nav-text-color;
+                font-size:$close_btn_size;
+            }
+        }
+    }
+}
+
+.resPageControllerBottom {
+    bottom: 0;
+    >#closeAllresFlipPage {
+        //background: url("../img/response/default/home_btn.png") top left repeat-x;
+        //background-size: 100% 100%;
+        cursor: pointer;
+        margin: 0 auto;
+
+        .icon {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+            text-align: center;
+            &::before{
+                font-family: 'icomoon' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                display: inline-block;
+                line-height: 50px;
+                content:"\e900";
+                color:$mobile-nav-text-color;
+                font-size:$close_btn_size;
+            }
+        }
+    }
+}
+
+.resAddPageContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 0;
+    >.resAddPageContentMain {
+        margin: 60px 10px 60px 10px;
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+
+/*content close mask*/
+
+#resContentMask {
+    display: none;
+}
+
+.resHtmlOverflow {
+    position: relative;
+    overflow: hidden !important;
+    body {
+        position: relative;
+        overflow: hidden !important;
+    }
+}
+
+
+/*桌面上的響應式切換樣式*/
+
+.swap_btn_desktop_wrap {
+    display: block;
+    padding: 2px 2px 2px 20px;
+    text-align: center;
+    position: relative;
+    clear: both;
+}
+
+.swap_btn_desktop {
+    color: #000;
+    text-decoration: none;
+    width: auto;
+    margin: 0 auto;
+    font-size: $swap_btn_desktop-size;
+    text-transform: capitalize;
+    >a,
+    >span {
+        color: #000;
+        padding: 5px 10px;
+        margin:2px;
+        display: inline-block;
+        text-decoration: none;
+        @include border-radius(5px);
+    
+        &::before{
+            font-family: 'icomoon' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 0 5px 0 0;
+        }
+
+    }
+    >a {
+        background-color: $swap_btn_desktop-mobile-bg-color;
+        color: $swap_btn_desktop-mobile-color;
+        &::before{
+            content:$mobile-icon-content;
+        }
+    }
+    >span {
+        background-color: $swap_btn_desktop-desktop-bg-color;
+        color: $swap_btn_desktop-desktop-color;
+        &::before{
+            content:$desktop-icon-content;
+        }
+    }
+}
+
+
+/*scroll top image*/
+
+#topcontrol {
+    width: auto;
+    height: auto;
+    padding: $topcontrol-padding;
+    background: $topcontrol-background;
+    color: $topcontrol-color;
+    font-size: $topcontrol-font-size;
+    @include border-radius($topcontrol-border-radius);
+    &::before{
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        content: $topcontrol-content;
+    }
+}
+
+
+/*loading icon*/
+
+#resPageLoad_loading_icon,
+#resLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $resLoader-bg-color;
+    &::after {
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: absolute;
+        font-size: $resLoader-font-size;
+        top: 50%;
+        left: 50%;
+        margin: $resLoader-offset;
+        color: $resLoader-text-color;
+        content: $resLoader-text;
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        animation:$resLoader-animation;
+    }
+}
+
+#resPageLoad_loading_icon {
+    z-index: 1002;
+}
+
+#resLoader {
+    z-index: 1001;
+}
+
+#resPageLoader {
+    @include box-shadow(0);
+}
+
+
+/* 
+    - google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+
+@media (max-width:1280px) {}
+
+
+/* 
+    - ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+
+@media (max-width:1024px) {}
+
+
+/* 
+    - google nexus 7 landscape (966px)
+    - google nexus 7 2 landscape (960px)
+*/
+
+@media (max-width:966px) {}
+
+
+/* 
+    - google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+
+@media (max-width:800px) {
+    /* res Document Width */
+    .resContainer {
+        position: static;
+    }
+    /*content close mask*/
+    #resContentMask {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 100;
+    }
+    /* page content */
+    body {
+        @include text-size-adjust(100%);
+    }
+    #resMainWrap {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        z-index: 99;
+        @include box-shadow(0,
+        0,
+        10px,
+        #000);
+    }
+    /* menu style */
+    .top_menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 100%;
+        margin-top: 0;
+        ul li {
+            margin: 0 5px;
+            font-size: 18px;
+        }
+    }
+    #mobile_nav,
+    #mobile_nav_bottom {
+        display: block;
+        left: 0;
+        width: 100%;
+        background: $mobile-nav-bg-color;
+        z-index: 150;
+        overflow: auto;
+        ul,
+        ul li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            display: block;
+            float: left;
+            position: relative;
+            &#menu_btn,
+            &#menu_btn_bottom {
+                a{
+                    &::before{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        /* Better Font Rendering =========== */
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        content:$menu_btn_content;
+                        font-size:$menu_btn_size;
+                    }
+                }
+            }
+            a {
+                display: table-cell;
+                overflow: hidden;
+                color: #fff;
+                text-decoration: none;
+                text-align: center;
+                vertical-align: middle;
+
+            }
+            .closeTop_btn,
+            .closeRight_btn,
+            .closeLeft_btn {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color:$mobile-nav-bg-color;
+                color:$mobile-nav-text-color;
+                font-size:$close_btn_size;
+                .icon {
+                    width: 100%;
+                    height: 100%;
+                    vertical-align: middle;
+                    text-align: center;
+                    &::before{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        /* Better Font Rendering =========== */
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: inline-block;
+                        line-height: 50px;
+                    }
+                }
+            }
+            .closeTop_btn {
+                .icon {
+                    &::before{
+                        content:$close_top_btn_content;
+                    }
+                }
+            }
+            .closeRight_btn {
+                .icon {
+                    &::before{
+                        content:$close_right_btn_content;
+                    }
+                }
+            }
+            .closeLeft_btn {
+                .icon {
+                    &::before{
+                        content:$close_left_btn_content;
+                    }
+                }
+            }
+        }
+    }
+    #mobile_nav {
+        top: 0;
+    }
+    #mobile_nav_bottom {
+        bottom: 0;
+    }
+    /*響應式按鈕內容*/
+    .flipContent {
+        display: block;
+        position: fixed;
+        margin: 0;
+        padding: 0;
+        background: $flipContent-bg;
+        text-align: left;
+        overflow: scroll;
+        @include overflow-scrolling(touch);
+        @include box-shadow(0,
+        0,
+        10px,
+        #000);
+        .menuList {
+            padding: 1px;
+            >div {
+                float: none;
+                clear: both;
+                width: 100%;
+                >.resContent {
+                    padding: 5px 0;
+                    width: 100%;
+                    float: left;
+                }
+            }
+            h1 {
+                margin: 10px 0 0 0;
+                padding: 2%;
+                display: block;
+                width: 96%;
+                height: auto;
+                float: left;
+                text-transform: uppercase;
+                font-size: 20px;
+                font-family: Verdana, Geneva, sans-serif;
+                color: $flipContent-h1-color;
+                background: $flipContent-h1-bg-color;
+                font-weight: normal;
+                border: 0;
+            }
+            div,
+            &.resMenu1,.resMenu1,
+            &.resMenu,.resMenu {
+                a.hasChild {
+                    &::after{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        /* Better Font Rendering =========== */
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: inline-block;
+                        line-height:1;
+                        content:$menu_child_content;
+                        float:right;
+                    }
+                }
+                ul {
+                    display: block;
+                    padding: 0;
+                    margin: 0;
+                    height: auto;
+                    float: left;
+                    width: 100%;
+                    li {
+                        display: block;
+                        margin: 0;
+                        width: 100%;
+                        height: auto;
+                        list-style: none;
+                        font-size: $menu-font-size;
+                        border: 0;
+                        padding: 0;
+                        float: none;
+                        clear: both;
+                        a {
+                            display: block;
+                            height: auto;
+                            font-size: $menu-font-size;
+                            text-decoration: none;
+                            padding: $menu-level1-padding;
+                            /* width: 96%; */
+                            margin: 0;
+                            font-weight: normal;
+                            border-bottom: $menu-level1-border-bottom;
+                            border-top: $menu-level1-border-top;
+                            color: $menu-level1-text-color;
+                            background-color: $menu-level1-bg-color;
+                            &.hasChild {
+                                color: $menu-level1-text-color;
+                            }
+                        }
+                        ul {
+                            display: block;
+                            margin-left: 0 !important;
+                            li {
+                                border: none;
+                                a {
+                                    padding: $menu-level2-padding;
+                                    border-bottom: $menu-level2-border-bottom;
+                                    border-top: $menu-level2-border-top;
+                                    color: $menu-level2-text-color;
+                                    background-color: $menu-level2-bg-color;
+                                    &.hasChild {
+                                        color: $menu-level2-text-color;
+                                    }
+                                }
+                                ul {
+                                    li {
+                                        a {
+                                            padding: $menu-level3-padding;
+                                            border-bottom: $menu-level3-border-bottom;
+                                            border-top: $menu-level3-border-top;
+                                            color: $menu-level3-text-color;
+                                            background-color: $menu-level3-bg-color;
+                                            &.hasChild {
+                                                color: $menu-level3-text-color;
+                                            }
+                                        }
+                                        ul {
+                                            li {
+                                                a {
+                                                    padding: $menu-level4-padding;
+                                                    border-bottom: $menu-level4-border-bottom;
+                                                    border-top: $menu-level4-border-top;
+                                                    color: $menu-level4-text-color;
+                                                    background-color: $menu-level4-bg-color;
+                                                    &.hasChild {
+                                                        color: $menu-level4-text-color;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        /* active */
+                        &.active,&:hover {
+                            >a {
+                                color: $menu-level1-text-color-active;
+                                background-color: $menu-level1-bg-color-active;
+                            }
+                            ul {
+                                li.active,li:hover {
+                                    >a {
+                                        color: $menu-level2-text-color-active;
+                                        background-color: $menu-level2-bg-color-active;
+                                    }
+                                    ul {
+                                        li.active,li:hover {
+                                            >a {
+                                                color: $menu-level3-text-color-active;
+                                                background-color: $menu-level3-bg-color-active;
+                                            }
+                                        }
+                                        ul {
+                                            li.active,li:hover {
+                                                >a {
+                                                    color: $menu-level4-text-color-active;
+                                                    background-color: $menu-level4-bg-color-active;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &:after {
+                        clear: both;
+                    }
+                }
+            }
+            select {
+                padding: 2%;
+                width: 100%;
+            }
+        }
+    }
+    .flipContentL {
+        top: 0;
+        left: -100%;
+        right: auto;
+        width: 80%;
+        height: 100%;
+        z-index: 101;
+    }
+    .flipContentR {
+        top: 0;
+        left: auto;
+        right: -120%;
+        width: 80%;
+        height: 100%;
+        z-index: 101;
+    }
+    .flipContentT {
+        left: 0;
+        right: auto;
+        top: -100%;
+        width: 100%;
+        height: 90%;
+        z-index: 101;
+    }
+    .flipContentTS {
+        left: 0;
+        right: auto;
+        top: -120px;
+        width: 100%;
+        height: 100px;
+        z-index: 101;
+    }
+    .flipContentLU {
+        top: 0;
+        left: -100%;
+        right: auto;
+        width: 90%;
+        height: 100%;
+        z-index: 98;
+        @include box-shadow(0,
+        0,
+        0,
+        #000);
+    }
+    .flipContentRU {
+        top: 0;
+        left: auto;
+        right: -100%;
+        width: 90%;
+        height: 100%;
+        z-index: 98;
+        @include box-shadow(0,
+        0,
+        0,
+        #000);
+    }
+    /*響應式頁面*/
+    .resFlipPage {
+        background: $flipContent-bg;
+        overflow: scroll;
+        @include overflow-scrolling(touch);
+    }
+    /*響應式切換按鈕*/
+    #mobile_nav_content {
+        #resSwap {
+            margin: 10px 0;
+            font-size: $resSwap-size;
+            a,
+            span {
+                padding: 2%;
+                width: 46%;
+                text-transform: uppercase;
+                display: block;
+                text-align: center;
+                float: left;
+
+                &::before{
+                    font-family: 'icomoon' !important;
+                    speak: none;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+                    /* Better Font Rendering =========== */
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    padding:0 5px 0 0;
+                }
+            }
+            span {
+                font-weight: normal;
+                text-decoration: none;
+                background-position:center left 5px;
+                background-repeat:no-repeat;
+                background-color:$resSwap-mobile-bg-color;
+                color: $resSwap-mobile-color;
+                @include box-shadow(0, 0, 10px, $resSwap-mobile-shadow-color);
+                &.split {
+                    display: none;
+                }
+
+                &::before{
+                    content: $mobile-icon-content;
+                }
+            }
+            a {
+                background-position:center left 5px;
+                background-repeat:no-repeat;
+                background-color:$resSwap-desktop-bg-color;
+                color: $resSwap-desktop-color;
+                @include box-shadow(0, 0, 1px, $resSwap-desktop-shadow-color, 'inset');
+
+                &::before{
+                    content:$desktop-icon-content;
+                }
+            }
+        }
+    }
+    /* 伸縮選單 */
+    .flipContent {
+        .menuList {
+            &.resMenu, .resMenu,
+            &.resMenu1, .resMenu1 {
+                ul{
+                    li {
+                        ul {
+                            display: none;
+                        }
+                        &.active {
+                            >ul {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /* other element */
+    .mobile_hide {
+        display: none;
+    }
+}
+
+
+/*
+    - ipad portrait / general screen portrait (768px)
+*/
+
+@media (max-width:768px) {}
+
+
+/*
+    - iphone 6 plus landscape (736px) 
+*/
+
+@media (max-width:736px) {}
+
+
+/*
+    - iphone 6 landscape (667px)
+*/
+
+@media (max-width:667px) {}
+
+
+/* 
+    - google nexus 7 portrait (604px)
+    - google nexus 7 2 portrait (600px)
+    - galaxy tab portrait (600px)
+*/
+
+@media (max-width:604px) {}
+
+
+/* 
+    - iphone 5 landscape (568px)
+    - iphone 4 landscape (480px)
+*/
+
+@media (max-width:570px) {}
+
+
+/* 
+    - iphone 6 plus portrait (414px) 
+    - galaxy note portrait (400px)
+*/
+
+@media (max-width:420px) {}
+
+
+/* 
+    - iphone 6 portrait (375px)
+    - galaxy S portrait (360px)
+    - iphone 5 portrait (320px)
+    - iphone 4 portrait (320px)
+*/
+
+@media (max-width:380px) {
+    .flipContent .menuList h1 {
+        font-size: 22px;
+    }
+}
+
+
+/* print style */
+
+@media print {
+    /* default setup: res object printstyle setup */
+    #resMainWrap {
+        margin: 0;
+        padding: 0;
+    }
+    #mobile_nav,
+    .flipContent,
+    .resFlipPage,
+    #topcontrol,
+    #swap_btn,
+    #mobile_nav_bottom,
+    #resPageLoader {
+        display: none !important;
+    }
+    table,
+    th,
+    td,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    div,
+    a,
+    div,
+    span,
+    ol,
+    ul,
+    li,
+    br,
+    p,
+    iframe {
+        @include print-color-adjust(exact);
+        /* @include page-break-inside(avoid); */
+        @include page-break-after(auto);
+    }
+    table {
+        @include page-break-inside(auto);
+    }
+    .resEnlarge>.resEnlargeOpenIcon {
+        background: none;
+    }
+    .mobile_overflow {
+        background: none;
+        padding: 0;
+    }
+    .resMarquee>span {
+        margin: 0 !important;
+        width: auto;
+    }
+}

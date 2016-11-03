@@ -7,8 +7,23 @@ this is a response setup for general webpage which is not designed by table and 
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--修改: 將圖片icon改為字型icon，並移除樣式，只保留預設樣式，把所有全域樣式參數移入sass/main/_JResVar.scss中，字型的部分則
-統一放在sass/fonts裡面，字型檔統一放在根目錄下的fonts資料夾
+-修改: 修改樣式
+-增加: 
+$(obj).JResContentTab({
+				init: 預設的顯示標籤 (預設:0),
+	            fx: 切換效果 (預設:slide / fade,slide,show),
+	            transitTime: 切換效果時間 (預設:300),
+	            createTabs: {			//js寫入Tab
+	            	tab1:{				//新標籤編號
+	            		id: "物件ID",
+						text: "Tab按鈕顯示文字",
+						content: "Tab內容"
+	            	}
+	            },
+	            onClick: {} //tab點擊客製動作, 預設 false,
+	            resMode: '', //響應式呈現模式 'expend':完全展開 'collapse': 收合展開 預設:無
+            	resModeActiveWidth: 604 //響應式呈現模式觸發尺寸(尺寸修改請一併修改樣式)
+			});
 
 =======================================================================================================================
 其他外掛
@@ -312,7 +327,9 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 						content: "Tab內容"
 	            	}
 	            },
-	            onClick: {} //tab點擊客製動作, 預設 false	
+	            onClick: {} //tab點擊客製動作, 預設 false,
+	            resMode: '', //響應式呈現模式 'expend':完全展開 'collapse': 收合展開 預設:無
+            	resModeActiveWidth: 604 //響應式呈現模式觸發尺寸(尺寸修改請一併修改樣式)
 			});
 
 			//直接建立在本文的結構

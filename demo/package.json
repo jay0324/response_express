@@ -1,0 +1,19 @@
+{
+  "name": "response_express",
+  "version": "1.0.1",
+  "description": "response express site template",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-sass": "*",
+    "gulp-insert": "*",
+    "dateformat": "*",
+    "gulp-watch": "*",
+    "font-awesome": "*",
+    "angular-ui-sortable": "*"
+  }
+}

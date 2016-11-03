@@ -1,0 +1,4 @@
+@keyframes loadingAnimate {
+    0%   {@include transform(rotateZ(0));}
+    100% {@include transform(rotateZ(360deg));}
+}
