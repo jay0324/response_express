@@ -31,7 +31,7 @@ gulp.task('response', function() {
         .pipe(gulp.dest('js/'));
 
     gulp.src('response/dist/response/readme.txt')
-        .pipe(gulp.dest('/'));
+        .pipe(gulp.dest(''));
 
     gulp.src('response/dist/response/fonts/*')
         .pipe(gulp.dest('css/fonts/'));
