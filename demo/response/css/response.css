@@ -1,4 +1,4 @@
-/* Date:2016/11/3 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
+/* Date:2016/11/10 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
 @charset "UTF-8";
 /* 預設響應式設定 */
 /* 
@@ -331,6 +331,19 @@ img {
   color: #fff;
   top: 0;
   z-index: 0;
+}
+
+.resPageController > .resAddPageTitle::before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 100%;
+}
+
+.resPageController > .resAddPageTitle .resAddPageTitle-wrapper {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .resPageController > .resAddPageBackIcon {
@@ -2932,6 +2945,8 @@ select.resSelect::-ms-expand {
   margin-left: -10px;
   margin-top: -10px;
   font-size: 20px;
+  width: 20px;
+  height: 20px;
   text-align: center;
 }
 

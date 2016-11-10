@@ -58,6 +58,8 @@
             margin-left: -(($contentSlider-btn-size/2));
             margin-top: -(($contentSlider-btn-size/2));
             font-size: $contentSlider-btn-size;
+            width:$contentSlider-btn-size;
+            height:$contentSlider-btn-size;
             //font-size: $contentSlider-btn-res-size;
             text-align: center;
         }

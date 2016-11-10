@@ -174,7 +174,7 @@
         var additionalPageContent = '<div id="resPageLoader" class="resFlipPage resFlipPageR"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' +
             '<div style="height:' + resMobileNavSetupHeight + 'px;" class="resPageController">' +
             '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#resPageLoader\',action:\'back\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div>' +
-            '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">Res Loader</div></div>' +
+            '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle"><span class="resAddPageTitle-wrapper">Res Loader</span></div></div>' +
             '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div></div>' +
             '<div class="resAddPageContent"><div class="resAddPageContentMain">' +
             '<div id="resPageLoad_loading_icon"></div>' +
@@ -201,7 +201,7 @@
                 additionalPageContent += '<div id="' + addPageID + '" class="resFlipPage ' + addPagePosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' +
                     '<div style="height:' + resMobileNavSetupHeight + 'px;" class="resPageController">' +
                     '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#' + addPageID + '\',action:\'back\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div>' +
-                    '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">' + additionalPageArray[i][2] + "</div>" +
+                    '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle"><span class="resAddPageTitle-wrapper">' + additionalPageArray[i][2] + "</span></div>" +
                     relateBtn +
                     '</div>' +
                     '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div></div>' +
@@ -739,7 +739,7 @@
                     });
                     var pageTitle = $(this).attr("title") == "" || $(this).attr("title") == undefined ? "" : $(this).attr("title");
                     var toggleParam = ($(this).attr("toggleParam") == undefined || $(this).attr("toggleParam") == "") ? "" : $(this).attr("toggleParam");
-                    $("#resPageLoader .resAddPageTitle").text(pageTitle);
+                    $("#resPageLoader .resAddPageTitle .resAddPageTitle-wrapper").text(pageTitle);
                     if ($(this).attr("toggle") == "" || $(this).attr("toggle") == undefined || $(this).attr("toggle") == "iframe") {
                         //iframe loader
                         $("#resPageLoad_loading_icon").show();
@@ -773,7 +773,7 @@
                 });
                 var pageTitle = $(this).attr("title") == "" || $(this).attr("title") == undefined ? "" : $(this).attr("title");
                 var toggleParam = ($(this).attr("toggleParam") == undefined || $(this).attr("toggleParam") == "") ? "" : $(this).attr("toggleParam");
-                $("#resPageLoader .resAddPageTitle").text(pageTitle);
+                $("#resPageLoader .resAddPageTitle .resAddPageTitle-wrapper").text(pageTitle);
                 if ($(this).attr("toggle") == "" || $(this).attr("toggle") == undefined || $(this).attr("toggle") == "iframe") {
                     //iframe loader
                     $("#resPageLoad_loading_icon").show();
