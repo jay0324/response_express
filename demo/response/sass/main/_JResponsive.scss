@@ -598,7 +598,7 @@ img {
                         padding: 0;
                         float: none;
                         clear: both;
-                        a {
+                        a,a:hover {
                             display: block;
                             height: auto;
                             font-size: $menu-font-size;
@@ -620,7 +620,7 @@ img {
                             margin-left: 0 !important;
                             li {
                                 border: none;
-                                a {
+                                a,a:hover {
                                     padding: $menu-level2-padding;
                                     border-bottom: $menu-level2-border-bottom;
                                     border-top: $menu-level2-border-top;
@@ -632,7 +632,7 @@ img {
                                 }
                                 ul {
                                     li {
-                                        a {
+                                        a,a:hover {
                                             padding: $menu-level3-padding;
                                             border-bottom: $menu-level3-border-bottom;
                                             border-top: $menu-level3-border-top;
@@ -644,7 +644,7 @@ img {
                                         }
                                         ul {
                                             li {
-                                                a {
+                                                a,a:hover {
                                                     padding: $menu-level4-padding;
                                                     border-bottom: $menu-level4-border-bottom;
                                                     border-top: $menu-level4-border-top;
@@ -661,26 +661,26 @@ img {
                             }
                         }
                         /* active */
-                        &.active,&:hover {
+                        &.active {
                             >a {
                                 color: $menu-level1-text-color-active;
                                 background-color: $menu-level1-bg-color-active;
                             }
                             ul {
-                                li.active,li:hover {
+                                li.active {
                                     >a {
                                         color: $menu-level2-text-color-active;
                                         background-color: $menu-level2-bg-color-active;
                                     }
                                     ul {
-                                        li.active,li:hover {
+                                        li.active {
                                             >a {
                                                 color: $menu-level3-text-color-active;
                                                 background-color: $menu-level3-bg-color-active;
                                             }
                                         }
                                         ul {
-                                            li.active,li:hover {
+                                            li.active {
                                                 >a {
                                                     color: $menu-level4-text-color-active;
                                                     background-color: $menu-level4-bg-color-active;
