@@ -7,36 +7,48 @@ this is a response setup for general webpage which is not designed by table and 
 Program: JQuery Responsive plugin
 Programmer: Jay HSU
 
--修改: 修改樣式
--增加: 
-$(obj).JResContentTab({
-				init: 預設的顯示標籤 (預設:0),
-	            fx: 切換效果 (預設:slide / fade,slide,show),
-	            transitTime: 切換效果時間 (預設:300),
-	            createTabs: {			//js寫入Tab
-	            	tab1:{				//新標籤編號
-	            		id: "物件ID",
-						text: "Tab按鈕顯示文字",
-						content: "Tab內容"
-	            	}
-	            },
-	            onClick: {} //tab點擊客製動作, 預設 false,
-	            resMode: '', //響應式呈現模式 'expend':完全展開 'collapse': 收合展開 預設:無
-            	resModeActiveWidth: 604 //響應式呈現模式觸發尺寸(尺寸修改請一併修改樣式)
-			});
+-修改: 修正mobile safari UI文字置中問題
+-增加: JResponsive寫入在螢幕尺寸變換重整停用狀態下，仍保持UI同步更新，寫法:
+
+//建立重整function JResponsive宣告在這邊
+function resInit() {
+	$.JResponsive();
+}
+//jquery onload function
+$(function() { 
+	$.JRes_autoRefresh({state: false}); //停用自動重整
+	resInit(); //呼叫UI
+	$(window).resize(function(){resInit();})//重整的時候就呼叫UI
+})
 
 =======================================================================================================================
-其他外掛
+#其他外掛
 =======================================================================================================================
 jQuery Easing Plugin: http://gsgd.co.uk/sandbox/jquery/easing/
 screenfull.js: https://sindresorhus.com/screenfull.js/
 
 =======================================================================================================================
-套用方式及相關文件說明
+#套用方式及相關文件說明
 =======================================================================================================================
 
-*Date: 2016/08/17 後版本請在網頁中加入viewport標籤
+#Date: 2016/08/17 後版本請在網頁中加入viewport標籤
+```
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0" />
+```
+
+#Date: 2015/11/28 響應式尺寸變動預設為葉面重整來取得UI建立所需的數值，如需改為非重整的方式，請參照以下作法
+```
+//建立重整function JResponsive宣告在這邊
+function resInit() {
+	$.JResponsive();
+}
+//jquery onload function
+$(function() { 
+	$.JRes_autoRefresh({state: false}); //停用自動重整
+	resInit(); //呼叫UI
+	$(window).resize(function(){resInit();})//重整的時候就呼叫UI
+})
+```
 
 在head所有加入下面幾行幾可啟用
 注意: jquery請看情形加入，如果該頁面已經有用jQuery則不用加入
@@ -55,11 +67,20 @@ SASS樣式檔案: sass/custom/_JResCustomSetup.scss
 NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯產生css
 如果沒有的人請直接編輯_css下的css檔案
 
+#jQuery: 
+=======================================================================================================================
+```
 <!--JQUERY-->
 <script type="text/javascript" src="response/jquery.min.js"></script> <!--jQuery Local v1.11.1 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!--cloudflare CDN v1.11.1 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script> <!--jQuery CDN v1.11.1 -->
+```
+=======================================================================================================================
 
+#Responsive:
+# 主程式及設定包建置於response/dist/下的response資料夾內，可以直接複製該資料夾放到網頁目錄下，然後用以下程式來引用文件即可
+=======================================================================================================================
+```
 <!--響應式設定-->
 <link rel="stylesheet" type="text/css" href="response/response.min.css" media="all"> <!--預設響應式樣式-->
 <link rel="stylesheet" type="text/css" href="response/css/sass.css" media="all"> <!--客製樣式 SASS-->
@@ -67,13 +88,20 @@ NOTE: 若您可以用sass來轉css的人，可以透過_sass下的scss來編輯�
 <script type="text/javascript" src="response/response.min.js"></script> <!--響應式主程式-->
 <script type="text/javascript" src="response/js/custom.js"></script> <!--客製設定-->
 <!--響應式設定-->
+```
+=======================================================================================================================
 
+#Responsive Rawgit Path:
+=======================================================================================================================
+```
 <!-- rawgit cdn -->
-https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.css <!--預設響應式樣式-->
+https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.css
 https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.min.js
+```
+=======================================================================================================================
 
 =======================================================================================================================
-響應式設定相關參數說明
+#響應式設定相關參數說明
 =======================================================================================================================
 	jQuery conflict usage: 
 	-----------------------------------------
@@ -454,7 +482,7 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 				onLoad: function () {} //其他延遲後載入的動作,預設false
 			})
 			//====================================================================================
-
+ 
 			//resMenu功能=========================================================================
 			$(menuObjID).JResMenu({
 		        view: 顯示方式(字串)(horizontal: 橫向, vertical:縱向(預設)),
