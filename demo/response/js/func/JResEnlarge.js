@@ -5,7 +5,7 @@
         var defaults = {
             enlargeSize: "100%",
             scalePx: 20,
-            paddingAmt: 20,
+            paddingAmt: 0,
             extraSource: "",
             setUILoadWidth: 800,
             popupMode: false,
@@ -95,28 +95,12 @@
                                     }
                                     
                                     //console.log(documentW+','+objW+','+objH);
-                                    
-                                    //建立wrap內容
-                                    $(this).wrap('<div class="resEnlargeWraper"><div id="' + thisID + '" class="resEnlarge" style="width:' + objW + 'px;' + wrapH + '">');
-                                    $(this).before('<div class="resEnlargeOpenIcon" onclick="JResEnlargeControl({id:\'' + thisID + "',action:'open',scalePx:" + scalePx + '});return false;"></div>');
-                                    if (enlargeSize == "auto") {
-                                        var FitIconVal = 'style="display:none"';
-                                        var OrangIconVal = "";
-                                    } else {
-                                        var FitIconVal = "";
-                                        var OrangIconVal = 'style="display:none"';
-                                    }
-                                    var resEnlargeControl = '<div class="resEnlargeCloseIcon" toggle="' + thisID + '" onclick=""></div>' +
-                                                             '<div class="resEnlargeFitIcon" toggle="' + thisID + '" ' + FitIconVal + ' onclick=""></div>' + 
-                                                             '<div class="resEnlargeOraginalIcon" toggle="' + thisID + '" ' + OrangIconVal + ' onclick=""></div>' + 
-                                                             '<div class="resEnlargePlusIcon" toggle="' + thisID + '" onclick=""></div>' + 
-                                                             '<div class="resEnlargeDisIcon" toggle="' + thisID + '" onclick=""></div>';
+
                                     var extraSource = options.extraSource != "" ? options.extraSource : ($(this).attr("toggle-src") != undefined) ? $(this).attr("toggle-src") : $(this).attr("src");
                                     extraSource = (enablePluginMode) ? enablePluginModeSource : extraSource;
-                                    var resEnlargeContent = '<div class="resEnlargeContent" toggle="' + thisID + '">' + 
-                                                            '<div class="resEnlargeControlBar">' + resEnlargeControl + "</div>" + 
-                                                            '<img id="' + thisID + '_enObj" src="' + extraSource + '" style="width:' + enlargeSize + ';height:auto;" />' + "</div>";
-                                    $(this).after(resEnlargeContent);
+                                    
+                                    //建立wrap內容
+                                    $(this).wrap('<div id="' + thisID + '" class="resEnlarge" style="width:' + objW + 'px;' + wrapH + '" enlarge-action="open" enlarge-scale="'+scalePx+'" enlarge-size="'+enlargeSize+'" enlarge-source="'+extraSource+'">');
 
                                 }).each(function(){
                                   if(this.complete) {
@@ -146,7 +130,7 @@
                                         }
                                     break;
                                     default:
-                                        options.extraSource = ($(this).attr("toggle-src") != undefined) ? $(this).attr("toggle-src") : $(this).attr("src");
+                                        options.extraSource = options.extraSource != "" ? options.extraSource : ($(this).attr("toggle-src") != undefined) ? $(this).attr("toggle-src") : $(this).attr("src");
                                         var doUsed = true;
                                     break;
                                 }
@@ -254,7 +238,23 @@
                         });
                         //console.log('scrolling down !');
                     }
-                })   
+                }).on('click','.resEnlarge',function(){
+                    var id = $(this).attr('id');
+                    var action = $(this).attr('enlarge-action');
+                    var scale = $(this).attr('enlarge-scale');
+                    var enlargeSize = $(this).attr('enlarge-size');
+                    var extraSource = $(this).attr('enlarge-source');
+
+                    JResEnlargeControl({
+                        id: id,
+                        action: action,
+                        scalePx: scale,
+                        enlargeSize: enlargeSize,
+                        extraSource: extraSource
+                    });
+
+                    return false;
+                })
 
         //計算兩點間距離
         function fnGetDistance(x1,x2,y1,y2){
@@ -290,7 +290,9 @@
         var defaults = {
             id: "",
             action: "",
-            scalePx: 20
+            scalePx: 20,
+            enlargeSize: 'auto',
+            extraSource: ''
         };
         options = $.extend(defaults, options);
 
@@ -298,9 +300,35 @@
         var id = options.id;
         var action = options.action;
         var scalePx = options.scalePx;
+        var enlargeSize = options.enlargeSize;
+        var extraSource = options.extraSource;
         //console.log($("#"+id+">.resEnlargeContent").get(0).outerHTML);
         if (action == 'open') {
-            $(container).html($("#"+id+">.resEnlargeContent").get(0).outerHTML);
+
+
+
+            if (enlargeSize == "auto") {
+                var FitIconVal = 'style="display:none"';
+                var OrangIconVal = "";
+            } else {
+                var FitIconVal = "";
+                var OrangIconVal = 'style="display:none"';
+            }
+
+
+            
+                                    var resEnlargeControl = '<div class="resEnlargeCloseIcon" toggle="' + id + '" onclick=""></div>' +
+                                                             '<div class="resEnlargeFitIcon" toggle="' + id + '" ' + FitIconVal + ' onclick=""></div>' + 
+                                                             '<div class="resEnlargeOraginalIcon" toggle="' + id + '" ' + OrangIconVal + ' onclick=""></div>' + 
+                                                             '<div class="resEnlargePlusIcon" toggle="' + id + '" onclick=""></div>' + 
+                                                             '<div class="resEnlargeDisIcon" toggle="' + id + '" onclick=""></div>';
+                                    
+                                    var resEnlargeContent = '<div class="resEnlargeContent" toggle="' + id + '">' + 
+                                                            '<div class="resEnlargeControlBar">' + resEnlargeControl + "</div>" + 
+                                                            '<img id="' + id + '_enObj" src="' + extraSource + '" style="width:' + enlargeSize + ';height:auto;" />' + "</div>";
+
+
+            $(container).html(resEnlargeContent);
         }
 
         switch (action) {

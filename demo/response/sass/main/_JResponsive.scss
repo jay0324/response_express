@@ -431,34 +431,51 @@ img {
             display: block;
             float: left;
             position: relative;
-            &#menu_btn,
-            &#menu_btn_bottom {
-                a{
-                    &::before{
-                        font-family: 'icomoon' !important;
-                        speak: none;
-                        font-style: normal;
-                        font-weight: normal;
-                        font-variant: normal;
-                        text-transform: none;
-                        line-height: 1;
-                        /* Better Font Rendering =========== */
-                        -webkit-font-smoothing: antialiased;
-                        -moz-osx-font-smoothing: grayscale;
-                        content:$menu_btn_content;
-                        font-size:$menu_btn_size;
-                    }
-                }
-            }
-            a {
-                display: table-cell;
+
+
+            a{
+                display:block;
+                text-align: center;
                 overflow: hidden;
                 color: #fff;
                 text-decoration: none;
                 text-align: center;
                 vertical-align: middle;
-
+                &::before{
+                  content: '';
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 0;
+                  height: 100%;
+                }
+                .label{
+                    display: inline-block;
+                    vertical-align: middle;/* 保证文字垂直居中 */
+                }
             }
+
+            &#menu_btn,
+            &#menu_btn_bottom {
+                a{
+                    .label{
+                        &::before{
+                            font-family: 'icomoon' !important;
+                            speak: none;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-variant: normal;
+                            text-transform: none;
+                            line-height: 1;
+                            /* Better Font Rendering =========== */
+                            -webkit-font-smoothing: antialiased;
+                            -moz-osx-font-smoothing: grayscale;
+                            content:$menu_btn_content;
+                            font-size:$menu_btn_size;
+                        }
+                    }
+                }
+            }
+
             .closeTop_btn,
             .closeRight_btn,
             .closeLeft_btn {
@@ -587,8 +604,19 @@ img {
                     height: auto;
                     float: left;
                     width: 100%;
-                    li {
+
+                    li{
                         display: block;
+                        a{
+                            display: block;
+                        }
+
+                        ul{
+                            display: block;
+                        }
+                    }
+
+                    li,li:hover {
                         margin: 0;
                         width: 100%;
                         height: auto;
@@ -599,12 +627,10 @@ img {
                         float: none;
                         clear: both;
                         a,a:hover {
-                            display: block;
+                            padding: $menu-level1-padding;
                             height: auto;
                             font-size: $menu-font-size;
                             text-decoration: none;
-                            padding: $menu-level1-padding;
-                            /* width: 96%; */
                             margin: 0;
                             font-weight: normal;
                             border-bottom: $menu-level1-border-bottom;
@@ -615,10 +641,10 @@ img {
                                 color: $menu-level1-text-color;
                             }
                         }
+
                         ul {
-                            display: block;
                             margin-left: 0 !important;
-                            li {
+                            li,li:hover {
                                 border: none;
                                 a,a:hover {
                                     padding: $menu-level2-padding;
@@ -631,7 +657,7 @@ img {
                                     }
                                 }
                                 ul {
-                                    li {
+                                    li,li:hover {
                                         a,a:hover {
                                             padding: $menu-level3-padding;
                                             border-bottom: $menu-level3-border-bottom;
@@ -643,7 +669,7 @@ img {
                                             }
                                         }
                                         ul {
-                                            li {
+                                            li,li:hover {
                                                 a,a:hover {
                                                     padding: $menu-level4-padding;
                                                     border-bottom: $menu-level4-border-bottom;
@@ -662,7 +688,7 @@ img {
                         }
                         /* active */
                         &.active {
-                            >a {
+                            >a,>a:hover {
                                 color: $menu-level1-text-color-active;
                                 background-color: $menu-level1-bg-color-active;
                             }
@@ -674,14 +700,14 @@ img {
                                     }
                                     ul {
                                         li.active {
-                                            >a {
+                                            >a,>a:hover {
                                                 color: $menu-level3-text-color-active;
                                                 background-color: $menu-level3-bg-color-active;
                                             }
                                         }
                                         ul {
                                             li.active {
-                                                >a {
+                                                >a,>a:hover {
                                                     color: $menu-level4-text-color-active;
                                                     background-color: $menu-level4-bg-color-active;
                                                 }

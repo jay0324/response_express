@@ -20,7 +20,7 @@
         
         //如果是啟用且有物件才執行
         if (state && $(obj).length > 0) {
-      
+            if ($(obj).hasClass("stickTopObj") === false) {
                 if (loadObj != '') {
                     //如果有設定欲執行延遲載入的子物件，則執行預設載入動作
                     if (options.onLoad != false) {
@@ -29,18 +29,19 @@
                         $(loadObj,obj).css({opacity: '0'});
                     }
                 }
+            }
 
                 $(window).on(mousewheelevt, function(e){
-                    //if scroll to the end of page, then show all hidden items
-                    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-                        fnTrggleEffect();
-                    }
+                        //if scroll to the end of page, then show all hidden items
+                        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                            fnTrggleEffect();
+                        }
 
-                    //init triggle when half browser height hit the scroll obj
-                    var trigglePos = $(window).scrollTop() + Math.round(($(window).height()/2)+eventPos);
-                    if ($(obj).position().top < trigglePos){
-                        fnTrggleEffect();
-                    }
+                        //init triggle when half browser height hit the scroll obj
+                        var trigglePos = $(window).scrollTop() + Math.round(($(window).height()/2)+eventPos);
+                        if ($(obj).position().top < trigglePos){
+                            fnTrggleEffect();
+                        }
                 })
 
                 //當文件載入時,先行偵測目前卷軸位置,並進行動作
@@ -60,6 +61,7 @@
 
         //載入效果
         function fnTrggleEffect(){
+           if ($(obj).hasClass("stickTopObj") === false) {
             if (loadObj != '') {
                 if ($(loadObj,obj).attr("load") != "complete") {
                     var maxAmt = $(loadObj,obj).length;
@@ -84,6 +86,7 @@
 
                     }
                 }
+            }
             }
         }
     }

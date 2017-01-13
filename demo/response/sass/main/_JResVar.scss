@@ -21,7 +21,7 @@ $menu_btn_content:				'\f0c9';
 $menu_btn_size:					26px;
 $menu_child_content:			"\f078";
 
-$menu-level1-padding:			2%;
+$menu-level1-padding:			10px 5px;
 $menu-level1-border-bottom:     1px solid #111111;
 $menu-level1-border-top:        1px solid #303030;
 $menu-level1-text-color:        $global-text-color;
@@ -29,7 +29,7 @@ $menu-level1-bg-color:          #202020;
 $menu-level1-text-color-active: $global-text-color;
 $menu-level1-bg-color-active:   #111111;
 
-$menu-level2-padding:			2% 2% 2% 4%;
+$menu-level2-padding:			10px 5px 10px 4%;
 $menu-level2-border-bottom:     1px solid #222222;
 $menu-level2-border-top:        1px solid #404040;
 $menu-level2-text-color:        #eeeeee;
@@ -37,7 +37,7 @@ $menu-level2-bg-color:          #303030;
 $menu-level2-text-color-active: #eeeeee;
 $menu-level2-bg-color-active:   #222222;
 
-$menu-level3-padding:			2% 2% 2% 6%;
+$menu-level3-padding:			10px 5px 10px 6%;
 $menu-level3-border-bottom:     1px solid #333333;
 $menu-level3-border-top:        1px solid #505050;
 $menu-level3-text-color:        #dddddd;
@@ -45,7 +45,7 @@ $menu-level3-bg-color:          #404040;
 $menu-level3-text-color-active: #dddddd;
 $menu-level3-bg-color-active:   #333333;
 
-$menu-level4-padding:			2% 2% 2% 8%;
+$menu-level4-padding:			10px 5px 10px 8%;
 $menu-level4-border-bottom:     1px solid #444444;
 $menu-level4-border-top:        1px solid #606060;
 $menu-level4-text-color:        #cccccc;
@@ -227,9 +227,11 @@ $enlarge-Btn-h:							50px;
 $enlarge-Btn-font-size:					25px;
 $enlarge-Btn-color:						#fff;
 $enlarge-BoxWrap-background-color:		#000;
+$enlarge-BoxWrap-control-area-bgcolor:	$global-background-color;
+$enlarge-BoxWrap-control-area-btncolor: $global-text-color;
 $enlarge-BoxWrap-background-opacity:	0.8;
 $enlarge-resPopupModeObj-font-size: 	60px;
-$enlarge-resPopupModeObj-color:			#000;
+$enlarge-resPopupModeObj-color:			$global-background-color;
 $enlarge-resPopupModeObj-background:	none;
 $enlarge-resPopupBoxPlusBtn-content:	"\f00a";
 $enlarge-resPopupBoxMinusBtn-content:	"\f010";

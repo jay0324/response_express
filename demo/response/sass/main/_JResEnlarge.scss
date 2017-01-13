@@ -182,7 +182,7 @@
         
         .resPopupBoxControl{
             position: absolute;
-            background: #000;
+            background: $enlarge-BoxWrap-control-area-bgcolor;
             display: block;
             float: none;
             top: 0;
@@ -194,7 +194,7 @@
                 width: 50px;
                 height: 50px;
                 float: right;
-                color: #fff;
+                color: $enlarge-BoxWrap-control-area-btncolor;
                 position: relative;
                 top: 0;
                 right: 0;
@@ -286,18 +286,10 @@
         position: relative;
         width: auto;
         height: auto;
-        >.resEnlargeOpenIcon {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            cursor: pointer;
 
-            &::before{
-                font-family: 'icomoon' !important;
+        &::before{
+            position:absolute;
+            font-family: 'icomoon' !important;
                 speak: none;
                 font-style: normal;
                 font-weight: normal;
@@ -315,7 +307,6 @@
                 font-size: $enlarge-font-size;
                 @include border-radius($enlarge-border-radius);
                 @include box-shadow($enlarge-box-shadow);
-            }
         }
     }
 

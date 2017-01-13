@@ -1,3 +1,17 @@
+.mobile_overflow {
+    //padding: 35px 0 0 0;
+    width: 100%;
+    overflow: auto;
+    position:relative;
+    background-color: $overflow-bg-color;
+    //background-image: $overflow-bg-image;
+    background-position: top left;
+    background-repeat:no-repeat;
+    >img{
+    	max-width: initial !important;
+    }
+}
+
 /* 
 	- google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
 */
@@ -17,27 +31,18 @@
 	- google nexus 7 2 landscape (960px)
 */
 @media (max-width:966px){
-
+	.mobile_overflow {
+		table{
+			width:1000px !important;
+		}
+	}
 }
 
 /* 
 	- google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
 */
 @media (max-width:800px){
-	.mobile_overflow {
-        padding: 35px 0 0 0;
-        width: auto;
-        overflow: auto;
-        position:relative;
-        background-color: $overflow-bg-color;
-        background-image: $overflow-bg-image;
-        background-position: top left;
-        background-repeat:no-repeat;
-
-        >img{
-        	max-width: initial !important;
-        }
-    }
+	
 }
 
 /*
