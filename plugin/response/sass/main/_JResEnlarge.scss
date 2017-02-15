@@ -1,0 +1,389 @@
+/*enlarge 還原*/
+.resEnlargeWraper{
+    overflow: hidden;
+}
+
+.resEnlarge {
+    position: static;
+    >.resEnlargeOpenIcon,
+    >.resEnlargeContent {
+        display: none;
+    }
+}
+
+#resEnlargePopupWrap{
+    position:fixed;
+    z-index:1010;
+    display:none;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    >.resEnlargeContent {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            z-index: 1000;
+            background: #fff;
+            padding: 10px 0 0 0;
+            >img {
+                position: relative;
+                display: block;
+                float: left;
+                margin-top: 60px;
+                margin-bottom: 30px;
+                z-index: 0;
+                max-width: none;
+            }
+            >.resEnlargeControlBar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50px;
+                background: $enlarge-controlbar-background;
+                color:$enlarge-controlbar-text-color;
+                z-index: 1;
+                >.resEnlargeCloseIcon,
+                >.resEnlargeFitIcon,
+                >.resEnlargeOraginalIcon,
+                >.resEnlargePlusIcon,
+                >.resEnlargeDisIcon {
+                    width: $enlarge-controlbar-size-w;
+                    height: $enlarge-controlbar-size-h;
+                    cursor: pointer;
+
+                    &::before{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        display: table-cell;
+                        vertical-align: middle;
+                        text-align: center;
+                        width: $enlarge-controlbar-size-w;
+                        height: $enlarge-controlbar-size-h;
+                        font-size: $enlarge-controlbar-font-size;
+                    }
+
+                }
+                >.resEnlargeCloseIcon {
+                    //background: url("../img/response/default/close_btn.png");
+                    float: right;
+                    //background-size: 100% 100%;
+                    &::before{
+                        content:$enlarge-resEnlargeCloseIcon;
+                    }
+                }
+                >.resEnlargeFitIcon {
+                    //background: url("../img/response/default/fit_btn.png");
+                    float: left;
+                    //background-size: 100% 100%;
+                    &::before{
+                        content:$enlarge-resEnlargeFitIcon;
+                    }
+                }
+                >.resEnlargeOraginalIcon {
+                    //background: url("../img/response/default/orign_btn.png");
+                    float: left;
+                    //background-size: 100% 100%;
+                    &::before{
+                        content:$enlarge-resEnlargeOraginalIcon;
+                    }
+                }
+                >.resEnlargePlusIcon {
+                    //background: url("../img/response/default/EnlargePlus_btn.png");
+                    float: left;
+                   // background-size: 100% 100%;
+                   &::before{
+                        content:$enlarge-resEnlargePlusIcon;
+                    }
+                }
+                >.resEnlargeDisIcon {
+                    //background: url("../img/response/default/EnlargeDis_btn.png");
+                    float: left;
+                    //background-size: 100% 100%;
+                    &::before{
+                        content:$enlarge-resEnlargeDisIcon;
+                    }
+                }
+            }
+        }
+}
+
+//resPopupBox
+.resPopupBox {
+    cursor: pointer;
+    background: #ccc;
+}
+
+.resPopupModeObj{
+    position:relative;
+    overflow:hidden;
+    &::before{
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position:absolute;
+        content: $enlarge-resPopupModeObj-content;
+        font-size: $enlarge-resPopupModeObj-font-size;
+        color: $enlarge-resPopupModeObj-color;
+        background: $enlarge-resPopupModeObj-background;
+        top: 50%;
+        left: 50%;
+        margin-left: -(($enlarge-resPopupModeObj-font-size/2));
+        margin-top: -(($enlarge-resPopupModeObj-font-size/2));
+        width: $enlarge-resPopupModeObj-font-size;
+        height: $enlarge-resPopupModeObj-font-size;
+        text-align:center;
+        pointer-events: none;
+        @include transition("all 0.5s");
+        @include opacity(0);
+        @include transform(rotate(180deg) scale(2));
+    }
+
+    &:hover{
+        &::before{
+            @include opacity(1);
+            @include transform(rotate(0) scale(1));
+        }
+    }
+}
+
+.resPopupBoxWrap {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    @include background-opacity($enlarge-BoxWrap-background-color,$enlarge-BoxWrap-background-opacity);
+    z-index: 1006;
+    top: 0;
+    left: 0;
+    .resPopupBoxContent {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        
+        .resPopupBoxControl{
+            position: absolute;
+            background: $enlarge-BoxWrap-control-area-bgcolor;
+            display: block;
+            float: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+
+            .resPopupBoxBtnGroup{
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                float: right;
+                color: $enlarge-BoxWrap-control-area-btncolor;
+                position: relative;
+                top: 0;
+                right: 0;
+
+                &::before{
+                    font-family: 'icomoon' !important;
+                    speak: none;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-variant: normal;
+                    text-transform: none;
+                    line-height: 1;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
+                    width: $enlarge-Btn-w;
+                    height: $enlarge-Btn-h;
+                    font-size: $enlarge-Btn-font-size;
+                    color:$enlarge-Btn-color;
+                }
+            }
+
+            .resPopupBoxPlusBtn {
+                &::before{
+                    content: $enlarge-resPopupBoxPlusBtn-content;
+                }
+            }
+
+            .resPopupBoxMinusBtn {
+                &::before{
+                    content: $enlarge-resPopupBoxMinusBtn-content;
+                }
+            }
+
+            .resPopupBoxCloseBtn {
+                &::before{
+                    content: $enlarge-resPopupBoxCloseBtn-content;
+                }
+            }
+        }
+
+        
+        .resPopupBoxContentArea {
+            width: 100%;
+            height: 85%;
+            height: calc(100% - 60px);
+            height: -moz-calc(100% - 60px);
+            padding-top: 60px;
+            overflow: auto;
+            cursor: -webkit-zoom-in;
+
+            img{
+                max-width: none;
+            }
+        }
+    }
+}
+
+/* 
+    - google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+
+}
+
+/* 
+    - ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+    - google nexus 7 landscape (966px)
+    - google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+    - google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+    /*enlarge setup*/
+    .resEnlarge {
+        position: relative;
+        width: auto;
+        height: auto;
+
+        &::before{
+            position:absolute;
+            font-family: 'icomoon' !important;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                display: block;
+                content:$enlarge-content;
+                padding: $enlarge-padding;
+                background: $enlarge-background;
+                float: $enlarge-float;
+                color: $enlarge-color;
+                font-size: $enlarge-font-size;
+                @include border-radius($enlarge-border-radius);
+                @include box-shadow($enlarge-box-shadow);
+        }
+    }
+
+    /* 排除圖片最大尺寸樣式 */
+    img.resIgnoreImgReSizer{
+        max-width:none;
+    }
+}
+
+/*
+    - ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+    - iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+    - iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+    - google nexus 7 portrait (604px)
+    - google nexus 7 2 portrait (600px)
+    - galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+
+}
+
+/* 
+    - iphone 5 landscape (568px)
+    - iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+    - iphone 6 plus portrait (414px) 
+    - galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+
+}
+
+/* 
+    - iphone 6 portrait (375px)
+    - galaxy S portrait (360px)
+    - iphone 5 portrait (320px)
+    - iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}
+
+/* print style */
+
+@media print {
+    .resEnlarge>.resEnlargeOpenIcon {
+        background: none;
+    }
+    .mobile_overflow {
+        background: none;
+        padding: 0;
+    }
+    .resMarquee>span {
+        margin: 0 !important;
+        width: auto;
+    }
+}

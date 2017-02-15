@@ -1,0 +1,337 @@
+/* resMenu style */
+
+.resMenu {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        list-style-image: none;
+        list-style-type: none;
+        li {
+            list-style: none;
+            margin: 0;
+            list-style: none;
+            list-style-image: none;
+            list-style-type: none;
+            a {
+                display:block;
+                color: $resMenu-btn-color;
+                background-color: $resMenu-btn-bg-color;
+                background-image: $resMenu-btn-bg-image;
+                font-size: $resMenu-btn-text-size;
+                background-position: right 3px top 3px;
+                background-repeat: no-repeat;
+                background-size:auto 85%;
+                text-decoration: none;
+                margin-bottom:1px;
+                padding:$resMenu-btn-padding;
+                &.hasChild{
+                    //padding:$resMenu-btn-child-padding;
+                    background-color: $resMenu-btn-child-bg-color;
+                    //background-image: $resMenu-btn-child-bg-image;
+                    color: $resMenu-btn-child-color;
+                    //background-position: right 3px top 3px;
+                    //background-repeat: no-repeat;
+                    //background-size:auto 85%;
+
+                     &::after{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        /* Better Font Rendering =========== */
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        text-decoration: none;
+                        content: $resMenu-btn-content;
+                        float:right;
+                    }
+                }
+            }
+            ul {
+                display: none;
+                padding-left:$resMenu-btn-level-padding;
+                background:$resMenu-btn-level1-bg;
+                li ul{
+                    background:$resMenu-btn-level2-bg;
+                    li ul{
+                        background:$resMenu-btn-level3-bg;
+                        li ul{
+                            background:$resMenu-btn-level4-bg;
+                            li ul{
+                                background:$resMenu-btn-level5-bg;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            &.active {
+                >ul {
+                    display: block;
+                }
+            }
+
+            &.active, &:hover {
+                >ul {
+                    >li.active, >li:hover{
+                        >a{
+                            color:$resMenu-btn-color-active;
+                            background-color: $resMenu-btn-bg-color-active;
+                            &.hasChild{
+                                background-color: $resMenu-btn-child-bg-color-active;
+                                color: $resMenu-btn-child-color-active;
+                            }
+                        }
+                    }
+                }
+                >a{
+                    color:$resMenu-btn-color-active;
+                    background-color: $resMenu-btn-bg-color;
+                    &.hasChild{
+                        background-color: $resMenu-btn-child-bg-color-active;
+                        color: $resMenu-btn-child-color-active;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.resMenu2 {
+    position: relative;
+    display: block;
+    width:100%;
+    ul {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        list-style-image: none;
+        list-style-type: none;
+        li {
+            position: relative;
+            display: inline-block;
+            flex: 1;
+            margin: $resMenu2-btn-margin;
+            padding: 0;
+            list-style: none;
+            list-style-image: none;
+            list-style-type: none;
+            float: left;
+            a {
+                display: block;
+                padding: $resMenu2-btn-padding;
+                margin: 0;
+                /* width: 90%; */
+                height: auto;
+                /* float: left; */
+                text-decoration: none;
+                color: $resMenu2-btn-color;
+                text-align: center;
+                font-size: $resMenu2-btn-text-size;
+                background-color: $resMenu2-btn-bg-color;
+                background-image: $resMenu2-btn-bg-image;
+                background-position: right 3px top 3px;
+                background-repeat: no-repeat;
+                background-size:auto 85%;
+                @include transition("all 0.5s");
+
+                &.hasChild{
+                    //padding:$resMenu2-btn-child-padding;
+                    background-color: $resMenu2-btn-child-bg-color;
+                    //background-image: $resMenu2-btn-child-bg-image;
+                    color: $resMenu2-btn-child-color;
+
+                    &::after{
+                        font-family: 'icomoon' !important;
+                        speak: none;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-variant: normal;
+                        text-transform: none;
+                        line-height: 1;
+                        /* Better Font Rendering =========== */
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        text-decoration: none;
+                        content: $resMenu2-btn-content;
+                        float:right;
+                    }
+
+                    &:hover {
+                        color: $resMenu2-btn-child-color-active;
+                        background-color: $resMenu2-btn-child-bg-color-active;
+                        //background-image: $resMenu2-btn-child-bg-image-active;
+                    }
+
+                }
+                &:hover {
+                    color: $resMenu2-btn-color-active;
+                    background-color: $resMenu2-btn-bg-color-active;
+                    background-image: $resMenu2-btn-bg-image-active;
+                }
+            }
+
+            &.active {
+                >ul {
+                    >li.active{
+                        >a{
+                            &:hover{
+                                color: $resMenu2-btn-level1-color-active;
+                                background-color: $resMenu2-btn-level1-bg-color-active;
+                                background-image: $resMenu2-btn-level1-bg-image-active;
+                            }
+
+                            &.hasChild{
+                                color: $resMenu2-btn-level1-color-child-active;
+                                background-color: $resMenu2-btn-level1-bg-color-child-active;
+                                //background-image: $resMenu2-btn-level1-bg-image-child-active;
+                                &::after{
+                                    content: $resMenu2-subbtn-content;
+                                }
+                            }
+                        }
+                    }
+                }
+                >a{
+                    &:hover {
+                        color: $resMenu2-btn-color-active;
+                        background-color: $resMenu2-btn-bg-color-active;
+                        background-image: $resMenu2-btn-bg-image-active;
+                    }
+                    &.hasChild{
+                        color: $resMenu2-btn-child-color-active;
+                        background-color: $resMenu2-btn-child-bg-color-active;
+                        //background-image: $resMenu2-btn-child-bg-image-active;
+                    }
+                }
+            }
+
+            ul {
+                position: absolute;
+                display: none;
+                top: 100%;
+                width:100%;
+                li {
+                    width:100%;
+                    margin: 0;
+                    border-bottom:$resMenu2-btn-child-border-bottom;
+                    a {
+                        /* width: 90%; */
+                        color: $resMenu2-btn-level1-color;
+                        background-color: $resMenu2-btn-level1-bg-color;
+                        background-image: $resMenu2-btn-level1-bg-image;
+                        
+                        &:hover {
+                            color: $resMenu2-btn-level1-color-active;
+                            background-color: $resMenu2-btn-level1-bg-color-active;
+                            background-image: $resMenu2-btn-level1-bg-image-active;
+                        }
+
+                        &.hasChild {
+                            color: $resMenu2-btn-level1-color-child;
+                            background-color: $resMenu2-btn-level1-bg-color-child;
+                            //background-image: $resMenu2-btn-level1-bg-image-child;
+                            &::after{
+                                content: $resMenu2-subbtn-content;
+                            }
+                        }
+                    }
+                    ul {
+                        top: 0;
+                        left: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 
+    - google nexus 10 landscape / galaxy tab 7.7,8,9,10.1 (1280px)
+*/
+@media (max-width:1280px){
+
+}
+
+/* 
+    - ipad landscape / general screen landscape / galaxy tab (1024px)
+*/
+@media (max-width:1024px){
+
+}
+
+/* 
+    - google nexus 7 landscape (966px)
+    - google nexus 7 2 landscape (960px)
+*/
+@media (max-width:966px){
+
+}
+
+/* 
+    - google nexus 10 portrait / galaxy tab 7.7,8,9,10.1 portrait (800px)
+*/
+@media (max-width:800px){
+
+}
+
+/*
+    - ipad portrait / general screen portrait (768px)
+*/
+@media (max-width:768px){
+
+}
+
+/*
+    - iphone 6 plus landscape (736px) 
+*/
+@media (max-width:736px){
+
+}
+
+/*
+    - iphone 6 landscape (667px)
+*/
+@media (max-width:667px){
+
+}
+
+/* 
+    - google nexus 7 portrait (604px)
+    - google nexus 7 2 portrait (600px)
+    - galaxy tab portrait (600px)
+*/
+@media (max-width:604px){
+
+}
+
+/* 
+    - iphone 5 landscape (568px)
+    - iphone 4 landscape (480px)
+*/
+@media (max-width:570px){
+
+}
+
+/* 
+    - iphone 6 plus portrait (414px) 
+    - galaxy note portrait (400px)
+*/
+@media (max-width:420px){
+
+}
+
+/* 
+    - iphone 6 portrait (375px)
+    - galaxy S portrait (360px)
+    - iphone 5 portrait (320px)
+    - iphone 4 portrait (320px)
+*/
+@media (max-width:380px){
+
+}

@@ -1,0 +1,22 @@
+{
+  "name": "response",
+  "version": "1.0.1",
+  "description": "response setup",
+  "main": "response.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-sass": "*",
+    "gulp-uglifyjs": "*",
+    "gulp-css-base64": "*",
+    "gulp-rename": "*",
+    "gulp-run-seq": "*",
+    "gulp-insert": "*",
+    "dateformat": "*",
+    "gulp-watch": "*"
+  }
+}
