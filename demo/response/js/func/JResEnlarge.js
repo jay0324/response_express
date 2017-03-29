@@ -382,11 +382,28 @@
           //放大
             case "plus":
                 $(container + ">.resEnlargeContent>img").attr("style", "width:" + ($(container + ">.resEnlargeContent>img").width() + scalePx) + "px !important");
+                var targetFrame = $(container + ">.resEnlargeContent");
+                if ($(container + ">.resEnlargeContent>img").width() > $(window).width()) {
+                    targetFrame.scrollLeft(targetFrame.scrollLeft()+((scalePx)/2));
+                }
+
+                if ($(container + ">.resEnlargeContent>img").height() > $(window).height()) {
+                    targetFrame.scrollTop(targetFrame.scrollTop()+((scalePx)/2));
+                }
             break;
 
           //縮小
             case "dis":
                 $(container + ">.resEnlargeContent>img").attr("style", "width:" + ($(container + ">.resEnlargeContent>img").width() - scalePx) + "px !important");
+
+                var targetFrame = $(container + ">.resEnlargeContent");
+                if ($(container + ">.resEnlargeContent>img").width() > $(window).width()) {
+                    targetFrame.scrollLeft(targetFrame.scrollLeft()-((scalePx)/2));
+                }
+
+                if ($(container + ">.resEnlargeContent>img").height() > $(window).height()) {
+                    targetFrame.scrollTop(targetFrame.scrollTop()-((scalePx)/2));
+                }
             break;
         }
     };
@@ -488,11 +505,28 @@
           //放大
             case "plus":
                 $(".resPopupTargetImg").attr("style", "width:" + ($(".resPopupTargetImg").width() + scalePx) + "px !important");
+                var targetFrame = $(".resPopupBoxContentArea");
+                if ($(".resPopupTargetImg").width() > $(window).width()) {
+                    targetFrame.scrollLeft(targetFrame.scrollLeft()+((scalePx)/2));
+                }
+
+                if ($(".resPopupTargetImg").height() > $(window).height()) {
+                    targetFrame.scrollTop(targetFrame.scrollTop()+((scalePx)/2));
+                }
+
             break;
 
           //縮小
             case "dis":
                 $(".resPopupTargetImg").attr("style", "width:" + ($(".resPopupTargetImg").width() - scalePx) + "px !important");
+                var targetFrame = $(".resPopupBoxContentArea");
+                if ($(".resPopupTargetImg").width() > $(window).width()) {
+                    targetFrame.scrollLeft(targetFrame.scrollLeft()-((scalePx)/2));
+                }
+
+                if ($(".resPopupTargetImg").height() > $(window).height()) {
+                    targetFrame.scrollTop(targetFrame.scrollTop()-((scalePx)/2));
+                }
             break;
         }
 

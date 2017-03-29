@@ -1,4 +1,4 @@
-/* Date:2017/1/13 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
+/* Date:2017/3/29 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
 @charset "UTF-8";
 /* 預設響應式設定 */
 /* 
@@ -608,6 +608,7 @@ img {
 }
 
 #resPageLoad_loading_icon {
+  position: absolute;
   z-index: 1002;
 }
 
@@ -1766,6 +1767,7 @@ select.resSelect::-ms-expand {
   background: #fff;
   float: left;
   overflow: hidden;
+  position: relative;
 }
 
 .resJSlideImg .resJSlideImgThumb ul li.active {
@@ -1774,11 +1776,16 @@ select.resSelect::-ms-expand {
 }
 
 .resJSlideImg .resJSlideImgThumb ul li img {
-  display: block;
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
-  height: 50%;
-  margin: 0 auto;
-  clear: both;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .resJSlideImg .resJSlideImgThumb ul li span {
@@ -1786,12 +1793,6 @@ select.resSelect::-ms-expand {
   height: 20px;
   clear: both;
   text-align: center;
-}
-
-.resJSlideImg .resJSlideImgThumb ul li.resThumbFit img {
-  width: auto;
-  height: 100%;
-  margin: 0 auto;
 }
 
 .resJSlideImg .resJSlideImgThumb ul li.resThumbFit span {
@@ -3392,6 +3393,7 @@ select.resSelect::-ms-expand {
 .scrollSticker {
   display: none;
   position: fixed;
+  width: 100%;
   z-index: 1000;
   top: 0;
   left: 0;

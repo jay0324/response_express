@@ -258,9 +258,9 @@
 
             trackSwipEvent = true;
 
-        }).on('touchmove', ".sliderContainer", function(e) {
-            //touchmove
-            var touch = e.originalEvent.touches[0];
+        }).on('touchend', ".sliderContainer", function(e) {
+            //touchend
+            var touch = e.originalEvent.changedTouches[0];
 
             //檢查走向
             if (type == "vertical") {
@@ -288,7 +288,6 @@
                     }
                     $(".sliderContainer>ul", obj).animate({ 'left': currentPOS + "px" }, transitionTime);
                 }
-                trackSwipEvent = false;
             }
 
             //swip to prev
@@ -309,8 +308,10 @@
                     }
                     $(".sliderContainer>ul", obj).animate({ 'left': currentPOS + "px" }, transitionTime);
                 }
-                trackSwipEvent = false;
             }
+            
+            //還原觸控狀態
+            trackSwipEvent = false;
         });
 
         //循環播放

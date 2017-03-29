@@ -151,16 +151,22 @@
                 background: $thumbslide-bg-color;
                 float: left;
                 overflow: hidden;
+                position:relative;
                 &.active {
                     border: $thumbslide-border-active;
                     background: $thumbslide-bg-color-active;
                 }
                 img {
-                    display: block;
-                    width:auto;
-                    height:50%;
-                    margin:0 auto;
-                    clear: both;
+                    max-height: 100%;  
+                    max-width: 100%; 
+                    width: auto;
+                    height: auto;
+                    position: absolute;  
+                    top: 0;  
+                    bottom: 0;  
+                    left: 0;  
+                    right: 0;  
+                    margin: auto;
                 }
                 span {
                     display: block;
@@ -170,11 +176,11 @@
                 }
 
                 &.resThumbFit{
-                    img{
-                        width:auto;
-                        height:100%;
-                        margin:0 auto;
-                    }
+                    // img{
+                    //     width:auto;
+                    //     height:100%;
+                    //     margin:0 auto;
+                    // }
                     span{
                         display:none;
                     }

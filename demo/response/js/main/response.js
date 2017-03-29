@@ -51,7 +51,9 @@
             res_mobileBottomNavBtnSetup: {},
             additionalBottomBtn: "",
             scrollTop: true,
-            app_icon: "img/response/app_ico.png"
+            app_icon: "img/response/app_ico.png",
+            minTouchSlideAmt: 20,
+            triggerTouchOpenRange: 3
         };
 
         options = $.extend(defaults, options);
@@ -715,6 +717,92 @@
                     if (menuCollapse != "") {
                         $(menuCollapse).JResMenu();
                     }
+
+                    //加入主選單的觸控開啟控制
+                        var manNavTouchStart = false;
+                        var updateLoc = 0;
+                        var leftMinRange = options.minTouchSlideAmt;
+                        var rightMinRange = $(window).width()-options.minTouchSlideAmt;
+                        var activeOpenRange = $(window).width()/options.triggerTouchOpenRange;
+                        var beginLoc = parseInt($("#mobile_nav_content").css(flipDirection));
+                        var maxRange = parseInt($("#mobile_nav_content").css("width"));
+                        var beginRange = beginLoc + maxRange;
+                        beginLoc = beginLoc-beginRange;
+                        $("body").on('touchstart', function(e) {
+                            if (!$("html").hasClass('resHtmlOverflow')) {
+                                if (flipDirection == 'left' || flipDirection == 'right') {
+                                    //touchstart
+                                    var touch = e.originalEvent.touches[0];
+
+                                    //detect left min trigger range
+                                    if (flipDirection == 'left') {
+                                        if (touch.pageX < leftMinRange){
+                                            manNavTouchStart = true;
+                                            prevNavTouchMove = touch.pageX;
+                                            updateLoc = beginLoc;
+                                        }
+                                    }
+
+                                    //detect right min trigger range
+                                    if (flipDirection == 'right') {
+                                        if (touch.pageX > rightMinRange){
+                                            manNavTouchStart = true;
+                                            prevNavTouchMove = $(window).width() - touch.pageX;
+                                            updateLoc = beginLoc;
+                                        }
+                                    }
+
+                                }
+                            }
+
+                        }).on('touchmove', function(e) {
+                            //touchmove
+                            var touch = e.originalEvent.changedTouches[0];
+                            if (manNavTouchStart){
+
+                                //detect left
+                                if (flipDirection == 'left') {
+                                    if (updateLoc < 0) updateLoc = beginLoc + touch.pageX;
+                                    $("#mobile_nav_content").css('left',updateLoc+'px');
+                                }
+
+                                //detect right
+                                if (flipDirection == 'right') {
+                                   if (updateLoc < 0) updateLoc = beginLoc + ($(window).width() - touch.pageX); 
+                                   $("#mobile_nav_content").css('right',updateLoc+'px');
+                                }
+
+                                //console.log('update: '+updateLoc+' begin: '+beginLoc+' maxRange: '+ maxRange);
+                            }
+                            
+                        }).on('touchend', function(e) {
+                            if (manNavTouchStart){
+                                if ((updateLoc - beginLoc) > activeOpenRange){
+                                    JResMobileTopNav({
+                                            btnId: "#menu_btn,#menu_btn_bottom",
+                                            contentId: "#mobile_nav_content",
+                                            position: flipDirection,
+                                            resetEvt: false,
+                                            animateTime: pannelAnimateTime,
+                                            animateEasing: pannelAnimateEasing,
+                                            event: 'touch'
+                                        });
+                                }else{
+                                    //detect left
+                                    if (flipDirection == 'left') {
+                                        $("#mobile_nav_content").animate({'left':'-120%'}, pannelAnimateTime);
+                                    }
+
+                                    //detect right
+                                    if (flipDirection == 'right') {
+                                        $("#mobile_nav_content").animate({'right':'-120%'}, pannelAnimateTime);
+                                    }
+
+                                }
+                                manNavTouchStart = false;
+                            }
+                        })
+
                 }
 
             } else {
@@ -1308,7 +1396,8 @@
             position: "",
             resetEvt: true,
             animateTime: 500,
-            animateEasing: "swing"
+            animateEasing: "swing",
+            event: 'mouse'
         };
         options = $.extend(defaults, options);
         var btnId = options.btnId;
@@ -1318,6 +1407,8 @@
         var ignoreUEvent = options.ignoreUEvent;
         var animateTime = options.animateTime;
         var animateEasing = options.animateEasing;
+        var triggerEvent = options.event;
+
         //開啟前先檢查其他pannel如果已經開啟則關閉
         $(".flipContentL").each(function() {
             if ($(this).css("left") == "0px" || $(this).css("left") == "0%") {
@@ -1412,15 +1503,7 @@
             //開啟視窗
             switch (position) {
                 case "right":
-                    if ($(contentId).css("right") == "0px" || $(contentId).css("right") == "0%") {
-                        $(contentId).animate({
-                            right: "-90%"
-                        }, animateTime, animateEasing);
-                        $.JResContentScroll({
-                            action: true
-                        });
-                        $("a div", btnId).remove();
-                    } else {
+                    if (triggerEvent == 'touch') {
                         $(contentId).animate({
                             right: "0px"
                         }, animateTime, animateEasing);
@@ -1428,6 +1511,24 @@
                             action: false
                         });
                         $("a", btnId).append("<div class='closeRight_btn'><div class='icon'></div></div>");
+                    }else{
+                        if ($(contentId).css("right") == "0px" || $(contentId).css("right") == "0%") {
+                            $(contentId).animate({
+                                right: "-90%"
+                            }, animateTime, animateEasing);
+                            $.JResContentScroll({
+                                action: true
+                            });
+                            $("a div", btnId).remove();
+                        } else {
+                            $(contentId).animate({
+                                right: "0px"
+                            }, animateTime, animateEasing);
+                            $.JResContentScroll({
+                                action: false
+                            });
+                            $("a", btnId).append("<div class='closeRight_btn'><div class='icon'></div></div>");
+                        }
                     }
                     break;
 
@@ -1534,15 +1635,8 @@
                     break;
 
                 default:
-                    if ($(contentId).css("left") == "0px" || $(contentId).css("left") == "0%") {
-                        $(contentId).animate({
-                            left: "-90%"
-                        }, animateTime, animateEasing);
-                        $.JResContentScroll({
-                            action: true
-                        });
-                        $("a div", btnId).remove();
-                    } else {
+
+                    if (triggerEvent == 'touch') {
                         $(contentId).animate({
                             left: "0px"
                         }, animateTime, animateEasing);
@@ -1550,6 +1644,24 @@
                             action: false
                         });
                         $("a", btnId).append("<div class='closeLeft_btn'><div class='icon'></div></div>");
+                    }else{
+                        if ($(contentId).css("left") == "0px" || $(contentId).css("left") == "0%") {
+                            $(contentId).animate({
+                                left: "-90%"
+                            }, animateTime, animateEasing);
+                            $.JResContentScroll({
+                                action: true
+                            });
+                            $("a div", btnId).remove();
+                        } else {
+                            $(contentId).animate({
+                                left: "0px"
+                            }, animateTime, animateEasing);
+                            $.JResContentScroll({
+                                action: false
+                            });
+                            $("a", btnId).append("<div class='closeLeft_btn'><div class='icon'></div></div>");
+                        }
                     }
                     break;
             }

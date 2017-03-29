@@ -1,7 +1,0 @@
-$(function() {
-	$.JResponsive({
-		defaultMenuObj: "#nav"
-	});
-	
-
- })

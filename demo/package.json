@@ -13,7 +13,10 @@
     "gulp-insert": "*",
     "dateformat": "*",
     "gulp-watch": "*",
+    "gulp-connect": "*",
     "font-awesome": "*",
-    "angular-ui-sortable": "*"
+    "angular-ui-sortable": "*",
+    "jade": "*",
+    "gulp-jade": "*"
   }
 }

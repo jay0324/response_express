@@ -152,7 +152,7 @@
             /*initial value*/
             var sideBtnInitial = {
                 state: false,
-                trigger: 'click',
+                trigger: 'touched click',
                 width: 100,
                 height: 100,
                 type: 'horizontal'
@@ -863,33 +863,31 @@
             swipToNextPOS = touch.pageX - touchSwipAmt;
             swipToPrevPOS = touch.pageX + touchSwipAmt;
             trackSwipEvent = true;
-        }).on('touchmove', function(e) {
-            //touchmove
-            var touch = e.originalEvent.touches[0];
+            fnStopLoop();
+
+        }).on('touchend', function(e) {
+            //touchend
+            var touch = e.originalEvent.changedTouches[0];
 
             //swip to next
             if (trackSwipEvent && swipToNextPOS > touch.pageX) {
                 //reset loop and all current state
-                fnStopLoop();
-                begin = false;
-
-                //建立效果及迴圈
-                fnDefineLoop(true);
-                trackSwipEvent = false;
+                
             }
 
             //swip to prev
             if (trackSwipEvent && swipToPrevPOS < touch.pageX) {
                 //reset loop and all current state
-                fnStopLoop();
                 prev = (curr == 0) ? maxAmt : curr - 1; //先還原為目前的項目
                 curr = (prev <= 0) ? maxAmt : prev - 1; //取得上一個項目
-                begin = false;
-
-                //建立效果及迴圈
-                fnDefineLoop(true);
-                trackSwipEvent = false;
             }
+
+            //進行迴圈
+            begin = false;
+            fnDefineLoop(true);
+            trackSwipEvent = false;
+
+            //console.log('next: '+swipToNextPOS+' prev: '+swipToPrevPOS+' leave: '+ touch.pageX);
         });
 
         //建立效果及迴圈
