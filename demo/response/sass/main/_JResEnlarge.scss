@@ -246,10 +246,14 @@
             height: -moz-calc(100% - 60px);
             padding-top: 60px;
             overflow: auto;
-            cursor: -webkit-zoom-in;
+            cursor: -webkit-grab;
 
             img{
                 max-width: none;
+            }
+
+            &.movehand{
+                cursor: -webkit-grabbing;
             }
         }
     }

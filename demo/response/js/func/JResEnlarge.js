@@ -15,6 +15,7 @@
         var setUILoadWidth = options.setUILoadWidth;
         var popupMode = options.popupMode;
         var enablePluginMode = options.enablePluginMode;
+        var desktopMouseDownMove = false;
 
         if (($.JRes_getCookie() == "true" || $.JRes_getCookie() == null || $.JRes_getCookie() == "")) {
             if ($(window).width() <= setUILoadWidth) {
@@ -150,6 +151,8 @@
         }
 
         //event
+        var previousPressPOSX = 0;
+        var previousPressPOSY = 0;
                 $(document).on('click','.resEnlargeCloseIcon',function(){
                     JResEnlargeControl({
                         id: $(this).attr("toggle"),
@@ -226,18 +229,6 @@
                     $(this).JResPopupBox({
                         action:'plus'
                     });
-                }).on('mousewheel','.resPopupBoxContentArea',function(e){
-                    if(e.originalEvent.wheelDelta /120 > 0) {
-                        $(">.resPopupTargetImg",this).JResPopupBox({
-                            action:'plus'
-                        });
-                        //console.log('scrolling up !');
-                    }else{
-                        $(">.resPopupTargetImg",this).JResPopupBox({
-                            action:'dis'
-                        });
-                        //console.log('scrolling down !');
-                    }
                 }).on('click','.resEnlarge',function(){
                     var id = $(this).attr('id');
                     var action = $(this).attr('enlarge-action');
@@ -254,7 +245,73 @@
                     });
 
                     return false;
-                })
+                }).on('mousedown','.resPopupBoxContentArea',function(e){
+                    if (!$.JRes_isMobile()) {
+                        e.preventDefault();
+                        desktopMouseDownMove = true;
+                        previousPressPOSX = e.pageX;
+                        previousPressPOSY = (e.pageY-window.pageYOffset-50);
+                        $(this).addClass('movehand');
+                    }
+                }).on('mousemove','.resPopupBoxContentArea',function(e){
+                    if (!$.JRes_isMobile()) {
+                        if (desktopMouseDownMove){
+                            var movePOSX = previousPressPOSX - e.pageX;
+                            var movePOSY = previousPressPOSY - (e.pageY-window.pageYOffset-50);
+                            //console.log('x:'+movePOSX+' / y:'+movePOSY);
+                            previousPressPOSX = e.pageX;
+                            previousPressPOSY = (e.pageY-window.pageYOffset-50);
+                            $(this).scrollLeft($(this).scrollLeft()+movePOSX);
+                            $(this).scrollTop($(this).scrollTop()+movePOSY);
+                        }
+                    }
+                }).on('mouseup','.resPopupBoxContentArea',function(e){
+                    if (!$.JRes_isMobile()) {
+                        desktopMouseDownMove = false;
+                        $(this).removeClass('movehand');
+                    }
+                }).on('mousewheel','.resPopupBoxContentArea',function(e){
+                    if (!$.JRes_isMobile()) {
+                        if(e.originalEvent.wheelDelta /120 > 0) {
+                            $(">.resPopupTargetImg",this).JResPopupBox({
+                                action:'plus'
+                            });
+                            //console.log('scrolling up !');
+                        }else{
+                            $(">.resPopupTargetImg",this).JResPopupBox({
+                                action:'dis'
+                            });
+                            //console.log('scrolling down !');
+                        }
+                    }
+                }).on('touchstart','.resPopupBoxContentArea',function(e){
+                    if ($.JRes_isMobile()) {
+                        if (($("meta[name='viewport']").attr("content").search('user-scalable=1') == -1) || ($("meta[name='viewport']").attr("content").search('user-scalable=yes') == -1)){
+                            var touch1 = e.originalEvent.touches[0];
+                            var touch2 = e.originalEvent.touches[1];
+                            if (!(touch1 == undefined || touch2 == undefined)){
+                                touchOrangal = fnGetDistance(touch1.pageX,touch2.pageX,touch1.pageY,touch2.pageY);
+                            }
+                        }
+                        //alert(touchOrangal);
+                    }
+                }).on('touchmove','.resPopupBoxContentArea',function(e){
+                    if ($.JRes_isMobile()) {
+                        if (($("meta[name='viewport']").attr("content").search('user-scalable=1') == -1) || ($("meta[name='viewport']").attr("content").search('user-scalable=yes') == -1)){
+                            var touch1 = e.originalEvent.touches[0];
+                            var touch2 = e.originalEvent.touches[1];
+                            if (!(touch1 == undefined || touch2 == undefined)){
+                                updateOrangal = fnGetDistance(touch1.pageX,touch2.pageX,touch1.pageY,touch2.pageY);
+                                $(">.resPopupTargetImg",this).JResPopupBox({
+                                    action:'plus',
+                                    scalePx: Math.round((touchOrangal - updateOrangal)*-1)
+                                });
+                                touchOrangal = updateOrangal; //更新touch間距
+                            }
+                        }
+                        //alert(touchOrangal - updateOrangal);
+                    }
+                });
 
         //計算兩點間距離
         function fnGetDistance(x1,x2,y1,y2){
