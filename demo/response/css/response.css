@@ -1,4 +1,4 @@
-/* Date:2017/3/30 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
+/* Date:2017/4/14 | JResponsive.js | (c) 2014 Digishot | Jay Hsu | license:ISC */
 @charset "UTF-8";
 /* 預設響應式設定 */
 /* 
@@ -2205,7 +2205,7 @@ select.resSelect::-ms-expand {
   height: calc(100% - 60px);
   height: -moz-calc(100% - 60px);
   padding-top: 60px;
-  overflow: auto;
+  overflow: hidden;
   cursor: -webkit-grab;
 }
 
@@ -2215,6 +2215,10 @@ select.resSelect::-ms-expand {
 
 .resPopupBoxWrap .resPopupBoxContent .resPopupBoxContentArea.movehand {
   cursor: -webkit-grabbing;
+}
+
+.resPopupBoxWrap .resPopupBoxContent .resPopupBoxContentArea.touchmove {
+  overflow: auto;
 }
 
 /* 

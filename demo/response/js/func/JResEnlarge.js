@@ -125,13 +125,14 @@
                                         if (enablePluginMode && fnCheckFormat($(this).parent("a").attr("href").toLowerCase())){
                                             var doUsed = true;
                                             options.extraSource = $(this).parent("a").attr('href');
+                                            var extraSource = options.extraSource;
                                             $(this).unwrap('a');
                                         }else{
                                             var doUsed = false;
                                         }
                                     break;
                                     default:
-                                        options.extraSource = options.extraSource != "" ? options.extraSource : ($(this).attr("toggle-src") != undefined) ? $(this).attr("toggle-src") : $(this).attr("src");
+                                        var extraSource = options.extraSource != "" ? options.extraSource : ($(this).attr("toggle-src") != undefined) ? $(this).attr("toggle-src") : $(this).attr("src");
                                         var doUsed = true;
                                     break;
                                 }
@@ -139,10 +140,11 @@
                                 var doUsed = false;
                             }
                         }
+
                         if (doUsed) {
                             $(this).each(function() {
                                 $(this).addClass("resPopupBox").wrap('<div class="resPopupModeObj">');
-                                $(this).attr("source",options.extraSource);
+                                $(this).attr("source",extraSource);
                             })
                         }
                     }
@@ -245,13 +247,15 @@
                     });
 
                     return false;
-                }).on('mousedown','.resPopupBoxContentArea',function(e){
+                }).on('mousedown touchstart','.resPopupBoxContentArea',function(e){
                     if (!$.JRes_isMobile()) {
                         e.preventDefault();
                         desktopMouseDownMove = true;
                         previousPressPOSX = e.pageX;
                         previousPressPOSY = (e.pageY-window.pageYOffset-50);
                         $(this).addClass('movehand');
+                    }else{
+                        $(this).addClass('touchmove');
                     }
                 }).on('mousemove','.resPopupBoxContentArea',function(e){
                     if (!$.JRes_isMobile()) {
@@ -265,14 +269,32 @@
                             $(this).scrollTop($(this).scrollTop()+movePOSY);
                         }
                     }
-                }).on('mouseup','.resPopupBoxContentArea',function(e){
+                }).on('mouseup touchend','.resPopupBoxContentArea',function(e){
                     if (!$.JRes_isMobile()) {
                         desktopMouseDownMove = false;
                         $(this).removeClass('movehand');
+                    }else{
+                        $(this).removeClass('touchmove');
                     }
                 }).on('mousewheel','.resPopupBoxContentArea',function(e){
                     if (!$.JRes_isMobile()) {
+                        //other browser
                         if(e.originalEvent.wheelDelta /120 > 0) {
+                            $(">.resPopupTargetImg",this).JResPopupBox({
+                                action:'plus'
+                            });
+                            //console.log('scrolling up !');
+                        }else{
+                            $(">.resPopupTargetImg",this).JResPopupBox({
+                                action:'dis'
+                            });
+                            //console.log('scrolling down !');
+                        }
+                    }
+                }).on('DOMMouseScroll','.resPopupBoxContentArea',function(e){
+                    if (!$.JRes_isMobile()) {
+                        //firefox
+                        if(e.originalEvent.detail < 0) {
                             $(">.resPopupTargetImg",this).JResPopupBox({
                                 action:'plus'
                             });
