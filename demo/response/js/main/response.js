@@ -183,27 +183,27 @@
             '<div id="resPageLoad_area"></div>' +
             '</div></div></div></div>';
         if (countAddPage > 0) {
-            for (var i = 0; i < countAddPage; i++) {
+            for (var page in additionalPageArray){
                 var addPagePosition = "";
                 var addPageflipDirection = "";
                 if (additionalPageArray != undefined) {
-                    addPagePosition = fnCheckPosition(additionalPageArray[i][1] + "_page", "position");
-                    addPageflipDirection = fnCheckPosition(additionalPageArray[i][1] + "_page", "direction");
+                    addPagePosition = fnCheckPosition(additionalPageArray[page]['type'] + "_page", "position");
+                    addPageflipDirection = fnCheckPosition(additionalPageArray[page]['type'] + "_page", "direction");
                 } else {
                     addPagePosition = pannelPosition;
                     addPageflipDirection = flipDirection;
                 }
-                var addPageContent = additionalPageArray[i][3] != undefined ? additionalPageArray[i][3] : "";
-                var addPageID = additionalPageArray[i][0] + "_pageContent";
+                var addPageContent = additionalPageArray[page]['content'] != undefined ? additionalPageArray[page]['content'] : "";
+                var addPageID = additionalPageArray[page]['id'] + "_pageContent";
                 var relateBtn = "";
-                if ($.trim(additionalPageArray[i][4]) != "") {
-                    var relateID = additionalPageArray[i][4].indexOf("_pageContent") == -1 ? additionalPageArray[i][4] + "_pageContent" : additionalPageArray[i][4];
+                if ($.trim(additionalPageArray[page]['relate_id']) != "") {
+                    var relateID = additionalPageArray[page]['relate_id'].indexOf("_pageContent") == -1 ? additionalPageArray[page]['relate_id'] + "_pageContent" : additionalPageArray[page]['relate_id'];
                     relateBtn = '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageNextIcon" onclick="JResPageControl({id:\'#' + relateID + '\',action:\'open\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div>';
                 }
                 additionalPageContent += '<div id="' + addPageID + '" class="resFlipPage ' + addPagePosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' +
                     '<div style="height:' + resMobileNavSetupHeight + 'px;" class="resPageController">' +
                     '<div style="width:' + resMobileNavSetupWidth + 'px;height:' + resMobileNavSetupHeight + 'px;" class="resAddPageBackIcon" onclick="JResPageControl({id:\'#' + addPageID + '\',action:\'back\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div>' +
-                    '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">' + additionalPageArray[i][2] + "</div>" +
+                    '<div style="height:' + resPageTitleHeight + 'px;margin:' + resPageTitleMargin + 'px 0;" class="resAddPageTitle">' + additionalPageArray[page]['show'] + "</div>" +
                     relateBtn +
                     '</div>' +
                     '<div style="height:' + resBottomMobileNavSetupHeight + 'px;" class="resPageControllerBottom"><div style="width:' + resBottomMobileNavSetupWidth + 'px;height:' + resBottomMobileNavSetupHeight + 'px;" id="closeAllresFlipPage" onclick="JResPageControl({id:\'\',action:\'closeAll\',animateTime:' + pannelAnimateTime + ',animateEasing:\'' + pannelAnimateEasing + '\'});return false;"><div class="icon"></div></div></div>' +
@@ -219,6 +219,8 @@
         var btnTarget = "";
         var additionalPannelContent = "";
         var mobile_nav_BtnAmt = 0;
+        var mobile_nav_top_width_arry = [];
+        var mobile_nav_top_state_arry = [];
         //若主選單按鈕有啟用在上選單
         if (resPrimM) {
             additionalBtn += '<li id="menu_btn" style="width:' + resMobileNavSetupWidth + "px;height:" + resMobileNavSetupHeight + "px;margin-right:" + resMobileNavSetupMargin + 'px"><a href="#" style="width:' + resMobileNavSetupWidth + "px;height:" + resMobileNavSetupHeight + 'px;"><span class="label"></span></a></li>';
@@ -226,38 +228,44 @@
         }
 
         if (countAddBtn > 0) {
-            for (var i = 0; i < countAddBtn; i++) {
-                var btnId = additionalBtnArray[i][0] != undefined ? additionalBtnArray[i][0] : "";
-                var btnLink = additionalBtnArray[i][1] != undefined ? additionalBtnArray[i][1] : "#";
-                var btnText = additionalBtnArray[i][2] != undefined ? additionalBtnArray[i][2] : "";
+            for (var btn in additionalBtnArray) {
+                var btnId = additionalBtnArray[btn]['id'] != undefined ? additionalBtnArray[btn]['id'] : "";
+                var btnLink = additionalBtnArray[btn]['link'] != undefined ? additionalBtnArray[btn]['link'] : "#";
+                var btnText = additionalBtnArray[btn]['show'] != undefined ? additionalBtnArray[btn]['show'] : "";
                 var showBtn = true;
-                switch (additionalBtnArray[i][3]) {
+                var btn_width = (additionalBtnArray[btn]['width'] != undefined)?additionalBtnArray[btn]['width']:resMobileNavSetupWidth;
+                var btn_state = (additionalBtnArray[btn]['state'] != undefined)?additionalBtnArray[btn]['state']:true;
+                switch (additionalBtnArray[btn]['target']) {
                     case "pannel":
                         //開啟響應式視窗
                         var addPanelPosition = "";
                         var addflipDirection = "";
-                        if (additionalBtnArray[i][4][0] != undefined) {
-                            addPanelPosition = fnCheckPosition(additionalBtnArray[i][4][0], "position");
-                            addflipDirection = fnCheckPosition(additionalBtnArray[i][4][0], "direction");
+                        if (additionalBtnArray[btn]['setup']['type'] != undefined) {
+                            addPanelPosition = fnCheckPosition(additionalBtnArray[btn]['setup']['type'], "position");
+                            addflipDirection = fnCheckPosition(additionalBtnArray[btn]['setup']['type'], "direction");
                         } else {
                             addPanelPosition = pannelPosition;
                             addflipDirection = flipDirection;
                         }
 
                         //pannel風格
-                        if (additionalBtnArray[i][4][2] != undefined) {
-                            addPannelStyle = additionalBtnArray[i][4][2];
+                        if (additionalBtnArray[btn]['setup']['class'] != undefined) {
+                            addPannelStyle = additionalBtnArray[btn]['setup']['class'];
                         } else {
                             addPannelStyle = pannelStyle;
                         }
 
-                        var addPanelContent = additionalBtnArray[i][4][1] != undefined ? additionalBtnArray[i][4][1] : "";
-                        additionalPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
-                        btnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'" + pannelAnimateEasing + "'});return false;\"";
-                        //trim whitespace from pannel content, then check if it is empty return value false to showBtn
-                        if ($.trim(addPanelContent) == "") {
-                            showBtn = false;
+                        //按鈕狀態
+                        if (btn_state) {
+                            var addPanelContent = additionalBtnArray[btn]['setup']['content'] != undefined ? additionalBtnArray[btn]['setup']['content'] : "";
+                            additionalPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
+                            btnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'" + pannelAnimateEasing + "'});return false;\"";
+                            //trim whitespace from pannel content, then check if it is empty return value false to showBtn
+                            if ($.trim(addPanelContent) == "") {
+                                showBtn = false;
+                            }
                         }
+
                         break;
 
                     case "tab":
@@ -271,17 +279,19 @@
                                 showBtn = false;
                             }
                         }
+
                         break;
 
                     case "page":
                         //開啟響應式頁面
-                        btnTarget = " class='resPageBtn' toggle='" + btnLink + "' ";
+                        var page_id = additionalBtnArray[btn]['page_id'] != undefined ? additionalBtnArray[btn]['page_id'] : "#";
+                        btnTarget = " class='resPageBtn' toggle='" + page_id + "' ";
                         break;
 
                     case "loader":
                         //開啟響應式載入頁面
                         btnTarget = " class='resPageLoaderBtn' ";
-                        var addLoaderSetup = additionalBtnArray[i][4] != undefined ? additionalBtnArray[i][4] : "";
+                        var addLoaderSetup = additionalBtnArray[btn]['setup'] != undefined ? additionalBtnArray[btn]['setup'] : "";
                         //將其餘參數寫入
                         if (addLoaderSetup != "") {
                             for (var data in addLoaderSetup) {
@@ -297,14 +307,18 @@
                         break;
 
                     default:
-                        btnTarget = " target='" + additionalBtnArray[i][3] + "'";
+                        btnTarget = " target='" + additionalBtnArray[btn]['target'] + "'";
                         break;
                 }
                 //showBtn value with false than don't show the button
                 if (showBtn) {
-                    additionalBtn += '<li id="' + btnId + '" style="width:' + resMobileNavSetupWidth + "px;height:" + resMobileNavSetupHeight + "px;margin-right:" + resMobileNavSetupMargin + 'px"><a href="' + btnLink + '" ' + btnTarget + 'style="width:' + resMobileNavSetupWidth + "px;height:" + resMobileNavSetupHeight + 'px;"><span class="label">' + btnText + '</span></a></li>';
+                    mobile_nav_top_state_arry.push(btn_state);
+                    if (btn_state){
+                        mobile_nav_top_width_arry.push(btn_width);
+                        additionalBtn += '<li id="' + btnId + '" style="width:' + btn_width + "px;height:" + resMobileNavSetupHeight + "px;margin-right:" + resMobileNavSetupMargin + 'px"><a href="' + btnLink + '" ' + btnTarget + 'style="width:' + btn_width + "px;height:" + resMobileNavSetupHeight + 'px;"><span class="label">' + btnText + '</span></a></li>';
+                        mobile_nav_BtnAmt++;
+                    }
                 }
-                mobile_nav_BtnAmt++;
             }
         }
         //擴充下選單按鈕
@@ -314,6 +328,8 @@
         var BottombtnTarget = "";
         var additionalBottomPannelContent = "";
         var mobile_nav_BottomBtnAmt = 0;
+        var mobile_nav_top_width_arry_bottom = [];
+        var mobile_nav_top_state_arry_bottom = [];
         //若主選單按鈕有啟用在下選單
         if (resBottomPrimM) {
             additionalBottomBtn += '<li id="menu_btn_bottom" style="width:' + resBottomMobileNavSetupWidth + "px;height:" + resBottomMobileNavSetupHeight + "px;margin-right:" + resBottomMobileNavSetupMargin + 'px"><a href="#" style="width:' + resBottomMobileNavSetupWidth + "px;height:" + resBottomMobileNavSetupHeight + 'px;"><span class="label"></span></a></li>';
@@ -321,38 +337,45 @@
         }
 
         if (countAddBottomBtn > 0) {
-            for (var i = 0; i < countAddBottomBtn; i++) {
-                var btnId = additionalBottomBtnArray[i][0] != undefined ? additionalBottomBtnArray[i][0] : "";
-                var btnLink = additionalBottomBtnArray[i][1] != undefined ? additionalBottomBtnArray[i][1] : "#";
-                var btnText = additionalBottomBtnArray[i][2] != undefined ? additionalBottomBtnArray[i][2] : "";
+            for (var btn in additionalBottomBtnArray) {
+                var btnId = additionalBottomBtnArray[btn]['id'] != undefined ? additionalBottomBtnArray[btn]['id'] : "";
+                var btnLink = additionalBottomBtnArray[btn]['link'] != undefined ? additionalBottomBtnArray[btn]['link'] : "#";
+                var btnText = additionalBottomBtnArray[btn]['show'] != undefined ? additionalBottomBtnArray[btn]['show'] : "";
                 var showBtn = true;
-                switch (additionalBottomBtnArray[i][3]) {
+                var btn_width_bottom = (additionalBottomBtnArray[btn]['width'] != undefined)?additionalBottomBtnArray[btn]['width']:resBottomMobileNavSetupWidth;
+                var btn_state_bottom = (additionalBottomBtnArray[btn]['state'] != undefined)?additionalBottomBtnArray[btn]['state']:true;
+
+                switch (additionalBottomBtnArray[btn]['target']) {
                     case "pannel":
                         //開啟響應式視窗
                         var addPanelPosition = "";
                         var addflipDirection = "";
-                        if (additionalBottomBtnArray[i][4][0] != undefined) {
-                            addPanelPosition = fnCheckPosition(additionalBottomBtnArray[i][4][0], "position");
-                            addflipDirection = fnCheckPosition(additionalBottomBtnArray[i][4][0], "direction");
+                        if (additionalBottomBtnArray[btn]['setup']['type'] != undefined) {
+                            addPanelPosition = fnCheckPosition(additionalBottomBtnArray[btn]['setup']['type'], "position");
+                            addflipDirection = fnCheckPosition(additionalBottomBtnArray[btn]['setup']['type'], "direction");
                         } else {
                             addPanelPosition = pannelPosition;
                             addflipDirection = flipDirection;
                         }
 
                         //pannel風格
-                        if (additionalBtnArray[i][4][2] != undefined) {
-                            addPannelStyle = additionalBtnArray[i][4][2];
+                        if (additionalBtnArray[i]['setup']['class'] != undefined) {
+                            addPannelStyle = additionalBtnArray[i]['setup']['class'];
                         } else {
                             addPannelStyle = pannelStyle;
                         }
 
-                        var addPanelContent = additionalBottomBtnArray[i][4][1] != undefined ? additionalBottomBtnArray[i][4][1] : "";
-                        additionalBottomPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
-                        BottombtnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'" + pannelAnimateEasing + "'});return false;\"";
-                        //trim whitespace from pannel content, then check if it is empty return value false to showBtn
-                        if ($.trim(addPanelContent) == "") {
-                            showBtn = false;
+                        //狀態
+                        if (btn_state_bottom) {
+                            var addPanelContent = additionalBottomBtnArray[btn]['setup']['content'] != undefined ? additionalBottomBtnArray[btn]['setup']['content'] : "";
+                            additionalBottomPannelContent += '<div id="' + btnId + '_pannelContent" class="flipContent ' + addPannelStyle + ' ' + addPanelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + addPanelContent + "<div class='clear'></div></div></div>";
+                            BottombtnTarget = " onclick=\"JResMobileTopNav({btnId:'#" + btnId + "',contentId:'#" + btnId + "_pannelContent',position:'" + addflipDirection + "',resetEvt:false,animateTime:" + pannelAnimateTime + ",animateEasing:'" + pannelAnimateEasing + "'});return false;\"";
+                            //trim whitespace from pannel content, then check if it is empty return value false to showBtn
+                            if ($.trim(addPanelContent) == "") {
+                                showBtn = false;
+                            }
                         }
+
                         break;
 
                     case "tab":
@@ -366,6 +389,7 @@
                                 showBtn = false;
                             }
                         }
+
                         break;
 
                     case "page":
@@ -376,7 +400,7 @@
                     case "loader":
                         //開啟響應式載入頁面
                         btnTarget = " class='resPageLoaderBtn' ";
-                        var addLoaderSetup = additionalBtnArray[i][4] != undefined ? additionalBtnArray[i][4] : "";
+                        var addLoaderSetup = additionalBottomBtnArray[btn]['setup'] != undefined ? additionalBottomBtnArray[btn]['setup'] : "";
                         //將其餘參數寫入
                         if (addLoaderSetup != "") {
                             for (var data in addLoaderSetup) {
@@ -391,14 +415,18 @@
                         break;
 
                     default:
-                        BottombtnTarget = " target='" + additionalBottomBtnArray[i][3] + "'";
+                        BottombtnTarget = " target='" + additionalBottomBtnArray[btn]['target'] + "'";
                         break;
                 }
                 //showBtn value with false than don't show the button
                 if (showBtn) {
-                    additionalBottomBtn += '<li id="' + btnId + '" style="width:' + resBottomMobileNavSetupWidth + "px;height:" + resBottomMobileNavSetupHeight + "px;margin-right:" + resBottomMobileNavSetupMargin + 'px"><a href="' + btnLink + '" ' + BottombtnTarget + 'style="width:' + resBottomMobileNavSetupWidth + "px;height:" + resBottomMobileNavSetupHeight + 'px;"><span class="label">' + btnText + "</span></a></li>";
+                    mobile_nav_top_state_arry_bottom.push(btn_state_bottom);
+                    if (btn_state_bottom){
+                        mobile_nav_top_width_arry_bottom.push(btn_width_bottom);
+                        additionalBottomBtn += '<li id="' + btnId + '" style="width:' + btn_width_bottom + "px;height:" + resBottomMobileNavSetupHeight + "px;margin-right:" + resBottomMobileNavSetupMargin + 'px"><a href="' + btnLink + '" ' + BottombtnTarget + 'style="width:' + btn_width_bottom + "px;height:" + resBottomMobileNavSetupHeight + 'px;"><span class="label">' + btnText + "</span></a></li>";
+                        mobile_nav_BottomBtnAmt++;
+                    }
                 }
-                mobile_nav_BottomBtnAmt++;
             }
         }
         //本地使用
@@ -438,68 +466,47 @@
         var res_langVarDefault = options.res_langVarDefault.toLowerCase();
         var res_langVarEn = options.res_langVarEn;
         //繁中版
-        var res_langVarTw = options.res_langVarTw.toLowerCase();
-        var res_langArrayTw = ["language:語系", "menu:主選單", "mobile:切換手機版", "desktop:切換電腦版"];
+        var res_langVarTw = options.res_langVarTw;
+        var res_langArrayTw = [{"language":"語系"},{"menu":"主選單"},{"mobile":"切換手機版"},{"desktop":"切換電腦版"}];
         var res_langArrayTw_extend = options.res_langArrayTw;
-        if (res_langArrayTw_extend.length > 0) {
-            for (var i = 0; i < res_langArrayTw_extend.length; i++) {
-                res_langArrayTw.push(res_langArrayTw_extend[i]);
-            }
-        }
+        $.extend(res_langArrayTw, res_langArrayTw_extend);
+
         //簡中版
         var res_langVarCn = options.res_langVarCn.toLowerCase();
-        var res_langArrayCn = ["language:语系", "menu:主选单", "mobile:切换手机版", "desktop:切换桌面版"];
+        var res_langArrayCn = [{"language":"语系"},{"menu":"主选单"},{"mobile":"切换手机版"},{"desktop":"切换桌面版"}];
         var res_langArrayCn_extend = options.res_langArrayCn;
-        if (res_langArrayCn_extend.length > 0) {
-            for (var i = 0; i < res_langArrayCn_extend.length; i++) {
-                res_langArrayCn.push(res_langArrayCn_extend[i]);
-            }
-        }
+        $.extend(res_langArrayCn, res_langArrayCn_extend);
+
         //外加語言1
         var res_langVarAdd1 = options.res_langVarAdd1.toLowerCase();
-        var res_langArrayAdd1 = ["language:language", "menu:menu", "mobile:mobile", "desktop:desktop"];
+        var res_langArrayAdd1 = [{"language":"language"},{"menu":"menu"},{"mobile":"mobile"},{"desktop":"desktop"}];
         var res_langArrayAdd1_extend = options.res_langArrayAdd1;
-        if (res_langArrayAdd1_extend.length > 0) {
-            for (var i = 0; i < res_langArrayAdd1_extend.length; i++) {
-                res_langArrayAdd1.push(res_langArrayAdd1_extend[i]);
-            }
-        }
+        $.extend(res_langArrayAdd1, res_langArrayAdd1_extend);
+
         //外加語言2
         var res_langVarAdd2 = options.res_langVarAdd2.toLowerCase();
-        var res_langArrayAdd2 = ["language:language", "menu:menu", "mobile:mobile", "desktop:desktop"];
+        var res_langArrayAdd2 = [{"language":"language"},{"menu":"menu"},{"mobile":"mobile"},{"desktop":"desktop"}];
         var res_langArrayAdd2_extend = options.res_langArrayAdd2;
-        if (res_langArrayAdd2_extend.length > 0) {
-            for (var i = 0; i < res_langArrayAdd2_extend.length; i++) {
-                res_langArrayAdd2.push(res_langArrayAdd2_extend[i]);
-            }
-        }
+        $.extend(res_langArrayAdd2, res_langArrayAdd2_extend);
+
         //外加語言3
         var res_langVarAdd3 = options.res_langVarAdd3.toLowerCase();
-        var res_langArrayAdd3 = ["language:language", "menu:menu", "mobile:mobile", "desktop:desktop"];
+        var res_langArrayAdd3 = [{"language":"language"},{"menu":"menu"},{"mobile":"mobile"},{"desktop":"desktop"}];
         var res_langArrayAdd3_extend = options.res_langArrayAdd3;
-        if (res_langArrayAdd3_extend.length > 0) {
-            for (var i = 0; i < res_langArrayAdd3_extend.length; i++) {
-                res_langArrayAdd3.push(res_langArrayAdd3_extend[i]);
-            }
-        }
+        $.extend(res_langArrayAdd3, res_langArrayAdd3_extend);
+
         //外加語言4
         var res_langVarAdd4 = options.res_langVarAdd4.toLowerCase();
-        var res_langArrayAdd4 = ["language:language", "menu:menu", "mobile:mobile", "desktop:desktop"];
+        var res_langArrayAdd4 = [{"language":"language"},{"menu":"menu"},{"mobile":"mobile"},{"desktop":"desktop"}];
         var res_langArrayAdd4_extend = options.res_langArrayAdd4;
-        if (res_langArrayAdd4_extend.length > 0) {
-            for (var i = 0; i < res_langArrayAdd4_extend.length; i++) {
-                res_langArrayAdd4.push(res_langArrayAdd4_extend[i]);
-            }
-        }
+        $.extend(res_langArrayAdd4, res_langArrayAdd4_extend);
+
         //外加語言5
         var res_langVarAdd5 = options.res_langVarAdd5.toLowerCase();
-        var res_langArrayAdd5 = ["language:language", "menu:menu", "mobile:mobile", "desktop:desktop"];
+        var res_langArrayAdd5 = [{"language":"language"},{"menu":"menu"},{"mobile":"mobile"},{"desktop":"desktop"}];
         var res_langArrayAdd5_extend = options.res_langArrayAdd5;
-        if (res_langArrayAdd5_extend.length > 0) {
-            for (var i = 0; i < res_langArrayAdd5_extend.length; i++) {
-                res_langArrayAdd5.push(res_langArrayAdd5_extend[i]);
-            }
-        }
+        $.extend(res_langArrayAdd5, res_langArrayAdd5_extend);
+
         var defaultLangMenuObj = options.defaultLangMenuObj;
         var customLangMenu = options.customLangMenu;
         //主選單
@@ -542,15 +549,14 @@
         var subMenu = "";
         var countDefaultSubMenuObj = defaultSubMenuObj.length;
         if (countDefaultSubMenuObj > 0) {
-            for (var i = 0; i < countDefaultSubMenuObj; i++) {
-                if ($(defaultSubMenuObj[i]).length > 0) {
-                    if ($(defaultSubMenuObj[i][1]).length > 0) {
-                        subMenu += '<div class="resContent_' + i + '">';
-                        subMenu += defaultSubMenuObj[i][0] != "" ? "<h1>" + fnTranslate(defaultSubMenuObj[i][0]) + "</h1>" : "";
-                        subMenu += '<div class="resContent">';
-                        subMenu += $(defaultSubMenuObj[i][1]).prop("tagName") != "UL" ? $(defaultSubMenuObj[i][1]).html() : "<ul>" + $(defaultSubMenuObj[i][1]).html() + "</ul>";
-                        subMenu += "</div></div>";
-                    }
+            for (var sub in defaultSubMenuObj){
+                var state = (defaultSubMenuObj[sub]['state'] != undefined)?defaultSubMenuObj[sub]['state']:true;
+                if (state) {
+                    subMenu += '<div class="resContent_' + defaultSubMenuObj[sub]['id'] + '">';
+                    subMenu += defaultSubMenuObj[sub]['show'] != "" ? "<h1>" + fnTranslate(defaultSubMenuObj[sub]['show']) + "</h1>" : "";
+                    subMenu += '<div class="resContent">';
+                    subMenu += $(defaultSubMenuObj[sub]['obj']).prop("tagName") != "UL" ? $(defaultSubMenuObj[sub]['obj']).html() : "<ul>" + $(defaultSubMenuObj[sub]['obj']).html() + "</ul>";
+                    subMenu += "</div></div>";
                 }
             }
         }
@@ -574,7 +580,7 @@
             (viewPortSetup == "") ? $("head").prepend('<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0">'): $("head").prepend('<meta name="viewport" content="' + viewPortSetup + '">');
         }
 
-        //若不是IE9以下才進行響應式設定
+        //若不是IE9以上才進行響應式設定
         if (!$.JRes_isLtIE9()) {
             //check the response cookie
             if ($.JRes_getCookie() == "true" || $.JRes_getCookie() == null || $.JRes_getCookie() == "") {
@@ -611,7 +617,10 @@
                 var body_margin_bottom = ''; //padding-bottom
 
                 //-- 計算導覽按鈕群長度 (上方) --
-                var mobile_nav_btn_width = mobile_nav_BtnAmt * (resMobileNavSetupWidth + resMobileNavSetupMargin);
+                var mobile_nav_btn_width = 0;
+                for (var i=0;i<mobile_nav_top_width_arry.length;i++){
+                    mobile_nav_btn_width += mobile_nav_top_width_arry[i] + resMobileNavSetupMargin;
+                }
                 var mobile_nav = resMenuState == true ? ' style="position:' + resMenuType + ';width:' + $(window).width() + "px;height:" + resMobileNavSetupHeight + 'px;" ' : ' resState="notUsed" style="display:none" ';
                 var mobile_nav_width = $(window).width() > mobile_nav_btn_width ? ' style="width:' + $(window).width() + 'px;" ' : ' style="width:' + mobile_nav_btn_width + 'px;" ';
                 if (resMenuState == true) {
@@ -620,7 +629,10 @@
                 }
 
                 //-- 計算導覽按鈕群長度 (下方) --
-                var mobile_nav_btn_width_bottom = mobile_nav_BottomBtnAmt * (resBottomMobileNavSetupWidth + resBottomMobileNavSetupMargin);
+                var mobile_nav_btn_width_bottom = 0;
+                for (var i=0;i<mobile_nav_top_width_arry_bottom.length;i++){
+                    mobile_nav_btn_width_bottom+=mobile_nav_top_width_arry_bottom[i]+resBottomMobileNavSetupMargin;
+                }
                 var mobile_nav_bottom = resBottomMenuState == true ? ' style="position:' + resBottomMenuType + ';width:' + $(window).width() + "px;height:" + resBottomMobileNavSetupHeight + 'px;" ' : ' resState="notUsed" style="display:none" ';
                 var mobile_nav_width_bottom = $(window).width() > mobile_nav_btn_width_bottom ? ' style="width:' + $(window).width() + 'px;" ' : ' style="width:' + mobile_nav_btn_width_bottom + 'px;" ';
                 var body_margin_bottom = (resBottomMenuState == true) ? 'padding-bottom:' + resBottomMobileNavSetupHeight + 'px;' : ''; //下選單有使用進行padding-bottom
@@ -632,67 +644,68 @@
                 //螢幕在800以下進行選單物件狀態偵測
                 var body_margin = $(window).width() <= setUILoadWidth ? ' style="' + body_margin_top + body_margin_bottom + '" ' : '';
 
-                //如果UI已經存在,則進行UI尺寸更新
-                if($("#resMainWrap").length > 0) {
-                    //主內容框架
-                    if($(window).width() <= setUILoadWidth) {
-                        $("#resMainWrap").css({
-                            "min-height": resMainWrap_miniHight + "px"
-                        });
-                    }else{
-                        $("#resMainWrap").css({
-                            "min-height": resMainWrap_miniHight + "px",
-                            "padding-top": '0px',
-                            "padding-bottom": '0px'
-                        });
-                    }
-
-                    //上選單
-                    if(resMenuState == true) {
-                        $("#resMainWrap").css({
-                            "padding-top": resMobileNavSetupHeight + 'px'
-                        });
-
-                        $("#mobile_nav").css({
-                            "position": resMenuType,
-                            "width": $(window).width() + 'px',
-                            "height": resMobileNavSetupHeight + 'px'
-                        });
-
-                        if ($(window).width() > mobile_nav_btn_width){
-                            $("#mobile_nav>ul").css({
-                                "width": $(window).width() + 'px'
+                    //進行UI尺寸更新
+                    $(window).resize(function(){
+                        //主內容框架
+                        if($(window).width() <= setUILoadWidth) {
+                            $("#resMainWrap").css({
+                                "min-height": resMainWrap_miniHight + "px"
                             });
                         }else{
-                            $("#mobile_nav>ul").css({
-                                "width": mobile_nav_btn_width + 'px'
+                            $("#resMainWrap").css({
+                                "min-height": resMainWrap_miniHight + "px",
+                                "padding-top": '0px',
+                                "padding-bottom": '0px'
                             });
                         }
-                    }
 
-                    //下選單
-                    if(resBottomMenuState == true) {
-                        $("#resMainWrap").css({
-                            "padding-bottom": resBottomMobileNavSetupHeight + 'px'
-                        });
-
-                        $("#mobile_nav_bottom").css({
-                            "position": resBottomMenuType,
-                            "width": $(window).width() + 'px',
-                            "height": resBottomMobileNavSetupHeight + 'px'
-                        });
-
-                        if ($(window).width() > mobile_nav_width_bottom){
-                            $("#mobile_nav_bottom>ul").css({
-                                "width": $(window).width() + 'px'
+                        //上選單
+                        if(resMenuState == true) {
+                            $("#resMainWrap").css({
+                                "padding-top": resMobileNavSetupHeight + 'px'
                             });
-                        }else{
-                            $("#mobile_nav_bottom>ul").css({
-                                "width": mobile_nav_width_bottom + 'px'
+
+                            $("#mobile_nav").css({
+                                "position": resMenuType,
+                                "width": $(window).width() + 'px',
+                                "height": resMobileNavSetupHeight + 'px'
                             });
+
+                            if ($(window).width() > mobile_nav_btn_width){
+                                $("#mobile_nav>ul").css({
+                                    "width": $(window).width() + 'px'
+                                });
+                            }else{
+                                $("#mobile_nav>ul").css({
+                                    "width": mobile_nav_btn_width + 'px'
+                                });
+                            }
                         }
-                    }
-                }else{
+
+                        //下選單
+                        if(resBottomMenuState == true) {
+                            $("#resMainWrap").css({
+                                "padding-bottom": resBottomMobileNavSetupHeight + 'px'
+                            });
+
+                            $("#mobile_nav_bottom").css({
+                                "position": resBottomMenuType,
+                                "width": $(window).width() + 'px',
+                                "height": resBottomMobileNavSetupHeight + 'px'
+                            });
+
+                            if ($(window).width() > mobile_nav_width_bottom){
+                                $("#mobile_nav_bottom>ul").css({
+                                    "width": $(window).width() + 'px'
+                                });
+                            }else{
+                                $("#mobile_nav_bottom>ul").css({
+                                    "width": mobile_nav_width_bottom + 'px'
+                                });
+                            }
+                        }
+                    })
+
                     //-- mobile menu interface --
                     $("body").wrapInner('<div id="resMainWrap" ' + body_margin + '></div>');
                     $("body").append('<div id="mobile_nav" ' + mobile_nav + "><ul " + mobile_nav_width + ">" + additionalBtn + "</ul></div>" + '<div id="mobile_nav_bottom" ' + mobile_nav_bottom + "><ul " + mobile_nav_width_bottom + ">" + additionalBottomBtn + "</ul></div>" + '<div id="mobile_nav_content" class="flipContent ' + pannelStyle + ' ' + pannelPosition + '"><div class="menuList" style="' + resMarginTop + resMarginBottom + '">' + swapBtn + '<div id="reslang" ' + res_langSwitch + ">" + "<h1>" + fnTranslate("language") + "</h1>" + language + "<div class='clear'></div></div>" + '<div id="resPrimery">' + "<h1>" + fnTranslate("menu") + "</h1>" + primaryMenu + "<div class='clear'></div></div>" + subMenu + "<div class='clear'></div></div></div>" + additionalPannelContent + additionalBottomPannelContent + additionalPageContent);
@@ -802,8 +815,6 @@
                                 manNavTouchStart = false;
                             }
                         })
-
-                }
 
             } else {
                 //切換為桌面版
@@ -1172,12 +1183,15 @@
 
         function fnReturnTranslate(transArray, str) {
             var transStr;
-            for (var i = 0; i < transArray.length; i++) {
-                if (transArray[i].split(":")[0] == str.toLowerCase()) {
-                    transStr = transArray[i].split(":")[1];
+            for (var trans in transArray) {
+                for (var chk in transArray[trans]) {
+                    if (chk.toLowerCase() === str.toLowerCase()) {
+                        transStr = transArray[trans][chk];
+                        break;
+                    }
                 }
             }
-            return transStr;
+            return (transStr === undefined)?str:transStr;
         }
     };
 

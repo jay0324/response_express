@@ -103,6 +103,18 @@
                                     //建立wrap內容
                                     $(this).wrap('<div id="' + thisID + '" class="resEnlarge" style="width:' + objW + 'px;' + wrapH + '" enlarge-action="open" enlarge-scale="'+scalePx+'" enlarge-size="'+enlargeSize+'" enlarge-source="'+extraSource+'">');
 
+                                    $(window).resize(function(){
+                                        $("#"+thisID).css({
+                                            width:'auto',
+                                            height:'auto'
+                                        });
+
+                                        $("#"+thisID+'>.resEnlargeImg').css({
+                                            width:'auto',
+                                            height:'auto'
+                                        })
+                                    })
+
                                 }).each(function(){
                                   if(this.complete) {
                                     $(this).trigger('load');

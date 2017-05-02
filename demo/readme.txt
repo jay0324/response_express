@@ -546,7 +546,8 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 		            top: 200,
 		            left: 10
 		        },
-		        delay: 100 						//延遲速度
+		        delay: 100, 					//動畫速度
+				hide: 800						//使用尺寸
 			});
 			//====================================================================================
 

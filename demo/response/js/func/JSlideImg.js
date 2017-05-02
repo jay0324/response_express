@@ -30,8 +30,25 @@
             $(options.disObj).append('<div class="loader"></div>');
         })
 
+        $(window).resize(function(){
+            $(".resJSlideImg").each(function(){
+                var resizeW = $(this).parent('div').width();
+                var resizeH = (resizeW/$(this).width())*$(this).height();
+                $(this).css({
+                    width: resizeW,
+                    height: resizeH
+                })
+
+                $(">.slideItem",this).css({
+                    width:resizeW,
+                    height: resizeW
+                })
+            })
+        })
+
         //查看是否有使用，或是隱藏的狀態下就不執行
         if ($("#" + options.disObj.attr("id")).length > 0 && $("#" + options.disObj.attr("id")).css("display") != "none") {
+            $("#" + options.disObj.attr("id")+'>'+options.childTag.toLowerCase()).addClass("slideItem");
             if (options.childTag.toLowerCase() == "img") $(options.childTag, this).addClass("resUnlarger");
             //禁止resEnlarge使用
             //設定排版方式
