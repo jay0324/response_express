@@ -158,56 +158,49 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 				res_langVarEn: '',						//網址列上語系的判斷值 (英文語系)
 				res_langVarTw: '',						//網址列上語系的判斷值 (繁中語系)
 				res_langArrayTw: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarCn: '',						//網址列上語系的判斷值 (簡中語系)
 				res_langArrayCn: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarAdd1: '',						//網址列上語系的判斷值 (其他語系)
 				res_langArrayAdd1: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarAdd2: '',						//網址列上語系的判斷值 (其他語系)
 				res_langArrayAdd2: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarAdd3: '',						//網址列上語系的判斷值 (其他語系)
 				res_langArrayAdd3: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarAdd4: '',						//網址列上語系的判斷值
 				res_langArrayAdd4: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
 				],
 				res_langVarAdd5: '',						//網址列上語系的判斷值
 				res_langArrayAdd5: [						//翻譯文字
-					'預翻譯字串:翻譯後字串',
-					'預翻譯字串:翻譯後字串',
+					{'預翻譯字串':'翻譯後字串'},
 					.
 					.
 					.
@@ -217,27 +210,24 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 				defaultMenuObj: '',							//主選單的物件ID或class
 				customMenu: '',								//客製主選單選單內容
 				defaultSubMenuObj: [						//主選單下方添加選單區塊
-					[
-						"其它嵌入的物件的標題",
-						"其它嵌入的物件ID或class"
-					],
-					[
-						"其它嵌入的物件的標題",
-						"其它嵌入的物件ID或class"
-					],
+					{
+						show: "其它嵌入的物件的標題",
+						obj: "其它嵌入的物件ID或class"
+						state: '狀態: ture/false'
+					},
 					.
 					.
 					.
 				],
 				customSubMenu: '',							//客製嵌入的物件內容
 				additionalPage: [							//響應式頁面
-					[
-						"頁面ID名稱",
-						"視窗開啟方式(left,top,right)",
-						"頁面標題",
-						"頁面內容",
-						"相關頁面ID(會產生下一頁按鈕)"
-					],
+					{
+						id:"頁面ID名稱",
+						type:"視窗開啟方式(left,top,right)",
+						show:"頁面標題",
+						content:"頁面內容",
+						relate_id:"相關頁面ID(會產生下一頁按鈕)"
+					},
 					.
 					.
 					.
@@ -254,34 +244,40 @@ https://cdn.rawgit.com/jay0324/response/master/response/dist/response/response.m
 				res_tabJumperSetting: {}, 					//(設定Tab標籤頁面定位, 預設值 state:true,speed:3000)
             	res_mobileTopNavBtnSetup: {} 				//(設定上方主選單, 預設值 state:true,type:fixed,primary:true,width:50,height:50,margin:5)
             	additionalBtn: [
-	            	[
-	            		"按鈕ID名稱",
-	            		"按鈕連結",
-	            		"按鈕顯示文字",
-	            		"按鈕目標 (一般target視窗目標如:target,new,blank等 或 pannel來啟動響應式視窗/tab來建立Tab標籤定位按鈕)",
-		            	[
-		            		"pannel值啟動之響應式視窗位置(top,top_small,left,right,left_under,right_under)",
-		            		"pannel值啟動之響應式視窗內容",
-		            		"pannel風格樣式(預設空值,style1)"
-		            	]
-	        		],
-					[
-	            		"按鈕ID名稱",
-	            		"自行建立響應式頁面的ID",
-	            		"按鈕顯示文字",
-	            		"page"
-	            	],
-	            	[
-	            		"按鈕ID名稱",
-	            		"預載入之URL",
-	            		"按鈕顯示文字",
-	            		"loader",
-	            		{
+	            	{
+	            		id:"按鈕ID名稱",
+	            		link:"按鈕連結",
+	            		show:"按鈕顯示文字",
+	            		target:"按鈕目標 (一般target視窗目標如:target,new,blank等 或 pannel來啟動響應式視窗/tab來建立Tab標籤定位按鈕)",
+		            	setup:{
+		            		type: "pannel值啟動之響應式視窗位置(top,top_small,left,right,left_under,right_under)",
+		            		content: "pannel值啟動之響應式視窗內容",
+		            		class: "pannel風格樣式(預設空值)"
+		            	},
+	            		width:"按鈕寬度",
+	            		state:"使用狀態 true/false"
+	        		},
+					{
+	            		id:"按鈕ID名稱",
+	            		page_id:"自行建立響應式頁面的ID",
+	            		show:"按鈕顯示文字",
+	            		target:"page",
+	            		width:"按鈕寬度",
+	            		state:"使用狀態 true/false"
+	            	},
+	            	{
+	            		id:"按鈕ID名稱",
+	            		link:"預載入之URL",
+	            		show:"按鈕顯示文字",
+	            		target:"loader",
+	            		setup:{
 	            			title: 頁面標題 (字串),
 							toggle: Loader類型 (字串 ajax/iframe 預設iframe),
 							toggleDom: ajax載入特定物件 (字串 ID或Class)
-	            		}
-	            	]
+	            		},
+	            		width:"按鈕寬度",
+	            		state:"使用狀態 true/false"
+	            	}
 				],
             	res_mobileBottomNavBtnSetup: {},				//請參照res_mobileTopNavBtnSetup的設定值
             	additionalBottomBtn: {},						//請參照additionalBtn的設定值
